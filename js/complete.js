@@ -1,14 +1,14 @@
 // complete.js（差し替え版）
-// 目的：現在ユーザーのスタンプ取得を「6スポット」で判定し、UIを表示。
+// 目的：現在ユーザーのスタンプ取得を「3スポット」で判定し、UIを表示。
 // 仕様：
 //  - Firebase v8 を使用し users/<uid>/stamps を once('value') で取得
 //  - ローカルフォールバックは uid 名前空間付き localStorage: stamp_<uid>_<spotId> = 'true'
 //  - uid 取得は ensureAnon() 優先、失敗時は localStorage の uid
-//  - 完走（6/6）で #completeCard を表示、未達なら #notComplete を表示
+//  - 完走（3/3）で #completeCard を表示、未達なら #notComplete を表示
 
 (function () {
-  const ALL_SPOTS = ['spot1','spot2','spot3','spot4','spot5','spot6'];
-  const TARGET = 6;
+  const ALL_SPOTS = ['spot1','spot3','spot4'];
+  const TARGET = 3;
 
   function getLocalUid() {
     try { return localStorage.getItem('uid') || null; } catch { return null; }

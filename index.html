@@ -7,7 +7,17 @@
   <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;padding:24px;line-height:1.6}</style>
 </head>
 <body>
-  <p>読み込み中です… 切り替わらない場合は <a id="fallback" href="tutorial.html">こちら</a></p>
+  <div style="max-width:720px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:stretch">
+    <h1 style="margin:0 0 6px;font-size:20px;text-align:center">ARスタンプラリーへようこそ</h1>
+    <p style="margin:0 0 6px;text-align:center;color:#444">以下からお選びください。スマホ向けの操作を想定した説明に進みます。</p>
+
+    <button id="noArBtn" class="cta" style="appearance:none;border:0;padding:14px 16px;border-radius:12px;background:#e9eef6;color:#111;font-weight:900;font-size:16px;">ARを使わず、歴史解説を見る</button>
+
+    <button id="withArBtn" class="cta" style="appearance:none;border:0;padding:14px 16px;border-radius:12px;background:#005ABB;color:#fff;font-weight:900;font-size:16px;">ARを使い、歴史解説を見る</button>
+
+    <p style="margin:8px 0 0;text-align:center;color:#888;font-size:13px">どちらのチュートリアルも後から設定で言語切替ができます。</p>
+  </div>
+
   <script>
     (function(){
       // withV がまだ読み込まれていない環境用の簡易版
@@ -21,11 +31,15 @@
         var sid = p.get('spotId'); if (sid) localStorage.setItem('pending_spotId', sid);
         var via = p.get('via');    if (via) localStorage.setItem('via', via);
       } catch(e){}
-      // 初回のみ tutorial、以降は map
-      var seen = false; try { seen = localStorage.getItem('tutorial_done') === '1'; } catch(e){}
-      var next = seen ? 'map.html' : 'tutorial.html';
-      var a = document.getElementById('fallback'); if (a) a.href = withV(next);
-      location.replace(withV(next));
+
+      document.getElementById('withArBtn')?.addEventListener('click', function(){
+        // ARありチュートリアル（既存）
+        location.href = withV('tutorial.html');
+      });
+      document.getElementById('noArBtn')?.addEventListener('click', function(){
+        // ARなしチュートリアル（新規）
+        location.href = withV('tutorial_noar.html');
+      });
     })();
   </script>
 </body>

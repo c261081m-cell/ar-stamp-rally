@@ -1,8 +1,8 @@
 /* map.js（差し替え版）
  * 目的：
- *  - スタンプ帳（6箇所）を Firebase v8 + localStorage で正しく反映
- *  - 6/6 達成で初回のみ完走モーダル表示＆インラインリンク表示
- *  - 「カメラ起動」→ スポット選択の写真グリッド（6箇所すべて AR 起動）
+ *  - スタンプ帳（3箇所）を Firebase v8 + localStorage で正しく反映
+ *  - 3/3 達成で初回のみ完走モーダル表示＆インラインリンク表示
+ *  - 「カメラ起動」→ スポット選択の写真グリッド（3箇所すべて AR 起動）
  *  - 写真ソースを assets/images/current_photos/spotXX.jpg に統一（XX=01..06）
  *  - 画像はモーダルを開いた時にだけ生成（負荷低減）＋ <img loading="lazy">
  */
@@ -22,9 +22,9 @@ const EIGHTHWALL_URLS = {
   spot6: 'https://maria261081.8thwall.app/spot6/'
 };
 
-const ALL_SPOTS       = ['spot1','spot2','spot3','spot4','spot5','spot6'];
-const AR_SPOTS        = ALL_SPOTS.slice();   // 6箇所すべて AR
-const COMPLETE_TARGET = 6;
+const ALL_SPOTS       = ['spot1','spot3','spot4'];
+const AR_SPOTS        = ALL_SPOTS.slice();   // AR 対象（今回は spot1,3,4 のみ）
+const COMPLETE_TARGET = 3;
 
 /* ====== 表示名・写真パス ====== */
 const SPOT_LABELS = {
@@ -44,7 +44,7 @@ const photoSrc = (spotId) => {
 function lsGet(k){ try{return localStorage.getItem(k);}catch{return null;} }
 function lsSet(k,v){ try{localStorage.setItem(k,v);}catch{} }
 function lsKeyStamp(uid, spot){ return `stamp_${uid}_${spot}`; }
-function seenKey(uid){ return `complete_6_seen_${uid}`; }
+function seenKey(uid){ return `complete_${COMPLETE_TARGET}_seen_${uid}`; }
 
 /* ====== Auth（匿名） ====== */
 async function ensureAnonSafe() {
@@ -224,13 +224,13 @@ async function boot(){
       location.href = url.toString();
     });
   });
-  for (let i=1;i<=6;i++){
-    const el = document.getElementById('openAR-spot'+i);
+  // フォールバックで個別ボタンがある場合、ALL_SPOTS のみをバインド
+  ALL_SPOTS.forEach(spot => {
+    const el = document.getElementById('openAR-' + spot);
     if (el && !el._arBound) {
       el._arBound = true;
       el.addEventListener('click', async (e)=>{
         e.preventDefault();
-        const spot = 'spot'+i;
         const base = EIGHTHWALL_URLS[spot];
         if (!base) { alert('このスポットのAR URLが未設定です'); return; }
         const uid = await ensureAnonSafe();
@@ -240,7 +240,7 @@ async function boot(){
         location.href = url.toString();
       });
     }
-  }
+  });
 }
 
 document.addEventListener('DOMContentLoaded', boot);

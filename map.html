@@ -238,9 +238,9 @@
         <div class="top-cell">
           <!-- スタンプ帳（折り畳み：単独で開閉・他要素は追従しない） -->
           <section class="stampbook" aria-label="スタンプ帳">
-            <button id="stampToggle" class="stampbook-header" type="button" aria-expanded="false" aria-controls="stampBody">
+              <button id="stampToggle" class="stampbook-header" type="button" aria-expanded="false" aria-controls="stampBody">
               <span class="arrow">▼</span><span id="stampBookTitle" data-i18n="map.stampbook">スタンプ帳</span>
-              <span class="stamp-count" id="stampCount" style="margin-left:8px">0/6</span>
+              <span class="stamp-count" id="stampCount" style="margin-left:8px">0/3</span>
             </button>
 
             <!-- コンプリート時リンク（JS制御で表示） -->
@@ -261,13 +261,7 @@
                     <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
                   </div>
                 </div>
-                <div class="stamp-cell" data-spot="spot2">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp02.png" alt="スタンプ2"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">T館<br>Troyer Memorial Arts and Science Hall</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
+                <!-- spot2 は表示対象から除外 -->
                 <div class="stamp-cell" data-spot="spot3">
                   <div class="stamp-thumb"><img src="assets/images/stamps/stamp03.png" alt="スタンプ3"></div>
                   <div class="stamp-meta">
@@ -282,20 +276,8 @@
                     <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
                   </div>
                 </div>
-                <div class="stamp-cell" data-spot="spot5">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp05.png" alt="スタンプ5"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">新体育館<br>PEC-A</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-                <div class="stamp-cell" data-spot="spot6">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp06.png" alt="スタンプ6"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name"><h2>Goal</h2>本館 3F<br>University Hall 3F</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
+                <!-- spot5 は表示対象から除外 -->
+                <!-- spot6 は表示対象から除外 -->
               </div>
             </div>
           </section>

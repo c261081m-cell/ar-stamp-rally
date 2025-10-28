@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>チュートリアル（ARなし） | ARスタンプラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style>
+    :root{ --accent:#005ABB; --text:#111; --bg:#fff; --radius:16px }
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
+    .wrap{max-width:960px;margin:0 auto;padding:clamp(12px,3vw,18px)}
+    .card{background:#fff;border-radius:var(--radius);padding:16px;box-shadow:0 12px 32px rgba(0,0,0,.06)}
+    .hero{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#f3f6fc;border:1px solid #e9eef6;display:flex;align-items:center;justify-content:center}
+    .panel{margin-top:12px;background:#f7f9fe;border:1px solid #e3eaf6;border-radius:12px;padding:12px}
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn{appearance:none;border:0;border-radius:12px;padding:14px 16px;font-weight:900;cursor:pointer;background:var(--accent);color:#fff;flex:1}
+    .btn-secondary{background:#e9eef6;color:#111}
+    .footerSpace{height:max(8px, env(safe-area-inset-bottom))}
+    .lang-switch{position:fixed; right:12px; top:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header><h1>チュートリアル（ARなし）</h1></header>
+    <main class="card" aria-live="polite">
+      <div class="hero" aria-hidden="true">
+        <img id="slideImg" src="assets/images/tutorial_photos/tutorial_image01.png" alt="チュートリアル画像" style="width:100%;height:100%;object-fit:contain;display:block">
+      </div>
+      <section class="panel">
+        <div id="slideText">
+          <p>このモードでは AR を使わず、写真やテキストでスポットの歴史解説をお読みいただけます。</p>
+          <ul>
+            <li>画面の案内に従って操作してください。</li>
+            <li>地図や一覧からスポットを選ぶと、そのスポットの解説が表示されます。</li>
+            <li>スタンプ取得はチュートリアル内の指示に従ってください（3箇所でコンプリート）。</li>
+          </ul>
+        </div>
+        <div class="ctaRow">
+          <button id="startBtn" class="btn">チュートリアルを始める</button>
+          <a href="map.html" id="skipLink" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">解説一覧に進む</a>
+        </div>
+      </section>
+    </main>
+    <div class="footerSpace"></div>
+  </div>
+
+  <script>
+    if (!window.withV) {
+      window.BUILD_V = window.BUILD_V || '20251005';
+      window.withV = function(url){ return url + (url.includes('?') ? '&' : '?') + 'v=' + window.BUILD_V; };
+    }
+    document.getElementById('startBtn')?.addEventListener('click', function(){
+      try { localStorage.setItem('tutorial_done','1'); } catch(e){}
+      // ARなしチュートリアルは簡易版のまま map に遷移
+      location.href = withV('map.html');
+    });
+  </script>
+</body>
+</html>
