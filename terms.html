@@ -135,6 +135,13 @@
 
       document.addEventListener('DOMContentLoaded', ()=>{
         applyI18n(getLang());
+        // If opened with a returnTo query param, update back link to return there.
+        try{
+          const params = new URLSearchParams(location.search);
+          const ret = params.get('returnTo');
+          const back = document.querySelector('.back');
+          if (ret && back){ back.setAttribute('href', ret); }
+        } catch(e){}
       });
     })();
   </script>

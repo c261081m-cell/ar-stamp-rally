@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>エントリ選択 | ARスタンプラリー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;padding:24px;line-height:1.6;background:#fff;color:#111}
+    .wrap{max-width:720px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
+    h1{margin:0 0 6px;font-size:20px;text-align:center}
+    p.lead{margin:0 0 12px;text-align:center;color:#444}
+    .cta{appearance:none;border:0;padding:14px 16px;border-radius:12px;font-weight:900;font-size:16px;cursor:pointer}
+    .cta.primary{background:#005ABB;color:#fff}
+    .cta.secondary{background:#e9eef6;color:#111}
+    .note{margin-top:8px;text-align:center;color:#888;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>使い方を選んでください</h1>
+    <p class="lead">ARを使って楽しむモードと、ARを使わず解説だけを見るモードを選べます。</p>
+
+    <button id="withArBtn" class="cta primary">ARを使い、歴史解説を見る</button>
+
+    <button id="noArBtn" class="cta secondary">ARを使わず、歴史解説を見る</button>
+
+    <p class="note">どちらのモードも後から言語を切り替えられます。QRやNFCで来た場合は自動で関連情報を保持します。</p>
+  </div>
+
+  <script>
+    // 簡易 withV
+    if (!window.withV) {
+      window.BUILD_V = window.BUILD_V || '20251005';
+      window.withV = function(url){ return url + (url.includes('?') ? '&' : '?') + 'v=' + window.BUILD_V; };
+    }
+    // クエリから pending 情報を保存（ある場合）
+    (function(){
+      try{
+        const p = new URLSearchParams(location.search);
+        const sid = p.get('spotId'); if (sid) localStorage.setItem('pending_spotId', sid);
+        const via = p.get('via');    if (via) localStorage.setItem('via', via);
+      }catch(e){}
+    })();
+
+    document.getElementById('withArBtn')?.addEventListener('click', ()=>{
+      location.href = withV('tutorial.html');
+    });
+    document.getElementById('noArBtn')?.addEventListener('click', ()=>{
+      location.href = withV('tutorial_noar.html');
+    });
+  </script>
+</body>
+</html>

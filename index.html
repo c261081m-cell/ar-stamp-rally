@@ -2,44 +2,157 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <title>ARスタンプラリー | エントリ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0;padding:24px;line-height:1.6}</style>
+  <title>ARスタンプラリー | ようこそ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <style>
+    :root{ --accent:#005ABB; --bg:#ffffff; --text:#111; --muted:#666 }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    .container{max-width:720px;margin:0 auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:100vh;box-sizing:border-box}
+
+    /* 言語ボタンは最上部に固定 */
+    .lang-switch-fixed{position:fixed;right:12px;top:12px;z-index:999}
+    .lang-btn{appearance:none;border:0;background:transparent;padding:6px;border-radius:10px}
+    .lang-icon{width:28px;height:28px;display:block}
+    .lang-menu{display:none;position:fixed;right:12px;top:52px;background:#fff;border:1px solid #e3eaf6;border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.12);overflow:hidden}
+    .lang-item{display:block;padding:10px 14px;border:0;background:transparent;width:160px;text-align:left}
+
+    /* 上部ロゴ */
+    .top{display:flex;align-items:center;justify-content:center;padding-top:36px}
+    .logo{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .logo img{width:140px;height:auto}
+    h1.title{margin:0;font-size:22px;font-weight:900;color:var(--accent)}
+
+    /* terms */
+    .terms-wrap{flex:1;overflow:hidden;border:1px solid #e9eef6;border-radius:12px;padding:12px;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,0.04)}
+    .terms-inner{height:100%;overflow:auto;padding:6px}
+    .terms-inner h2{margin-top:0;font-size:18px}
+    .terms-inner h3{font-size:16px;margin:12px 0 6px}
+    .terms-inner p{margin:.6em 0;color:#222}
+
+    /* 同意 */
+    .agree-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:8px}
+    .agree-text{font-size:16px;color:var(--text);font-weight:700}
+    .agree-checkbox{transform:scale(1.18)}
+
+    /* 始める */
+    .start-wrap{padding-top:8px}
+    .btn-start{display:block;width:100%;appearance:none;border:0;padding:14px 16px;border-radius:12px;background:var(--accent);color:#fff;font-weight:900;font-size:16px;box-shadow:0 10px 30px rgba(0,90,187,.15);text-align:center}
+    .btn-start[hidden]{display:none}
+
+    @media (max-width:420px){ .logo img{width:110px} h1.title{font-size:20px} .agree-text{font-size:15px} }
+  </style>
 </head>
 <body>
-  <div style="max-width:720px;margin:0 auto;padding:20px;display:flex;flex-direction:column;gap:12px;align-items:stretch">
-    <h1 style="margin:0 0 6px;font-size:20px;text-align:center">ARスタンプラリーへようこそ</h1>
-    <p style="margin:0 0 6px;text-align:center;color:#444">以下からお選びください。スマホ向けの操作を想定した説明に進みます。</p>
+  <!-- 最上部の言語スイッチ（固定） -->
+  <div class="lang-switch-fixed" id="langSwitch">
+    <button id="langBtn" class="lang-btn" aria-haspopup="true" aria-expanded="false">
+      <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語">
+    </button>
+    <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
+      <button class="lang-item" data-lang="ja">日本語</button>
+      <button class="lang-item" data-lang="en">English</button>
+    </div>
+  </div>
 
-    <button id="noArBtn" class="cta" style="appearance:none;border:0;padding:14px 16px;border-radius:12px;background:#e9eef6;color:#111;font-weight:900;font-size:16px;">ARを使わず、歴史解説を見る</button>
+  <div class="container">
+    <header class="top">
+      <div class="logo">
+        <img id="siteLogo" src="assets/images/ui/logo.png" alt="ARスタンプラリー ロゴ">
+        <h1 id="siteTitle" class="title" data-i18n="site.title">ARスタンプラリー</h1>
+      </div>
+    </header>
 
-    <button id="withArBtn" class="cta" style="appearance:none;border:0;padding:14px 16px;border-radius:12px;background:#005ABB;color:#fff;font-weight:900;font-size:16px;">ARを使い、歴史解説を見る</button>
+    <main class="terms-wrap" aria-label="利用規約">
+      <div class="terms-inner" id="termsText">
+        <h2 id="termsTitle" data-i18n="title">プライバシーポリシー・ご利用上の注意</h2>
 
-    <p style="margin:8px 0 0;text-align:center;color:#888;font-size:13px">どちらのチュートリアルも後から設定で言語切替ができます。</p>
+        <section>
+          <h3 data-i18n="privacy.h">プライバシーポリシー</h3>
+          <p data-i18n="privacy.p1">本アプリケーションは大学の卒業研究の一環として実施されています。アンケート等でご記入いただいた情報は、本研究における分析目的のみに使用し、研究目的以外には一切利用いたしません。</p>
+          <p data-i18n="privacy.p2">収集したデータは、個人を特定できない形に匿名化したうえで統計的に処理・分析を行います。分析結果を公表する際にも、個人を識別出来る情報が含まれることはありません。</p>
+          <p data-i18n="privacy.p3">また、利用者の同意なく第三者に個人情報を提供することはありません。</p>
+          <p data-i18n="privacy.p4">本アプリケーションは無料でご使用いただけますが、通信にかかる費用（モバイル通信料など）は利用者のご負担となります。</p>
+        </section>
+
+        <section>
+          <h3 data-i18n="terms.h">ご利用上の注意</h3>
+          <p data-i18n="terms.p1">本アプリは、AR（拡張現実）を用いた体験型コンテンツを含み、歩行や屋外での利用を伴う場合があります。ご利用の際は、周囲の安全に十分ご注意ください。また、AR利用中の事故・ケガ・機器の破損などについて、運営は一切の責任を負いかねます。</p>
+          <p class="note" data-i18n="terms.p2">※端末のバッテリー残量や通信環境にもご注意ください。屋外では日射・天候・足元などの状況に合わせ、無理のない範囲でご利用ください。</p>
+        </section>
+      </div>
+    </main>
+
+    <div class="agree-row">
+      <div class="agree-text" data-i18n="agree.question">上記に同意しますか？</div>
+      <div style="margin-left:auto">
+        <input id="agreeCheckbox" class="agree-checkbox" type="checkbox" aria-label="上記に同意しますか">
+      </div>
+    </div>
+
+    <div class="start-wrap">
+      <button id="startBtn" class="btn-start" data-i18n="startBtn" hidden>始める</button>
+    </div>
   </div>
 
   <script>
-    (function(){
-      // withV がまだ読み込まれていない環境用の簡易版
-      if (!window.withV) {
-        window.BUILD_V = window.BUILD_V || '20251003';
-        window.withV = function(url){ return url + (url.includes('?') ? '&' : '?') + 'v=' + window.BUILD_V; };
-      }
-      // NFC/QR のクエリを保持（将来用）
-      var p = new URLSearchParams(location.search);
-      try {
-        var sid = p.get('spotId'); if (sid) localStorage.setItem('pending_spotId', sid);
-        var via = p.get('via');    if (via) localStorage.setItem('via', via);
-      } catch(e){}
+    // withV
+    if (!window.withV) { window.BUILD_V = window.BUILD_V || '20251005'; window.withV = function(url){ return url + (url.includes('?') ? '&' : '?') + 'v=' + window.BUILD_V; }; }
 
-      document.getElementById('withArBtn')?.addEventListener('click', function(){
-        // ARありチュートリアル（既存）
-        location.href = withV('tutorial.html');
-      });
-      document.getElementById('noArBtn')?.addEventListener('click', function(){
-        // ARなしチュートリアル（新規）
-        location.href = withV('tutorial_noar.html');
-      });
+    // pending info
+    try{ const p = new URLSearchParams(location.search); const sid = p.get('spotId'); if (sid) localStorage.setItem('pending_spotId', sid); const via = p.get('via'); if (via) localStorage.setItem('via', via); }catch(e){}
+
+    // checkbox behavior
+    const checkbox = document.getElementById('agreeCheckbox');
+    const startBtn = document.getElementById('startBtn');
+    checkbox.addEventListener('change', ()=>{ if (checkbox.checked) startBtn.removeAttribute('hidden'); else startBtn.setAttribute('hidden',''); });
+    startBtn.addEventListener('click', ()=>{ location.href = withV('entry.html'); });
+
+    // i18n dictionary + menu
+    (function(){
+      const DICT = {
+        ja: {
+          'site.title':'ARスタンプラリー',
+          'startBtn':'始める',
+          'agree.question':'上記に同意しますか？',
+          'title':'プライバシーポリシー・ご利用上の注意',
+          'privacy.h':'プライバシーポリシー',
+          'privacy.p1':'本アプリケーションは大学の卒業研究の一環として実施されています。アンケート等でご記入いただいた情報は、本研究における分析目的のみに使用し、研究目的以外には一切利用いたしません。',
+          'privacy.p2':'収集したデータは、個人を特定できない形に匿名化したうえで統計的に処理・分析を行います。分析結果を公表する際にも、個人を識別出来る情報が含まれることはありません。',
+          'privacy.p3':'また、利用者の同意なく第三者に個人情報を提供することはありません。',
+          'privacy.p4':'本アプリケーションは無料でご使用いただけますが、通信にかかる費用（モバイル通信料など）は利用者のご負担となります。',
+          'terms.h':'ご利用上の注意',
+          'terms.p1':'本アプリは、AR（拡張現実）を用いた体験型コンテンツを含み、歩行や屋外での利用を伴う場合があります。ご利用の際は、周囲の安全に十分ご注意ください。また、AR利用中の事故・ケガ・機器の破損などについて、運営は一切の責任を負いかねます。',
+          'terms.p2':'※端末のバッテリー残量や通信環境にもご注意ください。屋外では日射・天候・足元などの状況に合わせ、無理のない範囲でご利用ください。'
+        },
+        en: {
+          'site.title':'AR Stamp Rally',
+          'startBtn':'Start',
+          'agree.question':'Do you agree to the above?',
+          'title':'Privacy Policy & Cautions for Use',
+          'privacy.h':'Privacy Policy',
+          'privacy.p1':'This application is conducted as part of a university graduation research project. Any information you provide (e.g., in the survey) will be used solely for analysis within this research and will not be used for any other purposes.',
+          'privacy.p2':'Collected data will be anonymized so individuals cannot be identified, and will be processed and analyzed statistically. Even when publishing results, no personally identifiable information will be included.',
+          'privacy.p3':'We will not provide personal information to third parties without the user’s consent.',
+          'privacy.p4':'This application is free to use; however, any communication costs (e.g., mobile data charges) are borne by the user.',
+          'terms.h':'Cautions for Use',
+          'terms.p1':'This app includes AR (augmented reality) experiences and may involve walking and outdoor use. Please pay close attention to your surroundings for safety. The organizers cannot be held responsible for any accidents, injuries, or device damage that may occur during AR use.',
+          'terms.p2':'* Please also be mindful of your device’s battery and network conditions. When outdoors, use the app within reasonable limits according to sunlight, weather, and footing.'
+        }
+      };
+
+      function getLang(){ try { return localStorage.getItem('app_lang') || 'ja'; } catch { return 'ja'; } }
+      function setLang(v){ try { localStorage.setItem('app_lang', v); } catch{} }
+      function applyI18n(lang){ const dict = DICT[lang] || DICT.ja; document.querySelectorAll('[data-i18n]').forEach(el=>{ const k=el.getAttribute('data-i18n'); if (dict[k] != null) el.textContent = dict[k]; }); document.documentElement.setAttribute('lang', lang==='en'?'en':'ja'); }
+
+      const btn = document.getElementById('langBtn');
+      const menu = document.getElementById('langMenu');
+      const items = menu.querySelectorAll('.lang-item');
+      const open = (v)=>{ menu.style.display = v ? 'block':'none'; btn.setAttribute('aria-expanded', v ? 'true':'false'); };
+      btn.addEventListener('click', (e)=>{ e.stopPropagation(); open(menu.style.display !== 'block'); });
+      document.addEventListener('click', ()=> open(false));
+      items.forEach(it=> it.addEventListener('click', ()=>{ const lang = it.dataset.lang || 'ja'; setLang(lang); applyI18n(lang); try{ window.dispatchEvent(new Event('app_lang_changed')); }catch(e){}; open(false); }));
+
+      document.addEventListener('DOMContentLoaded', ()=> applyI18n(getLang()));
     })();
   </script>
 </body>

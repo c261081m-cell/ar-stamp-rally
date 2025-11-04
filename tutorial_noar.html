@@ -14,11 +14,29 @@
     .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
     .btn{appearance:none;border:0;border-radius:12px;padding:14px 16px;font-weight:900;cursor:pointer;background:var(--accent);color:#fff;flex:1}
     .btn-secondary{background:#e9eef6;color:#111}
-    .footerSpace{height:max(8px, env(safe-area-inset-bottom))}
-    .lang-switch{position:fixed; right:12px; top:12px}
+  .footerSpace{height:max(8px, env(safe-area-inset-bottom))}
+  .lang-switch{position:fixed; right:12px; top:12px}
+  .lang-btn{appearance:none;border:0;background:#fff;border:1px solid #e3eaf6;border-radius:12px;padding:6px; cursor:pointer; box-shadow:0 10px 28px rgba(0,0,0,.15)}
+  .lang-btn:focus-visible{outline:3px solid rgba(0,90,187,.35)}
+  .lang-icon{width:28px;height:28px;display:block}
+  .lang-menu{position:absolute; right:0; margin-top:8px; background:#fff; border:1px solid #e3eaf6; border-radius:12px; box-shadow:0 10px 28px rgba(0,0,0,.15); display:none; min-width:160px; overflow:hidden}
+  .lang-menu.is-open{display:block}
+  .lang-item{display:block; width:100%; text-align:left; background:#fff; border:0; padding:10px 12px; cursor:pointer; font-weight:800; color:#000}
+  .lang-item:hover{background:#f2f6ff}
   </style>
 </head>
 <body>
+  <!-- 言語スイッチ（右上） -->
+  <div class="lang-switch" id="langSwitch">
+    <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+      <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語 / Language">
+    </button>
+    <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
+      <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
+      <button class="lang-item" data-lang="en" role="menuitem">English</button>
+    </div>
+  </div>
+
   <div class="wrap">
     <header><h1>チュートリアル（ARなし）</h1></header>
     <main class="card" aria-live="polite">
@@ -36,7 +54,7 @@
         </div>
         <div class="ctaRow">
           <button id="startBtn" class="btn">チュートリアルを始める</button>
-          <a href="map.html" id="skipLink" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">解説一覧に進む</a>
+          <a href="map_noar.html" id="skipLink" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">解説一覧に進む</a>
         </div>
       </section>
     </main>
@@ -48,10 +66,63 @@
       window.BUILD_V = window.BUILD_V || '20251005';
       window.withV = function(url){ return url + (url.includes('?') ? '&' : '?') + 'v=' + window.BUILD_V; };
     }
+
+    (function(){
+      const DICT = {
+        ja: {
+          'tut.title': 'チュートリアル（ARなし）',
+          'noar.lead': 'このモードでは AR を使わず、写真やテキストでスポットの歴史解説をお読みいただけます。',
+          'noar.li1': '画面の案内に従って操作してください。',
+          'noar.li2': '地図や一覧からスポットを選ぶと、そのスポットの解説が表示されます。',
+          'noar.li3': 'スタンプ取得はチュートリアル内の指示に従ってください（3箇所でコンプリート）。',
+          'startBtn': 'チュートリアルを始める',
+          'skipLink': '解説一覧に進む'
+        },
+        en: {
+          'tut.title': 'Tutorial (No AR)',
+          'noar.lead': 'In this mode you can read historical explanations with photos and text without using AR.',
+          'noar.li1': 'Follow the on-screen instructions.',
+          'noar.li2': 'Select a spot from the map or list to view its explanation.',
+          'noar.li3': 'Follow tutorial instructions to collect stamps (complete with 3).',
+          'startBtn': 'Start tutorial',
+          'skipLink': 'Go to explanation list'
+        }
+      };
+
+      function getLang(){ try { return localStorage.getItem('app_lang') || 'ja'; } catch { return 'ja'; } }
+      function setLang(v){ try { localStorage.setItem('app_lang', v); } catch{} }
+      function applyLang(lang){
+        const dict = DICT[lang] || DICT.ja;
+        const title = document.querySelector('header h1');
+        if (title) title.textContent = dict['tut.title'];
+        const lead = document.querySelector('#slideText p');
+        if (lead) lead.textContent = dict['noar.lead'];
+        const lis = document.querySelectorAll('#slideText ul li');
+        if (lis[0]) lis[0].textContent = dict['noar.li1'];
+        if (lis[1]) lis[1].textContent = dict['noar.li2'];
+        if (lis[2]) lis[2].textContent = dict['noar.li3'];
+        document.getElementById('startBtn').textContent = dict['startBtn'];
+        document.getElementById('skipLink').textContent = dict['skipLink'];
+        document.title = (lang==='en') ? 'Tutorial (No AR) | AR Stamp Rally' : 'チュートリアル（ARなし） | ARスタンプラリー';
+        document.documentElement.setAttribute('lang', lang==='en'?'en':'ja');
+      }
+
+      (function initLangMenu(){
+        const btn  = document.getElementById('langBtn');
+        const menu = document.getElementById('langMenu');
+        const items= menu?.querySelectorAll('.lang-item');
+        const open = (v)=>{ if (!menu || !btn) return; menu.classList.toggle('is-open', v); btn.setAttribute('aria-expanded', v ? 'true':'false'); };
+        btn?.addEventListener('click', (e)=>{ e.stopPropagation(); open(!menu.classList.contains('is-open')); });
+        document.addEventListener('click', ()=> open(false));
+        items?.forEach(it=>{ it.addEventListener('click', ()=>{ const lang = it.dataset.lang || 'ja'; setLang(lang); applyLang(lang); try { window.dispatchEvent(new Event('app_lang_changed')); } catch(e){} }); });
+      })();
+
+      document.addEventListener('DOMContentLoaded', ()=>{ applyLang(getLang()); });
+    })();
+
     document.getElementById('startBtn')?.addEventListener('click', function(){
       try { localStorage.setItem('tutorial_done','1'); } catch(e){}
-      // ARなしチュートリアルは簡易版のまま map に遷移
-      location.href = withV('map.html');
+      location.href = withV('map_noar.html');
     });
   </script>
 </body>

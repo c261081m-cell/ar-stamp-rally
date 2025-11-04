@@ -143,23 +143,7 @@
       <section class="panel">
         <div id="slideText" style="min-height:4lh"></div>
 
-        <!-- 1ページ目：規約スクロール＋同意（日英対応） -->
-        <div id="termsArea" style="display:none; margin-top:10px;">
-          <div class="termsBox" id="termsBox" tabindex="0" aria-label="プライバシーポリシー・ご利用上の注意（スクロール可）">
-            <h3 style="margin:.2em 0 0;font-size:16px" data-i18n="policy.title">プライバシーポリシー</h3>
-            <p data-i18n="policy.p1">本アプリケーションは大学の卒業研究の一環として実施されています。アンケート等でご記入いただいた情報は、本研究における分析目的のみに使用し、研究目的以外には一切利用いたしません。</p>
-            <p data-i18n="policy.p2">収集したデータは、個人を特定できない形に匿名化したうえで統計的に処理・分析を行います。分析結果を公表する際にも、個人を識別出来る情報が含まれることはありません。</p>
-            <p data-i18n="policy.p3">また、利用者の同意なく第三者に個人情報を提供することはありません。</p>
-            <p data-i18n="policy.p4">本アプリケーションは無料でご使用いただけますが、通信にかかる費用（モバイル通信料など）は利用者のご負担となります。</p>
-
-            <h3 style="margin:.8em 0 .2em;font-size:16px" data-i18n="terms.title">ご利用上の注意</h3>
-            <p data-i18n="terms.p1">本アプリは、AR（拡張現実）を用いた体験型コンテンツを含み、歩行や屋外での利用を伴う場合があります。ご利用の際は、周囲の安全に十分ご注意ください。また、AR利用中の事故・ケガ・機器の破損などについて、運営は一切の責任を負いかねます。</p>
-          </div>
-          <label class="agreeLine">
-            <input id="agreeChk" type="checkbox" />
-            <small data-i18n="agree">プライバシーポリシー・ご利用上の注意に同意します。</small>
-          </label>
-        </div>
+        <!-- walkthrough first page removed -->
 
         <!-- ページドット -->
         <div class="pageDots" aria-hidden="true" id="dots"></div>
@@ -266,21 +250,19 @@
       })();
 
       // スライド定義（画像・テキスト）
+      // 最初のウォークスルー（利用規約同意）を削除しました
       const slides = [
-        { img: 'assets/images/tutorial_photos/tutorial_image01.png', htmlKey: 'slide1', showTerms: true },
         { img: 'assets/images/tutorial_photos/tutorial_image03.png', htmlKey: 'slide2' },
         { img: 'assets/images/tutorial_photos/tutorial_image04.png', htmlKey: 'slide3' },
         { img: 'assets/images/tutorial_photos/tutorial_image02.png', htmlKey: 'slide4' },
         { img: 'assets/images/tutorial_photos/tutorial_image05.png', htmlKey: 'slide5' },
         { img: 'assets/images/tutorial_photos/tutorial_image06.png', htmlKey: 'slide6' },
         { img: 'assets/images/tutorial_photos/tutorial_image07.png', htmlKey: 'slide7' },
-        { img: 'assets/images/tutorial_photos/tutorial_image08.png', htmlKey: 'slide8' },
+        { img: 'assets/images/tutorial_photos/tutorial_image08.png', htmlKey: 'slide8' }
       ];
 
-      const imgEl   = document.getElementById('slideImg');
-      const textEl  = document.getElementById('slideText');
-      const termsEl = document.getElementById('termsArea');
-      const agreeEl = document.getElementById('agreeChk');
+  const imgEl   = document.getElementById('slideImg');
+  const textEl  = document.getElementById('slideText');
       const dotsEl  = document.getElementById('dots');
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
@@ -303,21 +285,12 @@
         imgEl.src = s.img;
         textEl.textContent = i18n(s.htmlKey);
 
-        // 1ページ目のみ規約表示
-        termsEl.style.display = s.showTerms ? 'block' : 'none';
-
         // ボタン文言（言語適用）
         prevBtn.style.visibility = (idx === 0 ? 'hidden' : 'visible');
         nextBtn.textContent = (idx === slides.length - 1) ? (lang==='en'?'Start':'はじめる') : i18n('common.next');
-
-        // 1ページ目は同意チェックが無いと次へ不可／skip非表示
-        if (idx === 0){
-          nextBtn.disabled = !agreeEl.checked;
-          skipBtn.style.display = 'none';
-        } else {
-          nextBtn.disabled = false;
-          skipBtn.style.display = 'inline-block';
-        }
+        // Walkthrough first page removed — no agreement gating
+        nextBtn.disabled = false;
+        skipBtn.style.display = 'inline-block';
 
         renderDots();
       }
@@ -336,7 +309,8 @@
       }
 
       function goNext(){
-        if (idx === 3){ requestPermissions(); }
+        // request camera/location on the permissions slide (shifted after removal)
+        if (idx === 2){ requestPermissions(); }
         if (idx < slides.length - 1){
           idx++;
           render();
@@ -348,7 +322,7 @@
       function goPrev(){ if (idx > 0){ idx--; render(); } }
       function skipAll(){ try { localStorage.setItem('tutorial_done','1'); } catch {} location.href = withV('map.html'); }
 
-      agreeEl.addEventListener('change', ()=>{ if (idx === 0){ nextBtn.disabled = !agreeEl.checked; } });
+  // agreement checkbox removed; no event listener needed
       prevBtn.addEventListener('click', goPrev);
       nextBtn.addEventListener('click', goNext);
       skipBtn.addEventListener('click', skipAll);
