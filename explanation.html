@@ -62,7 +62,19 @@
     .ctaRow{margin-top:14px; display:flex; gap:10px; flex-wrap:wrap}
     .back{display:inline-block; text-decoration:none}
 
-    .footerSpace{height:max(8px, env(safe-area-inset-bottom))}
+  .footerSpace{height:max(8px, env(safe-area-inset-bottom))}
+  /* スマホ向け: 背景を暗くするためのフラグ */
+  body.popup-open .wrap{filter:brightness(.55);transition:filter .18s ease}
+  /* スタンプ取得ポップアップ（中央表示） */
+  .stamp-popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1250}
+  .stamp-popup.show{display:flex}
+  .stamp-popup .panel{width:min(86vw,360px);background:transparent;border-radius:18px;padding:0;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .stamp-popup .panelInner{background:#fff;border-radius:18px;padding:16px 14px;box-shadow:0 16px 48px rgba(0,0,0,.28);width:100%;display:flex;flex-direction:column;align-items:center}
+  .stamp-popup h2{margin:0 0 10px;font-size:18px;font-weight:900;color:#111}
+  /* 正方形にして丸角 */
+  .stamp-popup .popup-stamp{width:64vw;max-width:260px;height:64vw;max-height:260px;border-radius:18px;border:1px solid #e9eef6;background:#f7f9ff;object-fit:cover}
+  .stamp-popup .closeBtn{margin-top:12px;display:inline-block;padding:12px 14px;border-radius:12px;background:#005ABB;color:#fff;font-weight:900;border:0;cursor:pointer}
+  /* （動画を使わないため関連スタイルは不要） */
   </style>
 </head>
 <body>
@@ -106,6 +118,19 @@
 
     <div class="footerSpace"></div>
   </div>
+
+  <!-- スタンプ取得ポップアップ -->
+  <div id="stampPopup" class="stamp-popup" role="dialog" aria-modal="true" aria-labelledby="stampPopupTitle">
+    <div class="panel" id="stampPopupPanel">
+      <div class="panelInner">
+        <h2 id="stampPopupTitle">スタンプを取得しました</h2>
+        <img id="stampPopupImage" class="popup-stamp" src="" alt="取得スタンプ">
+        <button id="stampPopupClose" class="closeBtn" type="button">閉じる</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- note: confetti video removed; popup-only UX -->
 
   <!-- 言語反映 -->
   <script>

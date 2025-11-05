@@ -487,10 +487,44 @@
   }
 
   // --------- 起動 ---------
+  // ポップアップ表示 / 非表示
+  function hideStampPopup(){
+    try {
+      const popup = $('#stampPopup');
+      if (popup) popup.classList.remove('show');
+      try { document.body.classList.remove('popup-open'); } catch(e){}
+    } catch(e){}
+  }
+
+  function showStampPopup(spotId){
+    try {
+      const popup = $('#stampPopup');
+      if (!popup) return;
+      const titleEl = $('#stampPopupTitle');
+      const img = $('#stampPopupImage');
+      const closeBtn = $('#stampPopupClose');
+      const lang = getLang();
+
+      if (titleEl) titleEl.textContent = (lang === 'en') ? 'You got a stamp!' : 'スタンプを取得しました';
+      if (img) { img.src = stampSrc(spotId); img.alt = `${spotId} ${lang==='en'?'stamp':'のスタンプ'}` }
+
+      // show popup (popup-only UX)
+      popup.classList.add('show');
+      try { document.body.classList.add('popup-open'); } catch(e){}
+
+      // handlers
+  if (closeBtn) closeBtn.onclick = hideStampPopup;
+      popup.onclick = function(ev){ if (ev.target === popup) hideStampPopup(); };
+      window.addEventListener('keydown', function onEsc(e){ if (e.key === 'Escape'){ hideStampPopup(); window.removeEventListener('keydown', onEsc); } });
+    } catch(e){ console.warn('[explanation] showStampPopup error', e); }
+  }
   async function boot(){
     const spotId = getSpotId();
     render(spotId);
     await saveStamp(spotId);
+
+    // スタンプ取得ポップアップを表示（言語反映後に）
+    try { showStampPopup(spotId); } catch(e){ console.warn('[explanation] popup failed', e); }
 
     // もし同ページで言語切替UIを載せた場合に即時反映したいときのフック
     window.addEventListener('app_lang_changed', () => render(spotId));
