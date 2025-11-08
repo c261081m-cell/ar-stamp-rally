@@ -37,7 +37,8 @@ const photoSrc = (spotId) => {
 function lsGet(k){ try{return localStorage.getItem(k);}catch{return null;} }
 function lsSet(k,v){ try{localStorage.setItem(k,v);}catch{} }
 function lsKeyStamp(uid, spot){ return `stamp_${uid}_${spot}`; }
-function seenKey(uid){ return `complete_${COMPLETE_TARGET}_seen_${uid}`; }
+// Use a page-scoped seen key so map_noar shows its own complete popup
+function seenKey(uid){ return `complete_${COMPLETE_TARGET}_seen_map_noar_${uid}`; }
 
 async function ensureAnonSafe() {
   if (typeof window.ensureAnon === 'function') {

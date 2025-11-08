@@ -112,7 +112,7 @@
 
       <!-- 戻る -->
       <div class="ctaRow">
-        <a id="backToMap" class="btn back" href="map.html">マップに戻る</a>
+        <button id="backToMap" class="btn back" type="button" data-href="map.html">マップに戻る</button>
       </div>
     </section>
 
@@ -149,17 +149,23 @@
           stampNote.textContent = (lang === 'en') ? 'You got a stamp!' : 'スタンプをゲットしました！';
         }
 
-        // 「マップに戻る」ボタン
+        // 「マップに戻る」ボタン（button に変更）
         var back = document.getElementById('backToMap');
         if (back){
             back.textContent = (lang === 'en') ? 'Back to Map' : 'マップに戻る';
+            // 初期の戻り先を data-href に保存
+            back.dataset.href = back.dataset.href || 'map.html';
+            // クリックで戻る（data-href を使う）
+            back.addEventListener('click', function(){
+              try { location.href = back.dataset.href || 'map.html'; } catch(e) { location.href = 'map.html'; }
+            });
         }
-        // クエリに returnTo がある場合は戻り先を上書き
+        // クエリに returnTo がある場合は戻り先を上書き（data-href をセット）
         try {
           const params = new URLSearchParams(location.search);
           const ret = params.get('returnTo');
           if (ret && back) {
-            back.href = ret;
+            back.dataset.href = ret;
           }
         } catch(e){}
 

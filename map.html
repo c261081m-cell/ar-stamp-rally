@@ -243,13 +243,17 @@
               <span class="stamp-count" id="stampCount" style="margin-left:8px">0/3</span>
             </button>
 
+            <!-- 常時表示する（推奨）アンケートリンク（完走時のリンクは別にあります） -->
+            <div id="surveyAlways" style="margin:8px 0 0;text-align:center;display:block">
+              <a id="surveyAlwaysLink" href="post-survey.html?returnTo=map.html" data-i18n="map.checkCompleteRecommended">📝 アンケート（コンプリート後推奨）</a>
+            </div>
             <!-- コンプリート時リンク（JS制御で表示） -->
             <div id="completeInline" class="complete-inline">
-              <a id="completeLink" href="post-survey.html" data-i18n="map.checkComplete">📝 アンケートに答える</a>
+              <a id="completeLink" href="post-survey.html?returnTo=map.html" data-i18n="map.checkComplete">📝 アンケートに答える</a>
             </div>
             <!-- ★ コンプリート時のみ表示するスペシャルコンテンツへのリンク -->
             <div id="specialInline" class="complete-inline" style="display:none">
-              <a id="specialLink" href="special.html" data-i18n="map.special">🌟 スペシャルコンテンツ</a>
+              <a id="specialLink" href="special.html?returnTo=map.html" data-i18n="map.special">🌟 スペシャルコンテンツ</a>
             </div>
 
             <div id="stampBody" class="stampbook-body">
@@ -326,7 +330,7 @@
     <p id="completeLead" class="complete-lead" data-i18n="map.completedLead">全てのスタンプを集めました。ご参加ありがとうございます！</p>
     <div class="complete-row">
       <button id="closeComplete" class="btn btn-secondary" type="button" data-i18n="map.backToMap">マップに戻る</button>
-      <a id="toSurvey" class="btn" href="post-survey.html" data-i18n="map.toSurvey">アンケートへ</a>
+      <a id="toSurvey" class="btn" href="post-survey.html?returnTo=map.html" data-i18n="map.toSurvey">アンケートへ</a>
     </div>
   </div>
 
@@ -356,6 +360,7 @@
           'map.notgot': '未取得',
           'map.got': '取得済み',
           'map.checkComplete': '📝 アンケートに答える',
+          'map.checkCompleteRecommended': '📝 アンケート（コンプリート後推奨）',
           'map.special': '🌟 スペシャルコンテンツ',
           'map.openAR': 'カメラ起動',
           'chooser.title': 'スポットを選んでください',
@@ -373,6 +378,7 @@
           'map.notgot': 'Not collected',
           'map.got': 'Collected',
           'map.checkComplete': '📝 Take the survey',
+          'map.checkCompleteRecommended': '📝 Survey (recommended after complete)',
           'map.special': '🌟 Special Content',
           'map.openAR': 'Open AR',
           'chooser.title': 'Choose a spot',

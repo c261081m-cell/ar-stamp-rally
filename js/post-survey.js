@@ -174,6 +174,28 @@
   function toast(msg){ try{ alert(msg); }catch{} }
   function goMap(){ location.href = 'map.html'; }
 
+  // 安全なリダイレクト: クエリの returnTo を確認し、許可されたページへ戻す
+  function goBackToReturnTo() {
+    try {
+      const params = new URLSearchParams(location.search);
+      let rt = params.get('returnTo');
+      if (rt && typeof rt === 'string') {
+        // 正規化: パス部分やクエリを取り除き、basename を取り出す
+        rt = rt.split('?')[0].split('#')[0];
+        rt = rt.split('/').pop();
+      }
+      const ALLOWED = ['map.html', 'map_noar.html'];
+      if (rt && ALLOWED.includes(rt)) {
+        location.href = rt;
+        return;
+      }
+    } catch (e) {
+      console.warn('[post-survey] returnTo parse error', e);
+    }
+    // フォールバック
+    location.href = 'map.html';
+  }
+
   /* ===== 送信 ===== */
   async function onSubmit(ev) {
     ev?.preventDefault?.();
@@ -189,7 +211,7 @@
     if (typeof navigator !== 'undefined' && !navigator.onLine) {
       savePendingLocally(payload);
       toast('オフラインのため、回答を一時保存しました。オンライン時に自動送信します。');
-      goMap();
+      goBackToReturnTo();
       return;
     }
 
@@ -199,7 +221,7 @@
       savePendingLocally(payload);
       setBusy(false);
       toast('ユーザー識別に失敗したため、回答を一時保存しました。後でもう一度お試しください。');
-      goMap();
+      goBackToReturnTo();
       return;
     }
 
@@ -207,13 +229,13 @@
       await writeSurvey(uid, payload);
       setBusy(false);
       toast('ご協力ありがとうございます。回答を送信しました！');
-      goMap();
+  goBackToReturnTo();
     } catch (e) {
       console.warn('[post-survey] write failed:', e?.message || e);
       savePendingLocally(payload);
       setBusy(false);
       toast('通信に失敗したため、回答を一時保存しました。オンライン時に自動送信します。');
-      goMap();
+      goBackToReturnTo();
     }
   }
 

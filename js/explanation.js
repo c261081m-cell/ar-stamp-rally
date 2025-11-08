@@ -526,6 +526,25 @@
     // スタンプ取得ポップアップを表示（言語反映後に）
     try { showStampPopup(spotId); } catch(e){ console.warn('[explanation] popup failed', e); }
 
+    // AR (8th Wall) 経由で戻ってきた場合にポップアップが出ないことがあるため、
+    // referrer に 8thwall を含む場合や returnTo=map.html の場合は再試行する。
+    try {
+      const ref = (document.referrer || '').toLowerCase();
+      const from8th = ref.indexOf('8thwall') !== -1 || ref.indexOf('8thwall.app') !== -1;
+      const ret = getQuery('returnTo');
+      if (from8th || ret === 'map.html') {
+        // 少し待ってから再表示を試みる（DOM/スタイルが遅れるケース対策）
+        setTimeout(()=>{
+          try {
+            const popup = $('#stampPopup');
+            if (popup && !popup.classList.contains('show')) {
+              showStampPopup(spotId);
+            }
+          }catch(e){}
+        }, 350);
+      }
+    } catch(e){}
+
     // もし同ページで言語切替UIを載せた場合に即時反映したいときのフック
     window.addEventListener('app_lang_changed', () => render(spotId));
   }

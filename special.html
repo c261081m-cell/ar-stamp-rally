@@ -21,8 +21,11 @@
     .wrap{max-width:960px;margin:0 auto;padding:clamp(10px,3vw,16px)}
     header{display:flex;align-items:center;gap:10px;padding:4px 0 10px}
     h1{font-size:22px;margin:0;font-weight:900}
-    .back{margin-left:auto}
-    .back a{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800}
+  .back{margin-left:auto}
+  .back a{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800}
+  /* ボタン化した戻る用のスタイル */
+  .back button{display:inline-block;background:var(--accent);color:#fff;padding:10px 14px;border-radius:12px;font-weight:800;border:0;cursor:pointer}
+  footer button.footer-back{background:none;border:0;color:var(--accent);font-weight:800;cursor:pointer;padding:0}
     nav.toc{background:#f7f9fe;border:1px solid #e3eaf6;border-radius:12px;padding:12px;box-shadow:var(--shadow);margin:8px 0 18px}
     nav.toc a{color:var(--accent);text-decoration:none}
     nav.toc ul{margin:6px 0 0 1.2em;padding:0}
@@ -72,7 +75,7 @@
   <div class="wrap">
     <header>
       <h1 data-i18n="h1">スペシャルコンテンツ</h1>
-      <div class="back"><a href="map.html" data-i18n="backToMap">マップへ戻る</a></div>
+      <div class="back"><button id="backToMapHeader" type="button" data-href="map.html" data-i18n="backToMap">マップへ戻る</button></div>
     </header>
 
     <!-- 目次 -->
@@ -197,7 +200,7 @@
     </section>
 
     <footer>
-      <a href="map.html" data-i18n="backToMapArrow">← マップへ戻る</a>
+      <button id="backToMapFooter" class="footer-back" type="button" data-href="map.html" data-i18n="backToMapArrow">← マップへ戻る</button>
     </footer>
   </div>
 
@@ -338,6 +341,28 @@
 
         // html lang
         document.documentElement.setAttribute('lang', lang==='en'?'en':'ja');
+
+        // Back buttons: header and footer. Use data-href and support ?returnTo override.
+        try {
+          const params = new URLSearchParams(location.search);
+          const ret = params.get('returnTo');
+
+          const hdr = document.getElementById('backToMapHeader');
+          const ftr = document.getElementById('backToMapFooter');
+
+          if (hdr) {
+            // set label (applyI18n already set innerHTML above)
+            hdr.textContent = d.backToMap || 'マップへ戻る';
+            // default href is in data-href attribute
+            if (ret) hdr.dataset.href = ret;
+            hdr.onclick = function(){ try { location.href = hdr.dataset.href || 'map.html'; } catch(e){ location.href = 'map.html'; } };
+          }
+          if (ftr) {
+            ftr.textContent = d.backToMapArrow || '← マップへ戻る';
+            if (ret) ftr.dataset.href = ret;
+            ftr.onclick = function(){ try { location.href = ftr.dataset.href || 'map.html'; } catch(e){ location.href = 'map.html'; } };
+          }
+        } catch(e) { /* ignore */ }
       }
 
       // Lang menu interactions
