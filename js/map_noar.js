@@ -110,11 +110,8 @@ function countCollected(stamps){
   return ALL_SPOTS.reduce((acc,id)=> acc + (stamps[id] ? 1 : 0), 0);
 }
 async function handleCompletionFlow(uid, stamps){
-  const got = countCollected(stamps);
-  if (got < COMPLETE_TARGET) return;
-  if (lsGet(seenKey(uid)) === 'true') return;
-  openCompleteModal();
-  lsSet(seenKey(uid), 'true');
+  // Completion modal is handled centrally by js/complete.js; avoid duplicating behavior here.
+  return;
 }
 
 function buildCameraChooserItems(){

@@ -38,23 +38,29 @@
   </div>
 
   <div class="wrap">
-    <header><h1>チュートリアル（ARなし）</h1></header>
+    <header><h1>はじめに</h1></header>
     <main class="card" aria-live="polite">
       <div class="hero" aria-hidden="true">
         <img id="slideImg" src="assets/images/tutorial_photos/tutorial_image01.png" alt="チュートリアル画像" style="width:100%;height:100%;object-fit:contain;display:block">
       </div>
       <section class="panel">
         <div id="slideText">
-          <p>このモードでは AR を使わず、写真やテキストでスポットの歴史解説をお読みいただけます。</p>
-          <ul>
-            <li>画面の案内に従って操作してください。</li>
-            <li>地図や一覧からスポットを選ぶと、そのスポットの解説が表示されます。</li>
-            <li>スタンプ取得はチュートリアル内の指示に従ってください（3箇所でコンプリート）。</li>
-          </ul>
+          <h2 style="margin-top:0;margin-bottom:8px;font-size:18px;font-weight:800">はじめに</h2>
+          <p>このアプリでは、ICUのキャンパスを歩きながら
+          スポットを巡る「スタンプラリー」を楽しめます。</p>
+
+          <p>地図からスポットを選んで解説を読んだり、
+          スタンプを集めていくことで、
+          ICUの歴史をより深く知ることができます。</p>
+
+          <p>3つのスタンプを集めると「コンプリート」です！
+          コンプリート後にはアンケートに答えて、
+          スペシャルコンテンツを見てみましょう。</p>
+
+          <p>まずは地図から気になる場所を選んでみてください。</p>
         </div>
-        <div class="ctaRow">
-          <button id="startBtn" class="btn">チュートリアルを始める</button>
-          <a href="map_noar.html" id="skipLink" class="btn btn-secondary" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">解説一覧に進む</a>
+        <div class="ctaRow" style="justify-content:center;margin-top:16px">
+          <button id="beginBtn" class="btn" style="width:64%;background:#005ABB">はじめる</button>
         </div>
       </section>
     </main>
@@ -94,16 +100,37 @@
       function applyLang(lang){
         const dict = DICT[lang] || DICT.ja;
         const title = document.querySelector('header h1');
-        if (title) title.textContent = dict['tut.title'];
-        const lead = document.querySelector('#slideText p');
-        if (lead) lead.textContent = dict['noar.lead'];
-        const lis = document.querySelectorAll('#slideText ul li');
-        if (lis[0]) lis[0].textContent = dict['noar.li1'];
-        if (lis[1]) lis[1].textContent = dict['noar.li2'];
-        if (lis[2]) lis[2].textContent = dict['noar.li3'];
-        document.getElementById('startBtn').textContent = dict['startBtn'];
-        document.getElementById('skipLink').textContent = dict['skipLink'];
-        document.title = (lang==='en') ? 'Tutorial (No AR) | AR Stamp Rally' : 'チュートリアル（ARなし） | ARスタンプラリー';
+        if (title) title.textContent = (lang==='en') ? 'Introduction' : 'はじめに';
+        // slideText content: set full paragraphs (Japanese provided). Provide a short English fallback.
+        const slide = document.getElementById('slideText');
+        if (slide) {
+          if (lang === 'en') {
+            slide.innerHTML = `
+              <h2 style="margin-top:0;margin-bottom:8px;font-size:18px;font-weight:800">Introduction</h2>
+              <p>This app lets you enjoy a stamp rally by walking around the ICU campus and visiting spots.</p>
+              <p>Select spots on the map to read explanations and collect stamps to learn more about ICU's history.</p>
+              <p>Collect 3 stamps to complete the rally! After completion, please take the survey and view the special content.</p>
+              <p>Start by choosing a spot on the map.</p>
+            `;
+          } else {
+            slide.innerHTML = `
+              <h2 style="margin-top:0;margin-bottom:8px;font-size:18px;font-weight:800">はじめに</h2>
+              <p>このアプリでは、ICUのキャンパスを歩きながら
+              スポットを巡る「スタンプラリー」を楽しめます。</p>
+
+              <p>地図からスポットを選んで解説を読んだり、
+              スタンプを集めていくことで、
+              ICUの歴史をより深く知ることができます。</p>
+
+              <p>3つのスタンプを集めると「コンプリート」です！
+              コンプリート後にはアンケートに答えて、
+              スペシャルコンテンツを見てみましょう。</p>
+
+              <p>まずは地図から気になる場所を選んでみてください。</p>
+            `;
+          }
+        }
+        document.title = (lang==='en') ? 'Introduction | AR Stamp Rally' : 'はじめに | ARスタンプラリー';
         document.documentElement.setAttribute('lang', lang==='en'?'en':'ja');
       }
 
@@ -120,7 +147,7 @@
       document.addEventListener('DOMContentLoaded', ()=>{ applyLang(getLang()); });
     })();
 
-    document.getElementById('startBtn')?.addEventListener('click', function(){
+    document.getElementById('beginBtn')?.addEventListener('click', function(){
       try { localStorage.setItem('tutorial_done','1'); } catch(e){}
       location.href = withV('map_noar.html');
     });

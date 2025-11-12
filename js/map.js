@@ -125,11 +125,10 @@ function countCollected(stamps){
   return ALL_SPOTS.reduce((acc,id)=> acc + (stamps[id] ? 1 : 0), 0);
 }
 async function handleCompletionFlow(uid, stamps){
-  const got = countCollected(stamps);
-  if (got < COMPLETE_TARGET) return;
-  if (lsGet(seenKey(uid)) === 'true') return; // 初回のみ
-  openCompleteModal();
-  lsSet(seenKey(uid), 'true');
+  // Completion UI (modal) is managed centrally by js/complete.js.
+  // This function intentionally does not open the modal or set the seen flag here.
+  // renderStampUI already toggles inline/special links.
+  return;
 }
 
 /* ====== カメラ起動（スポット選択：写真グリッド） ====== */

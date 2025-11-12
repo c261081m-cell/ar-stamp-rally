@@ -308,17 +308,10 @@
     </div>
   </div>
 
-  <div id="completeOverlay" class="complete-overlay" aria-hidden="true"></div>
-  <div id="completeModal" class="complete-modal" role="dialog" aria-modal="true" aria-labelledby="completeTitle" aria-describedby="completeLead" style="display:none">
-    <h2 id="completeTitle">🎉 コンプリート！</h2>
-    <p id="completeLead">全てのスタンプを集めました。ご参加ありがとうございます！</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button id="closeComplete" class="btn btn-secondary" type="button">マップに戻る</button>
-      <a id="toSurvey" class="btn" href="post-survey.html?returnTo=map_noar.html">アンケートへ</a>
-    </div>
-  </div>
+  <!-- centralized complete modal — injected by js/complete.js -->
 
   <script src="js/firebase.js" defer></script>
+  <script src="js/complete.js" defer></script>
   <script src="js/map_noar.js?v=20251101" defer></script>
   <!-- スタンプ帳開閉（単独挙動） -->
   <script>

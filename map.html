@@ -324,15 +324,7 @@
   </div>
 
   <!-- 完走モーダル -->
-  <div id="completeOverlay" class="complete-overlay" aria-hidden="true"></div>
-  <div id="completeModal" class="complete-modal" role="dialog" aria-modal="true" aria-labelledby="completeTitle" aria-describedby="completeLead">
-    <h2 id="completeTitle" class="complete-title" data-i18n="map.completedTitle">🎉 コンプリート！</h2>
-    <p id="completeLead" class="complete-lead" data-i18n="map.completedLead">全てのスタンプを集めました。ご参加ありがとうございます！</p>
-    <div class="complete-row">
-      <button id="closeComplete" class="btn btn-secondary" type="button" data-i18n="map.backToMap">マップに戻る</button>
-      <a id="toSurvey" class="btn" href="post-survey.html?returnTo=map.html" data-i18n="map.toSurvey">アンケートへ</a>
-    </div>
-  </div>
+  <!-- centralized complete modal — injected by js/complete.js -->
 
   <!-- スタンプ帳の開閉（単独挙動） -->
   <script>
@@ -502,6 +494,7 @@
     })();
   </script>
 
+  <script src="js/complete.js" defer></script>
   <script src="js/map.js?v=20251003" defer></script>
 
   <!-- モーダル内の固定キーだけ再適用（保険） -->
