@@ -7,7 +7,7 @@
 //  - 完走（3/3）で #completeCard を表示、未達なら #notComplete を表示
 
 (function () {
-  const ALL_SPOTS = ['spot1','spot3','spot4'];
+  const ALL_SPOTS = ['spot1','spot2','spot3'];
   const TARGET = 3;
 
   function getLocalUid() {

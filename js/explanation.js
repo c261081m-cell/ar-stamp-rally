@@ -37,17 +37,17 @@
 
   // --------- ラベル（日/英） ---------
   const LABELS_JA = {
-    spot1: '本館173前',
-    spot2: 'トロイヤー記念館（T館）前',
-    spot3: '学生食堂（ガッキ）前',
+    spot1: '本館正面玄関',
+    spot2: '図書館手前',
+    spot3: 'D館記念碑',
     spot4: 'チャペル前',
     spot5: '体育館（Pec-A）前',
     spot6: '本館307前',
   };
   const LABELS_EN = {
-    spot1: 'In front of Main Hall 173',
-    spot2: 'In front of Troyer Memorial Hall (T Hall)',
-    spot3: 'In front of Cafeteria (“Gakki”)',
+    spot1: 'Main Building — Front Entrance',
+    spot2: 'In Front of the Library',
+    spot3: 'D-Building Monument',
     spot4: 'In front of the Chapel',
     spot5: 'In front of the Gymnasium (Pec-A)',
     spot6: 'In front of Main Hall 307',
@@ -56,82 +56,84 @@
   // --------- 各スポットのデータ（日英） ---------
   // 画像パスは共通・テキストのみ差し替え
   const CONTENT = {
+    // Spot 1: Main Building — front entrance
     spot1: {
-      mainPhoto: 'assets/images/Photos_thesis/spot1_main.jpg',
+      // photo files are referenced here; please add actual images to assets/images/current_photos/
+      mainPhoto: 'assets/images/current_photos/spot01_main.jpg',
       ja: {
-        quiz: {
-          q: '本館は昔何に使われていたでしょうか？',
-          choices: { A:'図書館', B:'畑', C:'飛行機の制作' },
-          answer: 'C'
-        },
+        quiz: null,
         explainHTML: `
-        <p>ICUがある所には昔、「中島飛行機」という会社の研究所があったんだ。戦争のころには軍用機も多く作られていたんだよ。後に「富士重工業（現社名：SUBARU）」という会社になるよ。</p>
+        <p>ここは本館の正面玄関だよ。大学の顔とも言える場所で、多くの式典や集合写真の舞台になってきたところです。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_1.jpg" alt="キャンパス内部 本館風景">
-          <figcaption>出典：『キャンパス風景　本館内部』P-01_01_003, ICUアーカイブス 三鷹 東京</figcaption>
+          <img src="assets/images/current_photos/spot01_detail.jpg" alt="本館正面玄関の写真">
+          <figcaption>写真: 本館正面（撮影予定、assets/images/current_photos/spot01_detail.jpg）</figcaption>
         </figure>
-        <p>これは改装前の写真だよ。<b>本館はもともと中島飛行機が使っていたもの</b>を1953年に改築したんだ。</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="本館正面（1950年代）">
-          <figcaption>出典：『建物 本館』P-03_47_01_044, ICUアーカイブス 三鷹 東京</figcaption>
-        </figure>
-        <p>この写真は1950年代のもので、改築はしてるけど<b>バカ山・アホ山がまだ無い</b>よね？ バカ山・アホ山は図書館の地下階を掘った時にできた土を盛って作られたんだよ！</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_2.jpg" alt="1957_第一期生卒業式">
-          <figcaption>出典：『湯浅八郎所蔵ファイル Ⅰ 「第一期生卒業式」』P-02_24_123, ICUアーカイブス 三鷹 東京</figcaption>
-        </figure>
-        <p>この写真は1957年に一期生の卒業式のときに撮られたものだよ。見慣れた玄関が昔の写真にも出てくるなんて不思議な気持ちだね。</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="1952 献学時 - 小田急バスでの通学">
-          <figcaption>出典：『1952 献学時 - 小田急バスでの通学』P-01_14_010, ICUアーカイブス 三鷹 東京</figcaption>
-          <p>この写真は小田急バスで通学する、1952年の学生の写真だ。なんと、本館東側（今は駐輪場になっている方）の入り口近くまでバスが来ていたんだよ！</p>
-        </figure>
-        <!-- ▼▼ 追記分 ▼▼ -->
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_4.jpg" alt="1949年 本館前の集合写真">
-          <figcaption>出典：『本館 1949 「本館改修完成」』P-03_33_085, ICUアーカイブス 三鷹 東京</figcaption>
-        </figure>
-        <p>これは1949年の写真だよ。本館の前に立つのは、右からハロルド・W・ハケット氏（業務・財務担当副学長）モーリス・E・トロイヤー博士（カリキュラム・教育担当副学長）湯浅八郎博士（学長）阿由沢岩男博士（教職員）。湯浅八郎先生は初代学長だね。湯浅八郎記念館が大学にはあるけど、そこは湯浅先生が蒐集した民芸品が展示されている、博物館になっているんだ。また、トロイヤー先生を記念して建てられたのがトロイヤー記念アーツ・サイエンス館、つまりT館だね！</p>
-        <!-- ▲▲ 追記ここまで ▲▲ -->
-        <p>目の前に解説パネルがあるよね？こんな風に、ICUには歴史を解説しているパネルがたくさんあるんだ。本館にもたくさんあるよ！探して読んでみてね！</p>
+        <p>戦後の改修や増改築を経て、今の姿になっています。建物の外観や入口の意匠を観察してみてください。</p>
       `
       },
       en: {
-        quiz: {
-          q: 'What was the Main Building used for in the past?',
-          choices: { A:'Library', B:'Field', C:'Aircraft manufacturing' },
-          answer: 'C'
-        },
+        quiz: null,
         explainHTML: `
-        <p>The area where ICU stands used to be a research facility of Nakajima Aircraft. During the war, many military aircraft were produced here. Later, the company became Fuji Heavy Industries (now SUBARU).</p>
+        <p>This is the front entrance of the Main Building. It serves as the face of the university and has been a backdrop for many ceremonies and group photos.</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_1.jpg" alt="Main Hall interior in the past">
-          <figcaption>Source: “Campus View — Main Hall Interior,” P-01_01_003, ICU Archives, Mitaka, Tokyo</figcaption>
+          <img src="assets/images/current_photos/spot01_detail.jpg" alt="Main Building front entrance photo">
+          <figcaption>Photo: Main Building front (planned file: assets/images/current_photos/spot01_detail.jpg)</figcaption>
         </figure>
-        <p>This is before renovation. The <b>Main Hall was originally used by Nakajima Aircraft</b> and was remodeled in 1953.</p>
+        <p>The building’s appearance today reflects postwar renovations and later modifications. Take a moment to observe the façade and entrance details.</p>
+      `
+      }
+    },
+
+    // Spot 2: In front of the Library
+    spot2: {
+      mainPhoto: 'assets/images/current_photos/spot02_main.jpg',
+      ja: {
+        quiz: null,
+        explainHTML: `
+        <p>ここは図書館の手前にある通りです。学生が行き交う場所で、図書館への入口や周辺の植栽が特徴です。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="Main Hall front (1950s)">
-          <figcaption>Source: “Buildings — Main Hall,” P-03_47_01_044, ICU Archives, Mitaka, Tokyo</figcaption>
+          <img src="assets/images/current_photos/spot02_detail.jpg" alt="図書館手前の風景">
+          <figcaption>写真: 図書館手前（予定ファイル: assets/images/current_photos/spot02_detail.jpg）</figcaption>
         </figure>
-        <p>This photo is from the 1950s. Although it had been remodeled, <b>the two mounds (“Baka-yama” and “Aho-yama”) did not exist yet</b>. They were created with soil excavated when building the library’s basement.</p>
+        <p>図書館は学びの中心です。ここでは、かつて学生たちが掲示や集会をしていた跡が見られます。</p>
+      `
+      },
+      en: {
+        quiz: null,
+        explainHTML: `
+        <p>This is the area in front of the library. It is a busy walkway where students pass by; notice the library entrance and surrounding plantings.</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_2.jpg" alt="1957 First Graduating Class">
-          <figcaption>Source: “Hachiro Yuasa Collection I — First Commencement,” P-02_24_123, ICU Archives, Mitaka, Tokyo</figcaption>
+          <img src="assets/images/current_photos/spot02_detail.jpg" alt="Area in front of the library">
+          <figcaption>Photo: In front of the library (planned file: assets/images/current_photos/spot02_detail.jpg)</figcaption>
         </figure>
-        <p>This was taken at the first commencement in 1957. It feels strange to see the familiar entrance in an old photo, doesn’t it?</p>
+        <p>The library is the heart of academic life. You can still find traces of bulletin boards and gathering spots used by students in the past.</p>
+      `
+      }
+    },
+
+    // Spot 3: D-Building Monument
+    spot3: {
+      mainPhoto: 'assets/images/current_photos/spot03_main.jpg',
+      ja: {
+        quiz: null,
+        explainHTML: `
+        <p>ここはD館前の記念碑です。卒業や歴史を記念する石碑やレリーフがあり、学生や教員による寄贈が刻まれていることがあります。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="1952 Students commuting by Odakyu bus">
-          <figcaption>Source: “1952 Dedication — Commuting by Odakyu Bus,” P-01_14_010, ICU Archives, Mitaka, Tokyo</figcaption>
-          <p>This shows students commuting by Odakyu bus in 1952. The bus actually came near the east entrance of the Main Hall (now the bicycle parking area)!</p>
+          <img src="assets/images/current_photos/spot03_detail.jpg" alt="D館記念碑の写真">
+          <figcaption>写真: D館記念碑（予定ファイル: assets/images/current_photos/spot03_detail.jpg）</figcaption>
         </figure>
-        <!-- ▼▼ Added ▼▼ -->
+        <p>記念碑に刻まれた名前や日付をよく見てみてください。キャンパスの歴史が垣間見えます。</p>
+      `
+      },
+      en: {
+        quiz: null,
+        explainHTML: `
+        <p>This is the monument in front of D-Building. You can find plaques and reliefs commemorating donations and graduations—sometimes bearing names of alumni and staff.</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_4.jpg" alt="1949 Group in front of Main Hall">
-          <figcaption>Source: “Main Hall 1949 — Renovation Completed,” P-03_33_085, ICU Archives, Mitaka, Tokyo</figcaption>
+          <img src="assets/images/current_photos/spot03_detail.jpg" alt="D-Building monument photo">
+          <figcaption>Photo: D-Building monument (planned file: assets/images/current_photos/spot03_detail.jpg)</figcaption>
         </figure>
-        <p>This photo is from 1949. From right: Mr. Harold W. Hackett (VP for Business & Finance), Dr. Maurice E. Troyer (VP for Curriculum & Education), Dr. Hachiro Yuasa (President), and Dr. Iwao Ayuzawa (faculty). Dr. Yuasa was ICU’s first president; the Hachiro Yuasa Memorial Museum on campus exhibits folk crafts he collected. The Troyer Memorial Arts & Sciences Hall—“T Hall”—was built in honor of Dr. Troyer!</p>
-        <!-- ▲▲ Added ▲▲ -->
-        <p>You can find an explanatory panel right in front of you. ICU has many such historical panels—especially around the Main Hall. Try to find and read them!</p>
+        <p>Take a close look at the inscriptions—the names and dates offer glimpses into the campus history.</p>
       `
       }
     },

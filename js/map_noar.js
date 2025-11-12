@@ -17,14 +17,14 @@ const EIGHTHWALL_URLS = {
   spot6: 'https://maria261081.8thwall.app/spot6/'
 };
 
-const ALL_SPOTS       = ['spot1','spot3','spot4'];
+const ALL_SPOTS       = ['spot1','spot2','spot3'];
 const AR_SPOTS        = ALL_SPOTS.slice();
 const COMPLETE_TARGET = 3;
 
 const SPOT_LABELS = {
-  spot1: '本館 1F<br>University Hall 1F',
-  spot2: 'T館<br>Troyer Memorial Arts and Science Hall',
-  spot3: '大学食堂<br>Cafeteria',
+  spot1: '本館正面玄関<br>Main Building — Front Entrance',
+  spot2: '図書館手前<br>In Front of the Library',
+  spot3: 'D館記念碑<br>D-Building Monument',
   spot4: 'チャペル<br>Chapel',
   spot5: '新体育館<br>PEC-A',
   spot6: '<h2>Goal</h2>本館 3F<br>University Hall 3F',
