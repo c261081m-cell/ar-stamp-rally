@@ -29,7 +29,13 @@ const SPOT_LABELS = {
   spot5: '新体育館<br>PEC-A',
   spot6: '<h2>Goal</h2>本館 3F<br>University Hall 3F',
 };
+// Per-spot overrides for photo sources (non-AR map). Use PNGs for some spots when needed.
+const OVERRIDE_PHOTOS = {
+  spot2: 'assets/images/current_photos/spot07.PNG',
+  spot3: 'assets/images/current_photos/spot08.PNG'
+};
 const photoSrc = (spotId) => {
+  if (OVERRIDE_PHOTOS[spotId]) return OVERRIDE_PHOTOS[spotId];
   const nn = String(spotId.replace('spot','')).padStart(2,'0');
   return `assets/images/current_photos/spot${nn}.JPG`;
 };
