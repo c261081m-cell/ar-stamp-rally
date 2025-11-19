@@ -34,7 +34,13 @@
   }
   function lsKey(spot){ const uid = getUidSync() || 'nouid'; return `stamp_${uid}_${spot}` }
   function toNN(spotId){ return String(spotId.replace('spot','')).padStart(2,'0') }
-  function stampSrc(spotId){ return `assets/images/stamps/stamp${toNN(spotId)}.png` }
+  // allow per-spot stamp image overrides (some spots use non-sequential stamp files)
+  const STAMP_OVERRIDES = {
+    // spot9 uses stamp02.png, spot8 uses stamp03.png per content spec
+    spot9: 'assets/images/stamps/stamp02.png',
+    spot8: 'assets/images/stamps/stamp03.png'
+  };
+  function stampSrc(spotId){ return STAMP_OVERRIDES[spotId] || `assets/images/stamps/stamp${toNN(spotId)}.png` }
 
   // --------- ラベル（日/英） ---------
   const LABELS_JA = {
@@ -84,14 +90,8 @@
       `
       }
     },
-
-
-
     spot8: {
-      // main photo now located in Photos_thesis
       mainPhoto: 'assets/images/Photos_thesis/spot8_main.jpg',
-      // explicit stamp image override (user requested stamp03.png)
-      stampImage: 'assets/images/stamps/stamp03.png',
       ja: {
         quiz: {
           q: '図書館の地下を掘った時の土はどこへ持っていかれたでしょうか？',
@@ -99,48 +99,35 @@
           answer: 'B'
         },
         explainHTML: `
-        <p>☆自転車や歩行者に注意してね！☆</p>
+        <p><b>☆自転車や歩行者に注意してね！☆</b></p>
         <p>この場所からだと図書館の変遷がよくわかるね。昔の図書館の中はこんな感じだったらしいよ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="図書館の昔の様子">
-          <figcaption>写真: 図書館（予定ファイル: assets/images/Photos_thesis/spot8_detail_3.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="図書館の過去の写真">
+          <figcaption>（写真: 図書館の過去の様子）</figcaption>
         </figure>
-        <p>1960年に寄付金をもとに左側が建てられて、1972年に右側が増築、2000年に後ろ側にグループラーニングエリアやカフェが入っているオスマー図書館が増えたんだ。また、ICUの図書館には地下階があるけど、その地下を掘った土が盛られてできたのがバカ山とアホ山なんだよ。</p>
+        <p>1960年に寄付金をもとに左側が建てられて、1972年に右側が増築、2000年に後ろ側にグループラーニングエリアやカフェが入っているオスマー図書館（正式にはミルドレッドトップオスマー図書館）が増えたんだ。また、ICUの図書館には地下階があるけど、その地下を掘った土が盛られてできたのがバカ山とアホ山なんだよ。</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="1950年代の本館前の写真">
-          <figcaption>写真: 1950年代の本館前（予定ファイル: assets/images/Photos_thesis/spot1_main.jpg）</figcaption>
+          <figcaption>（写真: 1950年代の本館前。バカ山・アホ山はまだない）</figcaption>
         </figure>
-        <p>この図書館が出来る前は、本館に図書館があったんだ！本を引越ししたんだよ。図書館の手前、図書館から出てきた時に右側の茂みの内側には、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。これはICUが1952年に、第二次世界大戦後の日米において、和平を願って集められた寄付金によって献学されたからなんだ。</p>
+        <p>この図書館が出来る前は、本館に図書館があったんだ！本を引越ししたんだよ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="図書館脇の碑">
-          <figcaption>写真: 碑（予定ファイル: assets/images/Photos_thesis/spot8_detail_5.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="図書館の移転に関する写真">
+          <figcaption>（写真）</figcaption>
         </figure>
+        <p>図書館の手前、図書館から出てきた時に右側の茂みの内側には、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="図書館手前にある記念碑の写真">
+          <figcaption>（写真）</figcaption>
+        </figure>
+        <p>これはICUが1952年に、第二次世界大戦後の日米において、和平を願って集められた寄付金によって献学されたからなんだ。</p>
         <p>ICU図書館の歴史については、ICU図書館のホームページから歴史・沿革を選ぶことで見られるよ！</p>
-      `
-      },
-      en: {
-        quiz: {
-          q: 'Where was the soil from digging the library basement taken?',
-          choices: { A:'ICU forest', B:'Baka-yama / Aho-yama', C:'Beside the runway' },
-          answer: 'B'
-        },
-        explainHTML: `
-        <p>Watch out for bicycles and pedestrians!</p>
-        <p>You can see how the library changed over time from this spot. The original interior looked very different.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="Historic view of the library">
-          <figcaption>Photo: Library (planned file: assets/images/Photos_thesis/spot8_detail_3.jpg)</figcaption>
-        </figure>
-        <p>The left wing was built in 1960 with donations, the right wing added in 1972, and in 2000 the Osmar Library (with group-learning areas and a café) was added behind. The soil from digging the underground level was used to create Baka-yama and Aho-yama.</p>
       `
       }
     },
 
     spot9: {
-      // user's requested main photo for spot09 (uses spot8_main per user's input)
       mainPhoto: 'assets/images/Photos_thesis/spot9_main.jpg',
-      // explicit stamp image override (user requested stamp02.png)
-      stampImage: 'assets/images/stamps/stamp02.png',
       ja: {
         quiz: {
           q: 'D館には昔何が入っていたでしょうか？',
@@ -150,54 +137,38 @@
         explainHTML: `
         <p>D館には昔、学生や教職員が暮らすための施設が入っていたんだ。コーヒーを出してくれるカウンターや、理髪店や郵便局、靴磨き店もあったんだよ！</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="地下の理髪店跡の写真">
-          <figcaption>写真: 地下一階にある理髪店跡（assets/images/Photos_thesis/spot9_detail_6.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="地下一階にある理髪店跡の写真">
+          <figcaption>（キャプション：地下一階にある理髪店跡の写真）</figcaption>
         </figure>
         <p>今でも1階の床には、カウンターがあった所に色の違うタイルが貼られているよ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_3.jpg" alt="1階の床のタイル跡">
-          <figcaption>写真: 1階の床（assets/images/Photos_thesis/spot9_detail_3.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_3.jpg" alt="D館の1階床タイルの写真">
+          <figcaption>（写真）</figcaption>
         </figure>
+
         <p>D館は東側（今正面にある、記念碑があるほう）と西側（ファミリーマートが入っている方）に分かれていて、東側の方が古いよ。このD館東館の入口側・礼拝堂の裏がICUの中心だよ。この写真の、わざとかくっとなっている部分が中心をあらわしているんだ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="D館東館入口付近">
-          <figcaption>写真: D館東館（assets/images/Photos_thesis/spot9_detail_7.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="D館の入口付近写真">
+          <figcaption>（写真）</figcaption>
         </figure>
-        <p>D館とはICU創立に多大なる貢献をしてくださった、ディッフェンドルファー博士を記念して1958年に建てられた建築だよ。ディッフェンドルファーさんの写真もあるよ。</p>
+
+        <p>D館とはICU創立に多大なる貢献をしてくださった、ディッフェンドルファー博士を記念して1958年に建てられた建築だよ。D館はディッフェンドルファー博士を悼むものでもあるんだ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_8.jpg" alt="ディッフェンドルファー博士の写真">
-          <figcaption>写真: ディッフェンドルファー博士（assets/images/Photos_thesis/spot9_detail_8.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_8.jpg" alt="D館外観の写真">
+          <figcaption>（写真）</figcaption>
         </figure>
-        <p>登録有形文化財になっていて、3,4階にはほぼ日本最古のアルミサッシや、古くて景色が歪んで見えるガラスが使われている窓があるなど、とっても貴重な建物なんだ！</p>
+
+        <p>登録有形文化財になっていて、3.4階にはほぼ日本最古のアルミサッシや、古くて景色が歪んで見えるガラスが使われている窓があるなど、とっても貴重な建物なんだ！</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="D館の窓の様子">
-          <figcaption>写真: 窓の詳細（assets/images/Photos_thesis/spot9_detail_5.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="D館の古いガラスの写真">
+          <figcaption>（キャプション：写真では分からないけどガラスが歪んでいるよ）</figcaption>
         </figure>
+
         <p>D館には歴史を解説するパネルがあるんだ。ここに載っていること以外の事もたくさん書いてあるから、ぜひ見てみてね！</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_4.jpg" alt="D館の歴史パネル">
-          <figcaption>写真: 歴史パネル（assets/images/Photos_thesis/spot9_detail_4.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot9_detail_4.jpg" alt="D館に設置されている歴史解説パネルの写真">
+          <figcaption>（写真）</figcaption>
         </figure>
-      `
-      },
-      en: {
-        quiz: {
-          q: 'What used to be inside D-Building?',
-          choices: { A:'Barber shop', B:'Clothing store', C:'Produce shop' },
-          answer: 'A'
-        },
-        explainHTML: `
-        <p>D-Building once housed facilities for students and staff—there were counters serving coffee, a barber shop, a post office, and a shoe-shine stand.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="Basement barber shop remains">
-          <figcaption>Photo: Remains of a basement barber shop (assets/images/Photos_thesis/spot9_detail_6.jpg)</figcaption>
-        </figure>
-        <p>On the first floor you can still see tiles that mark where a service counter used to stand.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_3.jpg" alt="First-floor tile traces">
-          <figcaption>Photo: First-floor tiles (assets/images/Photos_thesis/spot9_detail_3.jpg)</figcaption>
-        </figure>
-        <p>D-Building was built in 1958 to commemorate Dr. Diffendorfer, who contributed greatly to ICU’s founding. Parts of the building are registered tangible cultural properties, and it contains rare historic windows and aluminium frames.</p>
       `
       }
     },
@@ -342,16 +313,12 @@
     const confRoot  = CONTENT[spotId] || CONTENT.spot7;
     const conf      = confRoot[lang] || confRoot.ja;
 
-      // タイトル
-      $('#spotTitle').textContent = title;
+    // タイトル
+    $('#spotTitle').textContent = title;
 
-      // スタンプ画像（conf に stampImage を指定していればそれを優先）
-      const sImg = $('#gotStampImage');
-      if (sImg) {
-        const stampImage = confRoot.stampImage || stampSrc(spotId);
-        sImg.src = stampImage;
-        sImg.alt = `${title} ${lang==='en'?'stamp':'のスタンプ'}`;
-      }
+    // スタンプ画像
+    const sImg = $('#gotStampImage');
+    if (sImg) { sImg.src = stampSrc(spotId); sImg.alt = `${title} ${lang==='en'?'stamp':'のスタンプ'}`; }
 
     // メイン写真
     const photo = $('#spotPhoto');
@@ -470,12 +437,7 @@
       const lang = getLang();
 
       if (titleEl) titleEl.textContent = (lang === 'en') ? 'You got a stamp!' : 'スタンプを取得しました';
-      if (img) {
-        const confRoot = CONTENT[spotId] || CONTENT.spot7;
-        const stampImage = confRoot.stampImage || stampSrc(spotId);
-        img.src = stampImage;
-        img.alt = `${spotId} ${lang==='en'?'stamp':'のスタンプ'}`;
-      }
+      if (img) { img.src = stampSrc(spotId); img.alt = `${spotId} ${lang==='en'?'stamp':'のスタンプ'}` }
 
       // show popup (popup-only UX)
       popup.classList.add('show');
