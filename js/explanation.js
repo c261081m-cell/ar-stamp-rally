@@ -138,7 +138,7 @@
 
     spot9: {
       // user's requested main photo for spot09 (uses spot8_main per user's input)
-      mainPhoto: 'assets/images/Photos_thesis/spot8_main.jpg',
+      mainPhoto: 'assets/images/Photos_thesis/spot9_main.jpg',
       // explicit stamp image override (user requested stamp02.png)
       stampImage: 'assets/images/stamps/stamp02.png',
       ja: {
