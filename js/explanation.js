@@ -88,8 +88,8 @@
 
 
     spot8: {
-      // user's requested main photo for spot08
-      mainPhoto: 'assets/images/current_photos/spot8_main.jpg',
+      // main photo now located in Photos_thesis
+      mainPhoto: 'assets/images/Photos_thesis/spot8_main.jpg',
       // explicit stamp image override (user requested stamp03.png)
       stampImage: 'assets/images/stamps/stamp03.png',
       ja: {
