@@ -132,6 +132,9 @@
         }
         document.title = (lang==='en') ? 'Introduction | AR Stamp Rally' : 'はじめに | ARスタンプラリー';
         document.documentElement.setAttribute('lang', lang==='en'?'en':'ja');
+        // update CTA/button texts
+        const beginBtn = document.getElementById('beginBtn');
+        if (beginBtn) beginBtn.textContent = (dict && dict.startBtn) ? dict.startBtn : (lang==='en' ? 'Start tutorial' : 'はじめる');
       }
 
       (function initLangMenu(){

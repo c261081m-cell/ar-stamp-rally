@@ -49,5 +49,39 @@
       location.href = withV('tutorial_noar.html');
     });
   </script>
+  <script>
+    // Simple i18n: read app_lang from localStorage and apply text
+    (function(){
+      const DICT = {
+        ja: {
+          title: '使い方を選んでください',
+          lead: 'ARを使って楽しむモードと、ARを使わず解説だけを見るモードを選べます。',
+          withAr: 'ARを使い、歴史解説を見る',
+          noAr: 'ARを使わず、歴史解説を見る',
+          note: 'どちらのモードも後から言語を切り替えられます。QRやNFCで来た場合は自動で関連情報を保持します。'
+        },
+        en: {
+          title: 'Choose how to use the app',
+          lead: 'Choose between an AR-enabled mode and a mode that shows historical explanations without AR.',
+          withAr: 'Use AR and view historical explanations',
+          noAr: 'View historical explanations (no AR)',
+          note: 'You can switch languages later. If you arrived via QR or NFC, related info will be preserved.'
+        }
+      };
+      function getLang(){ try { return localStorage.getItem('app_lang') || 'ja'; } catch { return 'ja'; } }
+      function apply(){
+        const lang = getLang();
+        const d = DICT[lang] || DICT.ja;
+        const h1 = document.querySelector('h1'); if (h1) h1.textContent = d.title;
+        const lead = document.querySelector('.lead'); if (lead) lead.textContent = d.lead;
+        const withBtn = document.getElementById('withArBtn'); if (withBtn) withBtn.textContent = d.withAr;
+        const noBtn = document.getElementById('noArBtn'); if (noBtn) noBtn.textContent = d.noAr;
+        const note = document.querySelector('.note'); if (note) note.textContent = d.note;
+        document.documentElement.setAttribute('lang', getLang()==='en'?'en':'ja');
+      }
+      window.addEventListener('app_lang_changed', apply);
+      document.addEventListener('DOMContentLoaded', apply);
+    })();
+  </script>
 </body>
 </html>

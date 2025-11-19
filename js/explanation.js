@@ -65,7 +65,6 @@
   const CONTENT = {
     // Spot 7: Main Building — front entrance (renamed from spot1)
     spot7: {
-      // photo files are referenced here; please add actual images to assets/images/current_photos/
       mainPhoto: 'assets/images/current_photos/spot01_main.jpg',
       ja: {
         quiz: null,
@@ -90,6 +89,8 @@
       `
       }
     },
+
+    // Spot 8: Library entrance
     spot8: {
       mainPhoto: 'assets/images/Photos_thesis/spot8_main.jpg',
       ja: {
@@ -123,9 +124,41 @@
         <p>これはICUが1952年に、第二次世界大戦後の日米において、和平を願って集められた寄付金によって献学されたからなんだ。</p>
         <p>ICU図書館の歴史については、ICU図書館のホームページから歴史・沿革を選ぶことで見られるよ！</p>
       `
+      },
+      en: {
+        quiz: {
+          q: 'Where was the soil taken when the library basement was excavated?',
+          choices: { A:'ICU Woods', B:'Baka-yama & Aho-yama (mounds)', C:'Beside the runway' },
+          answer: 'B'
+        },
+        explainHTML: `
+        <p><b>☆Please watch for bicycles and pedestrians!☆</b></p>
+        <p>From this spot you can clearly see how the library has changed over time. The interior of the old library looked something like this.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="Historic photo of the library">
+          <figcaption>(Photo: historic view of the library)</figcaption>
+        </figure>
+        <p>The left wing was built in 1960 thanks to donations, the right wing was added in 1972, and in 2000 the Osmar Library (officially the Mildred Topp Osmar Library) was expanded at the rear to include group learning areas and a café. The library has a basement, and the soil dug out when creating it was piled up to form the two mounds known as Baka-yama and Aho-yama.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="Main Building, 1950s">
+          <figcaption>(Photo: Main Building in the 1950s — note the mounds are not yet present)</figcaption>
+        </figure>
+        <p>Before this library was built, the library collection was housed in the Main Building, and the books were moved when the new library opened.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="Photo related to the library relocation">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+        <p>On the right side of the path in front of the library, tucked inside the bushes, there is a monument erected in 1952 to commemorate the San Francisco Peace Treaty. This reflects donations made in 1952 in the hope of peace between Japan and the U.S. after World War II.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="Monument near the library">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+        <p>For more on the history of the ICU Library, please see the library’s official website and its history pages.</p>
+      `
       }
     },
 
+    // Spot 9: D-Building
     spot9: {
       mainPhoto: 'assets/images/Photos_thesis/spot9_main.jpg',
       ja: {
@@ -170,9 +203,53 @@
           <figcaption>（写真）</figcaption>
         </figure>
       `
+      },
+      en: {
+        quiz: {
+          q: 'What used to be located in D-Building?',
+          choices: { A:'A barbershop', B:'A clothing shop', C:'A greengrocer' },
+          answer: 'A'
+        },
+        explainHTML: `
+        <p>D-Building once housed facilities used by students and staff. There was a counter serving coffee, a barbershop, a post office, and even a shoeshine stand!</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="Remains of a barbershop in the basement">
+          <figcaption>(Caption: Remains of a barbershop in the basement)</figcaption>
+        </figure>
+        <p>Even today you can see tiles on the first-floor floor where the counter once stood — the tiles are a different color there.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_3.jpg" alt="Tiles on the D-Building first floor">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+
+        <p>D-Building is split into an east side (where the monument now stands) and a west side (the side with the FamilyMart). The east side is older. The entrance side of the east wing, just behind the chapel, marks the historic center of ICU — the small kink in the building in the photo indicates that center.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="Entrance area of D-Building">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+
+        <p>D-Building was constructed in 1958 to honor Dr. Diffendorfer, who made significant contributions to the founding of ICU. The building serves as a memorial to him.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_8.jpg" alt="Exterior of D-Building">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+
+        <p>The building is registered as a tangible cultural property. On the third and fourth floors you can find very early aluminum window frames and old glass that slightly distorts the view — features that make the building especially valuable.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="Old glass at D-Building">
+          <figcaption>(Caption: The glass is slightly warped though you may not notice in photos)</figcaption>
+        </figure>
+
+        <p>There is also an information panel explaining D-Building’s history. It contains many details beyond what’s shown here, so please take a look when you visit.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_4.jpg" alt="History panel at D-Building">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+      `
       }
     },
 
+    // Spot 4, 5, 6 remain unchanged (kept as before)
     spot4: {
       mainPhoto: 'assets/images/Photos_thesis/spot4_main.jpg',
       ja: {
@@ -311,7 +388,8 @@
     const lang = getLang();
     const title = (lang === 'en' ? LABELS_EN[spotId] : LABELS_JA[spotId]) || (lang==='en'?'Spot':'スポット');
     const confRoot  = CONTENT[spotId] || CONTENT.spot7;
-    const conf      = confRoot[lang] || confRoot.ja;
+    // Prefer requested language; if not present, prefer English, then Japanese fallback
+    const conf      = confRoot[lang] || confRoot.en || confRoot.ja;
 
     // タイトル
     $('#spotTitle').textContent = title;
