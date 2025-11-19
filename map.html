@@ -232,6 +232,7 @@
       <div class="top-grid" aria-label="上部メニュー">
         <div class="top-cell left">
           <a class="link" id="termsLink" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
+          <a class="link" id="entryLink" href="entry.html" data-i18n="map.entry">ARあり/なし選択画面へ</a>
           <a class="link" id="tutorialLink" href="tutorial.html" data-i18n="map.tutorial">チュートリアル</a>
         </div>
 
@@ -314,6 +315,9 @@
         </a>
       </div>
 
+      <!-- 地図下のヒント（言語対応） -->
+      <div id="mapHint" class="hint" data-i18n="map.pinHint">地図上のピンをタップすると、そこまでのルートが表示されます！(別アプリが開かれます)</div>
+
       <!-- 画面最下部：カメラ起動 -->
       <div class="footer-cta">
         <button id="cameraBtn" class="btn" data-i18n="map.openAR">カメラ起動</button>
@@ -362,6 +366,8 @@
           'map.checkComplete': '📝 アンケートに答える',
           'map.checkCompleteRecommended': '📝 アンケート（コンプリート後推奨）',
           'map.special': '🌟 スペシャルコンテンツ',
+          'map.entry': 'ARあり/なし選択画面へ',
+          'map.pinHint': '地図上のピンをタップすると、そこまでのルートが表示されます！(別アプリが開かれます)',
           'map.openAR': 'カメラ起動',
           'chooser.title': 'スポットを選んでください',
           'chooser.desc':  '写真をタップするとARが起動します。',
@@ -380,6 +386,8 @@
           'map.checkComplete': '📝 Take the survey',
           'map.checkCompleteRecommended': '📝 Survey (recommended after complete)',
           'map.special': '🌟 Special Content',
+          'map.entry': 'Go to AR / No-AR selection',
+          'map.pinHint': 'Tap a pin on the map to show a route to that location! (This will open another app)',
           'map.openAR': 'Open AR',
           'chooser.title': 'Choose a spot',
           'chooser.desc':  'Tap a photo to launch AR.',
