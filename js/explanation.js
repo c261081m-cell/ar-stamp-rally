@@ -63,29 +63,71 @@
   // --------- 各スポットのデータ（日英） ---------
   // 画像パスは共通・テキストのみ差し替え
   const CONTENT = {
-    // Spot 7: Main Building — front entrance (renamed from spot1)
+    // Spot 7: Main Building — front entrance
     spot7: {
-      mainPhoto: 'assets/images/current_photos/spot01_main.jpg',
+      mainPhoto: 'assets/images/Photos_thesis/spot1_detail_2.jpg',
       ja: {
-        quiz: null,
+        quiz: {
+          q: '本館は昔何に使われていたでしょうか？',
+          choices: { A:'図書館', B:'畑', C:'飛行機の制作' },
+          answer: 'C'
+        },
         explainHTML: `
-        <p>ここは本館の正面玄関だよ。大学の顔とも言える場所で、多くの式典や集合写真の舞台になってきたところです。</p>
+        <p>ICUがある所には昔、「中島飛行機」という名前の会社があったんだ。戦争のころには軍用機も多く作られていたんだよ。後に「富士重工業（現社名：SUBARU）」という会社になるよ。本館はもともと中島飛行機が使っていたものを1953年に改築したんだ。これは改装前の写真だよ。</p>
         <figure>
-          <img src="assets/images/current_photos/spot01_detail.jpg" alt="本館正面玄関の写真">
-          <figcaption>写真: 本館正面（撮影予定、assets/images/current_photos/spot01_detail.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot1_detail_1.jpg" alt="改装前の本館写真">
+          <figcaption>（写真: 改装前の本館、assets/images/Photos_thesis/spot1_detail_1.jpg）</figcaption>
         </figure>
-        <p>戦後の改修や増改築を経て、今の姿になっています。建物の外観や入口の意匠を観察してみてください。</p>
+
+        <p>これは一期生の卒業式の写真！1957年のことだよ。70年近く前の卒業生も、今と変わらない道を歩いたんだね。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_2.jpg" alt="1957年の一期生卒業式の写真">
+          <figcaption>（写真: 1957年 一期生卒業式、assets/images/Photos_thesis/spot1_detail_2.jpg）</figcaption>
+        </figure>
+
+        <p>これは昔の小田急バスの写真！このころは今のバス停とは違い、今本館の向かって右、東側すぐまで来ていたらしいよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="昔の小田急バスの写真">
+          <figcaption>（写真: 小田急バス、assets/images/Photos_thesis/spot1_detail_3.jpg）</figcaption>
+        </figure>
+
+        <p>これは授業風景の写真……ではなく、1950-60年頃のクラブ活動の写真。本館で行われていたみたいだね。かつての人たちの生き生きとした表情がうかがえるよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot7_detail_2.jpg" alt="クラブ活動の写真">
+          <figcaption>（写真: クラブ活動、assets/images/Photos_thesis/spot7_detail_2.jpg）</figcaption>
+        </figure>
       `
       },
       en: {
-        quiz: null,
+        quiz: {
+          q: 'What was the Main Building originally used for?',
+          choices: { A:'A library', B:'A field', C:'Aircraft manufacturing' },
+          answer: 'C'
+        },
         explainHTML: `
-        <p>This is the front entrance of the Main Building. It serves as the face of the university and has been a backdrop for many ceremonies and group photos.</p>
+        <p>Long before ICU was here, this site was home to a company called Nakajima Aircraft. During the war years they produced many military aircraft. The company later became Fuji Heavy Industries (now known as SUBARU). The Main Building was originally part of Nakajima Aircraft and was rebuilt in 1953. The photo below shows the building before renovation.</p>
         <figure>
-          <img src="assets/images/current_photos/spot01_detail.jpg" alt="Main Building front entrance photo">
-          <figcaption>Photo: Main Building front (planned file: assets/images/current_photos/spot01_detail.jpg)</figcaption>
+          <img src="assets/images/Photos_thesis/spot1_detail_1.jpg" alt="Main Building before renovation">
+          <figcaption>(Photo: Main Building before renovation, assets/images/Photos_thesis/spot1_detail_1.jpg)</figcaption>
         </figure>
-        <p>The building’s appearance today reflects postwar renovations and later modifications. Take a moment to observe the façade and entrance details.</p>
+
+        <p>This is a photo from the first-class commencement in 1957. Nearly 70 years ago, graduates walked the same paths people walk today.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_2.jpg" alt="1957 commencement photo">
+          <figcaption>(Photo: 1957 commencement, assets/images/Photos_thesis/spot1_detail_2.jpg)</figcaption>
+        </figure>
+
+        <p>Here is an old Odakyu bus photo. Back then the bus stop reached much closer to the Main Building on its east side than it does today.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="Old Odakyu bus photo">
+          <figcaption>(Photo: Odakyu bus, assets/images/Photos_thesis/spot1_detail_3.jpg)</figcaption>
+        </figure>
+
+        <p>Finally, this is not a classroom photo but a club activity scene from the 1950s–60s, apparently held in the Main Building. You can sense how lively people were back then.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot7_detail_2.jpg" alt="Club activity photo">
+          <figcaption>(Photo: Club activities, assets/images/Photos_thesis/spot7_detail_2.jpg)</figcaption>
+        </figure>
       `
       }
     },
