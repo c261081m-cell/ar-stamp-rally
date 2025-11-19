@@ -138,7 +138,7 @@
         <p>D館には昔、学生や教職員が暮らすための施設が入っていたんだ。コーヒーを出してくれるカウンターや、理髪店や郵便局、靴磨き店もあったんだよ！</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="地下一階にある理髪店跡の写真">
-          <figcaption>（キャプション：地下一階にある理髪店跡の写真）</figcaption>
+          <figcaption>（地下一階にある理髪店跡の写真）</figcaption>
         </figure>
         <p>今でも1階の床には、カウンターがあった所に色の違うタイルが貼られているよ。</p>
         <figure>
@@ -161,7 +161,7 @@
         <p>登録有形文化財になっていて、3.4階にはほぼ日本最古のアルミサッシや、古くて景色が歪んで見えるガラスが使われている窓があるなど、とっても貴重な建物なんだ！</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="D館の古いガラスの写真">
-          <figcaption>（キャプション：写真では分からないけどガラスが歪んでいるよ）</figcaption>
+          <figcaption>（写真では分からないけどガラスが歪んでいるよ）</figcaption>
         </figure>
 
         <p>D館には歴史を解説するパネルがあるんだ。ここに載っていること以外の事もたくさん書いてあるから、ぜひ見てみてね！</p>
