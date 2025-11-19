@@ -21,12 +21,13 @@
   }
   function normalizeSpotId(v){
     const id = String(v || '').trim().toLowerCase();
-    return /^spot[1-6]$/.test(id) ? id : 'spot1';
+    // accept spot1..spot9 for compatibility; default to spot7 (new main building id)
+    return (/^spot[1-9]$/.test(id)) ? id : 'spot7';
   }
   function getSpotId(){
     const urlId = getQuery('spotId');
     const bodyId= document.body ? document.body.dataset.spot : null;
-    return normalizeSpotId(urlId || bodyId || 'spot1');
+    return normalizeSpotId(urlId || bodyId || 'spot7');
   }
   function getUidSync(){
     try { return (firebase?.auth?.().currentUser?.uid) || localStorage.getItem('uid'); } catch { return null; }
@@ -37,17 +38,17 @@
 
   // --------- ラベル（日/英） ---------
   const LABELS_JA = {
-    spot1: '本館正面玄関',
-    spot2: '図書館手前',
-    spot3: 'D館記念碑',
+    spot7: '本館正面玄関',
+    spot8: '図書館手前',
+    spot9: 'D館記念碑',
     spot4: 'チャペル前',
     spot5: '体育館（Pec-A）前',
     spot6: '本館307前',
   };
   const LABELS_EN = {
-    spot1: 'Main Building — Front Entrance',
-    spot2: 'In Front of the Library',
-    spot3: 'D-Building Monument',
+    spot7: 'Main Building — Front Entrance',
+    spot8: 'In Front of the Library',
+    spot9: 'D-Building Monument',
     spot4: 'In front of the Chapel',
     spot5: 'In front of the Gymnasium (Pec-A)',
     spot6: 'In front of Main Hall 307',
@@ -56,8 +57,8 @@
   // --------- 各スポットのデータ（日英） ---------
   // 画像パスは共通・テキストのみ差し替え
   const CONTENT = {
-    // Spot 1: Main Building — front entrance
-    spot1: {
+    // Spot 7: Main Building — front entrance (renamed from spot1)
+    spot7: {
       // photo files are referenced here; please add actual images to assets/images/current_photos/
       mainPhoto: 'assets/images/current_photos/spot01_main.jpg',
       ja: {
@@ -84,8 +85,8 @@
       }
     },
 
-    // Spot 2: In front of the Library
-    spot2: {
+    // Spot 8: In front of the Library (renamed from spot2)
+    spot8: {
       mainPhoto: 'assets/images/current_photos/spot02_main.jpg',
       ja: {
         quiz: null,
@@ -111,8 +112,8 @@
       }
     },
 
-    // Spot 3: D-Building Monument
-    spot3: {
+    // Spot 9: D-Building Monument (renamed from spot3)
+    spot9: {
       mainPhoto: 'assets/images/current_photos/spot03_main.jpg',
       ja: {
         quiz: null,
@@ -138,7 +139,7 @@
       }
     },
 
-    spot2: {
+    spot8: {
       mainPhoto: 'assets/images/Photos_thesis/spot2_main.jpg',
       ja: {
         quiz: {
@@ -172,7 +173,7 @@
       }
     },
 
-    spot3: {
+    spot9: {
       mainPhoto: 'assets/images/Photos_thesis/spot3_main.jpg',
       ja: {
         quiz: {
@@ -381,7 +382,7 @@
   function render(spotId){
     const lang = getLang();
     const title = (lang === 'en' ? LABELS_EN[spotId] : LABELS_JA[spotId]) || (lang==='en'?'Spot':'スポット');
-    const confRoot  = CONTENT[spotId] || CONTENT.spot1;
+    const confRoot  = CONTENT[spotId] || CONTENT.spot7;
     const conf      = confRoot[lang] || confRoot.ja;
 
     // タイトル

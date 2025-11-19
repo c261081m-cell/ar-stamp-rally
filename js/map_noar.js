@@ -9,30 +9,31 @@ const $$ = (s)=>Array.from(document.querySelectorAll(s));
 
 /* ====== 8th Wall 側 URL（未使用だが残す） ====== */
 const EIGHTHWALL_URLS = {
-  spot1: 'https://maria261081.8thwall.app/spot1/',
-  spot2: 'https://maria261081.8thwall.app/spot2/',
-  spot3: 'https://maria261081.8thwall.app/spot3/',
+  spot7: 'https://maria261081.8thwall.app/test-3/',
+  spot8: 'https://maria261081.8thwall.app/icu-library/',
+  spot9: 'https://maria261081.8thwall.app/icu-d-memorial/',
   spot4: 'https://maria261081.8thwall.app/spot4/',
   spot5: 'https://maria261081.8thwall.app/spot5/',
   spot6: 'https://maria261081.8thwall.app/spot6/'
 };
 
-const ALL_SPOTS       = ['spot1','spot2','spot3'];
+const ALL_SPOTS       = ['spot7','spot8','spot9'];
 const AR_SPOTS        = ALL_SPOTS.slice();
 const COMPLETE_TARGET = 3;
 
 const SPOT_LABELS = {
-  spot1: '本館正面玄関<br>Main Building — Front Entrance',
-  spot2: '図書館手前<br>In Front of the Library',
-  spot3: 'D館記念碑<br>D-Building Monument',
+  spot7: '本館正面玄関<br>Main Building — Front Entrance',
+  spot8: '図書館手前<br>In Front of the Library',
+  spot9: 'D館記念碑<br>D-Building Monument',
   spot4: 'チャペル<br>Chapel',
   spot5: '新体育館<br>PEC-A',
   spot6: '<h2>Goal</h2>本館 3F<br>University Hall 3F',
 };
 // Per-spot overrides for photo sources (non-AR map). Use PNGs for some spots when needed.
+// Main building (spot7) uses default spot07.JPG, override the others as requested:
 const OVERRIDE_PHOTOS = {
-  spot2: 'assets/images/current_photos/spot07.PNG',
-  spot3: 'assets/images/current_photos/spot08.PNG'
+  spot8: 'assets/images/current_photos/spot08.PNG',
+  spot9: 'assets/images/current_photos/spot08.PNG'
 };
 const photoSrc = (spotId) => {
   if (OVERRIDE_PHOTOS[spotId]) return OVERRIDE_PHOTOS[spotId];
