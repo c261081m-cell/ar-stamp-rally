@@ -33,7 +33,7 @@ const SPOT_LABELS = {
 // Main building (spot7) uses default spot07.JPG, override the others as requested:
 const OVERRIDE_PHOTOS = {
   spot8: 'assets/images/current_photos/spot08.PNG',
-  spot9: 'assets/images/current_photos/spot08.PNG'
+  spot9: 'assets/images/current_photos/spot09.PNG'
 };
 const photoSrc = (spotId) => {
   if (OVERRIDE_PHOTOS[spotId]) return OVERRIDE_PHOTOS[spotId];

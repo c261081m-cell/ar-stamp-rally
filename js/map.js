@@ -40,7 +40,7 @@ const SPOT_LABELS = {
 const OVERRIDE_PHOTOS = {
   // 図書館 -> spot08.PNG, D館 -> spot08.PNG
   spot8: 'assets/images/current_photos/spot08.PNG',
-  spot9: 'assets/images/current_photos/spot08.PNG'
+  spot9: 'assets/images/current_photos/spot09.PNG'
 };
 const photoSrc = (spotId) => {
   if (OVERRIDE_PHOTOS[spotId]) return OVERRIDE_PHOTOS[spotId];
