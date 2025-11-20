@@ -52,6 +52,22 @@
     background:#fff;border:1px solid #e9eef6;border-radius:14px;
     box-shadow:0 6px 24px rgba(0,0,0,.05);overflow:visible; /* パネルを重ねるため visible */
   }
+  /* stamp icon button (left edge) */
+  .stamp-icon-btn{appearance:none;border:0;padding:6px;background:#fff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;box-shadow:var(--menuShadow);cursor:pointer}
+  .stamp-icon-btn img{width:100%;height:100%;object-fit:contain}
+  /* stamp panel when expanded */
+  .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden}
+  .stamp-panel.is-open{display:block}
+  .stamp-panel-inner{display:flex;flex-direction:column;width:50vw;height:50vw;max-width:480px;max-height:480px;padding:12px;gap:10px}
+  .stamp-panel .stamp-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:10px}
+  .stamp-panel .stamp-item .thumb{width:20%;aspect-ratio:1/1;border-radius:8px;overflow:hidden;background:#f3f6fc;border:1px solid #e3eaf6;display:flex;align-items:center;justify-content:center}
+  .stamp-panel .stamp-item .thumb img{width:100%;height:100%;object-fit:cover}
+  .stamp-panel .stamp-item .thumb img{opacity:.28;filter:grayscale(.2);transition:opacity .18s, filter .18s}
+  .stamp-panel .stamp-item.is-got{background:#f3fbf5;border-color:#b7e4c7}
+  .stamp-panel .stamp-item.is-got .thumb img{opacity:1;filter:none}
+  .stamp-panel .stamp-item .meta{flex:1}
+  .stamp-panel .stamp-item .meta .title{font-weight:800;font-size:14px}
+  .stamp-panel .stamp-item .meta .where{font-size:12px;color:#666}
   /* ヘッダー：高さを抑え、1行で完結 */
   .stampbook-header{
     width:100%; text-align:center; background:#fff; color:#111;
@@ -232,58 +248,20 @@
       <!-- 上部 1/6 エリア -->
       <div class="top-grid" aria-label="上部メニュー">
         <div class="top-cell left">
+          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
+            <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
+          </button>
+          <div id="stampLinks" style="display:flex;align-items:center;gap:10px;margin-left:6px">
+            <a id="surveyAlwaysLink" class="link" href="post-survey.html?returnTo=map.html" data-i18n="map.checkCompleteRecommended">📝 アンケート（コンプリート後推奨）</a>
+            <a id="specialLinkTop" class="link" href="special.html?returnTo=map.html" data-i18n="map.special" style="display:none">🌟 スペシャルコンテンツ</a>
+          </div>
           <a class="link" id="termsLink" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
           <a class="link" id="entryLink" href="entry.html" data-i18n="map.entry">ARあり/なし選択画面へ</a>
           <a class="link" id="tutorialLink" href="tutorial.html" data-i18n="map.tutorial">チュートリアル</a>
         </div>
 
         <div class="top-cell">
-          <!-- スタンプ帳（折り畳み：単独で開閉・他要素は追従しない） -->
-          <section class="stampbook" aria-label="スタンプ帳">
-              <button id="stampToggle" class="stampbook-header" type="button" aria-expanded="false" aria-controls="stampBody">
-              <span class="arrow">▼</span><span id="stampBookTitle" data-i18n="map.stampbook">スタンプ帳</span>
-              <span class="stamp-count" id="stampCount" style="margin-left:8px">0/3</span>
-            </button>
-
-            <!-- 常時表示する（推奨）アンケートリンク（完走時のリンクは別にあります） -->
-            <div id="surveyAlways" style="margin:8px 0 0;text-align:center;display:block">
-              <a id="surveyAlwaysLink" href="post-survey.html?returnTo=map.html" data-i18n="map.checkCompleteRecommended">📝 アンケート（コンプリート後推奨）</a>
-            </div>
-            <!-- コンプリート時リンク（JS制御で表示） -->
-            <div id="completeInline" class="complete-inline">
-              <a id="completeLink" href="post-survey.html?returnTo=map.html" data-i18n="map.checkComplete">📝 アンケートに答える</a>
-            </div>
-            <!-- ★ コンプリート時のみ表示するスペシャルコンテンツへのリンク -->
-            <div id="specialInline" class="complete-inline" style="display:none">
-              <a id="specialLink" href="special.html?returnTo=map.html" data-i18n="map.special">🌟 スペシャルコンテンツ</a>
-            </div>
-
-            <div id="stampBody" class="stampbook-body">
-              <div class="stamp-grid">
-                <div class="stamp-cell" data-spot="spot7">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp01.png" alt="スタンプ1"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">本館正面玄関<br>Main Building — Front Entrance</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-                <div class="stamp-cell" data-spot="spot8">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp02.png" alt="スタンプ2"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">図書館手前<br>In Front of the Library</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-                <div class="stamp-cell" data-spot="spot9">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp03.png" alt="スタンプ3"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">D館記念碑<br>D-Building Monument</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <!-- placeholder: stamp panel is rendered as floating element -->
         </div>
 
         <div class="top-cell right">
@@ -319,6 +297,24 @@
       <!-- 地図下のヒント（言語対応） -->
       <div id="mapHint" class="hint" data-i18n="map.pinHint">地図上のピンをタップすると、そこまでのルートが表示されます！(別アプリが開かれます)</div>
 
+      <!-- Stamp panel (floating) -->
+      <div id="stampPanel" class="stamp-panel" role="dialog" aria-hidden="true">
+        <div class="stamp-panel-inner">
+          <div class="stamp-item" data-spot="spot7">
+            <div class="thumb"><img src="assets/images/stamps/stamp01.png" alt="stamp01"></div>
+            <div class="meta"><div class="title">本館正面玄関</div><div class="where">取得場所: 本館正面</div></div>
+          </div>
+          <div class="stamp-item" data-spot="spot8">
+            <div class="thumb"><img src="assets/images/stamps/stamp02.png" alt="stamp02"></div>
+            <div class="meta"><div class="title">図書館手前</div><div class="where">取得場所: 図書館手前</div></div>
+          </div>
+          <div class="stamp-item" data-spot="spot9">
+            <div class="thumb"><img src="assets/images/stamps/stamp03.png" alt="stamp03"></div>
+            <div class="meta"><div class="title">D館記念碑</div><div class="where">取得場所: D館記念碑</div></div>
+          </div>
+        </div>
+      </div>
+
       <!-- 画面最下部：カメラ起動 -->
       <div class="footer-cta">
         <button id="cameraBtn" class="btn" data-i18n="map.openAR">カメラ起動</button>
@@ -342,15 +338,63 @@
   <!-- スタンプ帳の開閉（単独挙動） -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.getElementById('stampToggle');
-      const body = document.getElementById('stampBody');
-      const arrow = btn?.querySelector('.arrow');
-      btn?.addEventListener('click', () => {
-        const open = body.style.display === 'block';
-        body.style.display = open ? 'none' : 'block';
-        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
-        if (arrow) arrow.textContent = open ? '▼' : '▲';
+      const icon = document.getElementById('stampIconBtn');
+      const panel = document.getElementById('stampPanel');
+      const specialTop = document.getElementById('specialLinkTop');
+      // toggle panel
+      function setOpen(v){
+        if (!panel || !icon) return;
+        panel.classList.toggle('is-open', v);
+        panel.setAttribute('aria-hidden', v ? 'false' : 'true');
+        icon.setAttribute('aria-expanded', v ? 'true' : 'false');
+      }
+      icon?.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const open = panel && panel.classList.contains('is-open');
+        setOpen(!open);
       });
+      // prevent clicks inside panel from closing it
+      panel?.addEventListener('click', (e)=>{ e.stopPropagation(); });
+      // reflect local stamp state and wire item clicks
+      function isGotLocal(spot){
+        try{
+          for (let i=0;i<localStorage.length;i++){
+            const k = localStorage.key(i);
+            if (!k) continue;
+            if (k.endsWith(`_${spot}`) && localStorage.getItem(k) === 'true') return true;
+          }
+        }catch(e){}
+        return false;
+      }
+      document.querySelectorAll('#stampPanel .stamp-item').forEach(item=>{
+        const spot = item.dataset.spot;
+        if (!spot) return;
+        if (isGotLocal(spot)) item.classList.add('is-got');
+        item.addEventListener('click', ()=>{
+          // navigate to explanation for this spot; keep returnTo map
+          try{ location.href = `explanation.html?spotId=${encodeURIComponent(spot)}&returnTo=map.html`; }catch(e){}
+          setOpen(false);
+        });
+      });
+      // close on outside click
+      document.addEventListener('click', ()=> setOpen(false));
+      document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') setOpen(false); });
+
+      // wire up special link visibility based on completion UI (completeInline used elsewhere)
+      try{
+        const specialInline = document.getElementById('specialInline');
+        if (specialInline && specialTop){
+          // if specialInline is present and visible, show the top link
+          const obs = new MutationObserver(()=>{
+            const vis = window.getComputedStyle(specialInline).display !== 'none';
+            specialTop.style.display = vis ? 'inline-block' : 'none';
+          });
+          obs.observe(specialInline, {attributes:true,attributeFilter:['style','class']});
+          // run once
+          const vis = window.getComputedStyle(specialInline).display !== 'none';
+          specialTop.style.display = vis ? 'inline-block' : 'none';
+        }
+      }catch(e){}
     });
   </script>
 

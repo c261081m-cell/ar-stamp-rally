@@ -473,14 +473,22 @@
         <p>C. ${conf.quiz.choices.C}</p>
       `;
       answerBlock.style.display = 'none';
+        // hide explanation until answer is revealed
+        const explainEl = $('#explainBlock');
+        if (explainEl) explainEl.style.display = 'none';
       if (showBtn) {
         showBtn.disabled = false;
-        showBtn.onclick = () => {
-          const label = (lang==='en' ? 'Answer' : '答え');
-          answerText.innerHTML = `<b>${label}：${conf.quiz.answer}</b>（${conf.quiz.choices[conf.quiz.answer]}）`;
-          answerBlock.style.display = 'block';
-          showBtn.disabled = true;
-        };
+          showBtn.onclick = () => {
+            const label = (lang==='en' ? 'Answer' : '答え');
+            answerText.innerHTML = `<b>${label}：${conf.quiz.answer}</b>（${conf.quiz.choices[conf.quiz.answer]}）`;
+            answerBlock.style.display = 'block';
+            // reveal explanation (text & photos)
+            if (explainEl) {
+              explainEl.style.display = 'block';
+              try { explainEl.scrollIntoView({behavior:'smooth', block:'start'}); } catch(e){}
+            }
+            showBtn.disabled = true;
+          };
       }
     } else {
       // クイズ無し（spot6）
