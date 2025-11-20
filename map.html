@@ -56,16 +56,39 @@
   /* Top-row icons: unified rounded-square appearance for all five icons */
   .stamp-icon-btn{appearance:none;border:1px solid #e3eaf6;padding:6px;background:#fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
   .stamp-icon-btn img{width:24px;height:24px;object-fit:contain}
+  /* Make only the stampbook icon slightly larger for emphasis */
+  #stampIconBtn{ width:56px; height:56px; padding:8px; border-radius:14px }
+  #stampIconBtn img{ width:28px; height:28px }
   .stamp-label{font-size:12px;color:#111;margin-bottom:6px;text-align:center;font-weight:800}
   .icon-with-label{display:flex;flex-direction:column;align-items:center;gap:6px}
   .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
   .icon-btn img{width:28px;height:28px;display:block}
-  .icon-label{font-size:12px;color:var(--accent);width:48px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}
+  .icon-label{
+    font-size:12px;
+    color:var(--accent);
+    width:48px;
+    text-align:center;
+    white-space:normal; /* allow wrapping */
+    word-break:break-word; /* break long words if needed (helpful for English) */
+    line-height:1.15;
+    font-weight:800;
+    display:block;
+  }
   /* stamp panel when expanded */
   .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden;padding:8px}
   .stamp-panel.is-open{display:block}
   /* make panel large enough to show all stamps at once while staying within viewport */
-  .stamp-panel-inner{display:grid;grid-template-columns:repeat(3, minmax(0,1fr));gap:12px;width:min(92vw,900px);max-width:900px;max-height:calc(100vh - 120px);overflow:auto;padding:12px}
+  /* When stamp panel expands, show stamps stacked vertically (3 visible rows) */
+  .stamp-panel-inner{
+    display:grid;
+    grid-template-columns: 1fr; /* single column, stacked */
+    gap:12px;
+    width: min(86vw, 360px);
+    max-width: 360px;
+    max-height: calc(100vh - 140px);
+    overflow:auto;
+    padding:12px;
+  }
   .stamp-panel .stamp-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:10px;width:100%}
   .stamp-panel .stamp-item .thumb{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#f3f6fc;border:1px solid #e3eaf6;display:flex;align-items:center;justify-content:center}
   .stamp-panel .stamp-item .thumb img{width:100%;height:100%;object-fit:cover}
@@ -212,9 +235,21 @@
   .camera-chooser h3{margin:0 0 8px;font-size:18px}
   .camera-chooser p{margin:0 0 10px;color:#333}
 
-  .camera-chooser .list{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
-  @media (min-width:720px){ .camera-chooser .list{ grid-template-columns:repeat(3, 1fr); } }
+  /* Camera chooser: show photos stacked vertically (one column) */
+  .camera-chooser .list{
+    display:grid;
+    grid-template-columns: 1fr; /* single column, stacked vertically */
+    gap:12px;
+    max-width:480px;
+    margin:0 auto;
+  }
+  @media (min-width:720px){
+    .camera-chooser .list{ grid-template-columns: 1fr; }
+  }
   .camera-chooser .item{ padding:0; border:none; background:transparent }
+  /* Make chooser thumbnails fill width and keep a pleasant aspect */
+  .camera-chooser .item .thumbWrap{ width:100%; aspect-ratio:16/9; border-radius:12px; overflow:hidden }
+  .camera-chooser .item .thumbWrap img{ width:100%; height:100%; object-fit:cover }
 
   /* スポット詳細モーダル（写真＋AR起動） */
   .spot-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);z-index:1005;display:none}
