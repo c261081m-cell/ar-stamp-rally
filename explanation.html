@@ -99,19 +99,16 @@
         <div class="stampNote" id="stampNote">スタンプをゲットしました！</div>
       </div>
 
-      <!-- メイン写真 -->
-      <div class="photo">
-        <img id="spotPhoto" src="" alt="スポット写真">
-      </div>
-
-      <!-- クイズ -->
+      <!-- クイズ（スタンプ画像の直下に表示） -->
       <div id="quizSection">
         <div class="quizTitle" id="quizTitle">クイズ</div>
         <div id="quizBody" class="quizBody"></div>
         <div id="quizChoices" class="choices"></div>
-        <button id="showAnswerBtn" class="btn" type="button">答えを見る</button>
+        <button id="showAnswerBtn" class="btn" type="button">答えと解説を見る</button>
         <div id="answerBlock" class="answer"><span id="answerText"></span></div>
       </div>
+
+      <!-- メイン写真は表示しない -->
 
       <!-- 解説 -->
       <div id="explainBlock" class="explain"></div>
@@ -182,7 +179,7 @@
         var quizTitle = document.getElementById('quizTitle');
         var showBtn   = document.getElementById('showAnswerBtn');
         if (quizTitle) quizTitle.textContent = (lang === 'en') ? 'Quiz' : 'クイズ';
-        if (showBtn)   showBtn.textContent   = (lang === 'en') ? 'Show Answer' : '答えを見る';
+        if (showBtn)   showBtn.textContent   = (lang === 'en') ? 'Show Answer & Explanation' : '答えと解説を見る';
       }
 
       document.addEventListener('DOMContentLoaded', applyExplainLang);
