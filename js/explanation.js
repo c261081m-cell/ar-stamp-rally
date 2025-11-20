@@ -38,7 +38,8 @@
   const STAMP_OVERRIDES = {
     // spot9 uses stamp02.png, spot8 uses stamp03.png per content spec
     spot9: 'assets/images/stamps/stamp02.png',
-    spot8: 'assets/images/stamps/stamp03.png'
+    spot8: 'assets/images/stamps/stamp03.png',
+    spot7: 'assets/images/stamps/stamp01.png'
   };
   function stampSrc(spotId){ return STAMP_OVERRIDES[spotId] || `assets/images/stamps/stamp${toNN(spotId)}.png` }
 
