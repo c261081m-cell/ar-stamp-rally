@@ -55,12 +55,30 @@
   /* stamp icon button (left edge) */
   /* Top-row icons: unified rounded-square appearance for all five icons */
   .stamp-icon-btn{appearance:none;border:1px solid #e3eaf6;padding:6px;background:#fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
-  .stamp-icon-btn img{width:24px;height:24px;object-fit:contain}
-  /* Make only the stampbook icon slightly larger for emphasis */
-  #stampIconBtn{ width:56px; height:56px; padding:8px; border-radius:14px }
-  #stampIconBtn img{ width:28px; height:28px }
+  .stamp-icon-btn img{width:28px;height:28px;object-fit:contain}
+  /* Make the stampbook icon match other icons in size; tint the stamp icon blue */
+  #stampIconBtn{ width:48px; height:48px; padding:6px; border-radius:12px; background:#005ABB; border-color:#005ABB }
+  #stampIconBtn img{ width:28px; height:28px; filter:brightness(0) invert(1); }
   .stamp-label{font-size:12px;color:#111;margin-bottom:6px;text-align:center;font-weight:800}
-  .icon-with-label{display:flex;flex-direction:column;align-items:center;gap:6px}
+  /* icon-with-label: place icon at bottom and label at top within a fixed container
+     so that all icons' bottoms align and label tops align across the row */
+  .icon-with-label{
+    /* Use flex so label and icon align stably.
+       Label is ordered before the icon and the group is bottom-aligned
+       so when label wraps to two lines the lower line sits directly above the icon. */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-end; /* push content to bottom */
+    height:72px;
+    gap:6px;
+    text-align:center;
+  }
+  /* place label before icon so it sits directly above the icon */
+  .icon-with-label .icon-label{ order:-1; margin:0 }
+  /* reset absolute positioning to use normal flow inside flex container */
+  .icon-with-label .icon-btn,
+  .icon-with-label .stamp-icon-btn{ position:static; transform:none }
   .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
   .icon-btn img{width:28px;height:28px;display:block}
   .icon-label{
@@ -74,6 +92,8 @@
     font-weight:800;
     display:block;
   }
+  /* labels that should stay single-line and not constrained to the icon width */
+  .icon-label.label-single{ width:auto; white-space:nowrap }
   /* stamp panel when expanded */
   .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden;padding:8px}
   .stamp-panel.is-open{display:block}
@@ -170,7 +190,9 @@
   .lang-switch{position:relative}
   .lang-btn{
     appearance:none;border:0;background:#fff;border:1px solid #e3eaf6;border-radius:12px;
-    padding:6px; cursor:pointer; box-shadow:var(--menuShadow)
+    padding:6px; cursor:pointer; box-shadow:var(--menuShadow);
+    /* match tutorial icon size */
+    width:48px; height:48px; display:inline-flex; align-items:center; justify-content:center;
   }
   .lang-btn:focus-visible{outline:3px solid rgba(0,90,187,.35)}
   .lang-icon{width:28px;height:28px;display:block}
@@ -326,11 +348,11 @@
           <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
             <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
           </button>
-          <div class="icon-label">スタンプ帳</div>
+          <div class="icon-label label-single">スタンプ帳</div>
         </div>
         <div class="icon-with-label" style="justify-self:center">
           <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map.html"><img src="assets/images/ui/survey_icon.png" alt="アンケート"></a>
-          <div class="icon-label">アンケート</div>
+          <div class="icon-label label-single">アンケート</div>
         </div>
         <div class="icon-with-label" style="justify-self:center">
           <button id="langBtn" class="stamp-icon-btn lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">

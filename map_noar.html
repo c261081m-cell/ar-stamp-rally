@@ -52,6 +52,29 @@
     background:#fff;border:1px solid #e9eef6;border-radius:14px;
     box-shadow:0 6px 24px rgba(0,0,0,.05);overflow:visible; /* パネルを重ねるため visible */
   }
+  /* Top-row icons: unified rounded-square appearance for all five icons */
+  .stamp-icon-btn{appearance:none;border:1px solid #e3eaf6;padding:6px;background:#fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
+  .stamp-icon-btn img{width:28px;height:28px;object-fit:contain}
+  /* Stamp icon: match other icons' size and tint only this button */
+  #stampIconBtn{ width:48px; height:48px; padding:6px; border-radius:12px; background:#005ABB; border-color:#005ABB }
+  #stampIconBtn img{ width:28px; height:28px; filter:brightness(0) invert(1); }
+    /* Use flex to align label above icon and anchor the group to the bottom.
+      When the label wraps, its lower line will sit directly above the icon. */
+    .icon-with-label{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:72px; gap:6px; text-align:center }
+    .icon-with-label .icon-label{ order:-1; margin:0 }
+    .icon-with-label .icon-btn, .icon-with-label .stamp-icon-btn{ position:static; transform:none }
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
+  .icon-btn img{width:28px;height:28px;display:block}
+  .icon-label{font-size:12px;color:var(--accent);width:48px;text-align:center;white-space:normal;word-break:break-word;line-height:1.15;font-weight:800;display:block}
+  .icon-label.label-single{ width:auto; white-space:nowrap }
+  /* stamp panel when expanded (floating) */
+  .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden;padding:8px}
+  .stamp-panel.is-open{display:block}
+  .stamp-panel-inner{display:grid;grid-template-columns:1fr;gap:12px;width:min(86vw,360px);max-width:360px;max-height:calc(100vh - 140px);overflow:auto;padding:12px}
+  .stamp-panel .stamp-item{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px;border-radius:10px;width:100%}
+  .stamp-panel .stamp-item .thumb{width:100%;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#f3f6fc;border:1px solid #e3eaf6;display:flex;align-items:center;justify-content:center}
+  .stamp-panel .stamp-item .thumb img{width:100%;height:100%;object-fit:cover}
+  .stamp-panel .stamp-item .title{font-size:13px;font-weight:800;text-align:center}
   /* ヘッダー：高さを抑え、1行で完結 */
   .stampbook-header{
     width:100%; text-align:center; background:#fff; color:#111;
@@ -125,7 +148,9 @@
   .lang-switch{position:relative}
   .lang-btn{
     appearance:none;border:0;background:#fff;border:1px solid #e3eaf6;border-radius:12px;
-    padding:6px; cursor:pointer; box-shadow:var(--menuShadow)
+    padding:6px; cursor:pointer; box-shadow:var(--menuShadow);
+    /* match tutorial icon size */
+    width:48px; height:48px; display:inline-flex; align-items:center; justify-content:center;
   }
   .lang-btn:focus-visible{outline:3px solid rgba(0,90,187,.35)}
   .lang-icon{width:28px;height:28px;display:block}
@@ -179,8 +204,15 @@
   .camera-chooser h3{margin:0 0 8px;font-size:18px}
   .camera-chooser p{margin:0 0 10px;color:#333}
 
-  .camera-chooser .list{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
-  @media (min-width:520px){ .camera-chooser .list{ grid-template-columns:repeat(3, 1fr); } }
+  /* show photos stacked vertically (one column) when choosing a spot */
+  .camera-chooser .list{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+    max-width:480px;
+    margin:0 auto;
+  }
+  @media (min-width:520px){ .camera-chooser .list{ grid-template-columns: 1fr; } }
   .camera-chooser .item{ padding:0; border:none; background:transparent }
 
   .thumbWrap{
@@ -225,65 +257,57 @@
 <body>
   <div id="pageRoot">
     <div class="wrap">
-      <!-- 上部：プライバシー / チュートリアル / スタンプ帳 / 言語切替（map.html と同等） -->
-  <div class="top-grid" aria-label="上部メニュー" style="display:grid; grid-template-columns:1fr auto; grid-template-areas: 'links icon' 'book book'; gap:8px; align-items:center; margin-bottom:12px;">
-        <div class="top-cell left" style="grid-area:links;display:flex;gap:10px;flex-wrap:wrap">
-          <a class="link" id="termsLink" href="terms.html?returnTo=map_noar.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
-          <a class="link" id="entryLink" href="entry.html" data-i18n="map.entry">ARあり/なし選択画面へ</a>
-          <a class="link" id="tutorialLink" href="tutorial_noar.html" data-i18n="map.tutorial">チュートリアル</a>
+      <!-- 上部：プライバシーを最上部に置く -->
+      <div class="top-privacy" style="text-align:center;margin-bottom:8px;">
+        <a id="termsLink" class="link" href="terms.html?returnTo=map_noar.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
+      </div>
+
+      <!-- 上部：アイコン行（5列） -->
+      <div class="icon-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:end;margin-bottom:10px;">
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="entryIconBtn" class="icon-btn" href="entry.html"><img src="assets/images/ui/entry_icon.png" alt="ARあり/なし選択"></a>
+          <div class="icon-label" data-i18n="map.entry">ARあり/なし選択</div>
         </div>
-        <div class="top-cell" style="grid-area:book">
-          <section class="stampbook" aria-label="スタンプ帳">
-            <button id="stampToggle" class="stampbook-header" type="button" aria-expanded="false" aria-controls="stampBody">
-              <span class="arrow">▼</span><span id="stampBookTitle" data-i18n="map.stampbook">スタンプ帳</span>
-              <span class="stamp-count" id="stampCount" style="margin-left:8px">0/3</span>
-            </button>
-            <!-- 常時表示する（推奨）アンケートリンク -->
-            <div id="surveyAlways" style="margin:8px 0 0;text-align:center;display:block">
-              <a id="surveyAlwaysLink" href="post-survey.html?returnTo=map_noar.html" data-i18n="map.checkCompleteRecommended">📝 アンケート（コンプリート後推奨）</a>
-            </div>
-            <div id="completeInline" class="complete-inline" style="display:none">
-              <a id="completeLink" href="post-survey.html?returnTo=map_noar.html" data-i18n="map.checkComplete">📝 アンケートに答える</a>
-            </div>
-            <div id="specialInline" class="complete-inline" style="display:none">
-              <a id="specialLink" href="special.html?returnTo=map_noar.html" data-i18n="map.special">🌟 スペシャルコンテンツ</a>
-            </div>
-            <div id="stampBody" class="stampbook-body">
-              <div class="stamp-grid">
-                <div class="stamp-cell" data-spot="spot7">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp01.png" alt="スタンプ1"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">本館正面玄関<br>Main Building — Front Entrance</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-                <div class="stamp-cell" data-spot="spot8">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp02.png" alt="スタンプ2"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">図書館手前<br>In Front of the Library</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-                <div class="stamp-cell" data-spot="spot9">
-                  <div class="stamp-thumb"><img src="assets/images/stamps/stamp03.png" alt="スタンプ3"></div>
-                  <div class="stamp-meta">
-                    <div class="stamp-name">D館記念碑<br>D-Building Monument</div>
-                    <div class="stamp-status"><span class="mark" data-i18n="map.notgot">未取得</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="tutorialIconBtn" class="icon-btn" href="tutorial_noar.html"><img src="assets/images/ui/tutorial_icon.png" alt="使い方"></a>
+          <div class="icon-label" data-i18n="map.tutorial">使い方</div>
         </div>
-        <div class="top-cell right" style="grid-area:icon;display:flex;justify-content:flex-end">
-          <div class="lang-switch" id="langSwitch">
-            <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
-              <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語 / Language">
-            </button>
-            <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
-              <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
-              <button class="lang-item" data-lang="en" role="menuitem">English</button>
-            </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
+            <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
+          </button>
+          <div class="icon-label label-single" data-i18n="map.stampbook">スタンプ帳</div>
+        </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map_noar.html"><img src="assets/images/ui/survey_icon.png" alt="アンケート"></a>
+          <div class="icon-label label-single">アンケート</div>
+        </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <button id="langBtn" class="stamp-icon-btn lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+            <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語 / Language">
+          </button>
+          <div class="icon-label">言語</div>
+          <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
+            <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
+            <button class="lang-item" data-lang="en" role="menuitem">English</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stamp panel (floating) -->
+      <div id="stampPanel" class="stamp-panel" role="dialog" aria-hidden="true">
+        <div class="stamp-panel-inner">
+          <div class="stamp-item" data-spot="spot7">
+            <div class="thumb"><img src="assets/images/stamps/stamp01.png" alt="stamp01"></div>
+            <div class="meta"><div class="title">本館正面玄関</div></div>
+          </div>
+          <div class="stamp-item" data-spot="spot8">
+            <div class="thumb"><img src="assets/images/stamps/stamp02.png" alt="stamp02"></div>
+            <div class="meta"><div class="title">図書館手前</div></div>
+          </div>
+          <div class="stamp-item" data-spot="spot9">
+            <div class="thumb"><img src="assets/images/stamps/stamp03.png" alt="stamp03"></div>
+            <div class="meta"><div class="title">D館記念碑</div></div>
           </div>
         </div>
       </div>
@@ -365,14 +389,57 @@
   <!-- スタンプ帳開閉（単独挙動） -->
   <script>
     document.addEventListener('DOMContentLoaded', ()=>{
-      const btn = document.getElementById('stampToggle');
+      // legacy toggle (if present)
+      const legacyBtn = document.getElementById('stampToggle');
       const body = document.getElementById('stampBody');
-      const arrow = btn?.querySelector('.arrow');
-      btn?.addEventListener('click', () => {
+      const arrow = legacyBtn?.querySelector('.arrow');
+      const stampPanel = document.getElementById('stampPanel');
+
+      function toggleStampPanel(v){
+        // if floating panel exists, toggle it; otherwise fallback to legacy body
+        if (stampPanel){
+          const isOpen = stampPanel.classList.contains('is-open');
+          const want = typeof v === 'boolean' ? v : !isOpen;
+          stampPanel.classList.toggle('is-open', want);
+          if (legacyBtn) legacyBtn.setAttribute('aria-expanded', want ? 'true' : 'false');
+          return;
+        }
+        if (!body || !legacyBtn) return;
         const open = body.style.display === 'block';
         body.style.display = open ? 'none' : 'block';
-        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+        legacyBtn.setAttribute('aria-expanded', open ? 'false' : 'true');
         if (arrow) arrow.textContent = open ? '▼' : '▲';
+      }
+
+      legacyBtn?.addEventListener('click', toggleStampPanel);
+      // wire top-left stamp icon button to same toggle
+      const stampIcon = document.getElementById('stampIconBtn');
+      stampIcon?.addEventListener('click', (e)=>{ e.stopPropagation(); toggleStampPanel(); });
+      // close on outside click
+      document.addEventListener('click', ()=>{ const p = document.getElementById('stampPanel'); if (p) p.classList.remove('is-open'); });
+    });
+  </script>
+  <script>
+    // wire stamp panel items: reflect local state and navigate to explanation
+    document.addEventListener('DOMContentLoaded', ()=>{
+      function isGotLocal(spot){
+        try{
+          for (let i=0;i<localStorage.length;i++){
+            const k = localStorage.key(i);
+            if (!k) continue;
+            if (k.endsWith(`_${spot}`) && localStorage.getItem(k) === 'true') return true;
+          }
+        }catch(e){}
+        return false;
+      }
+      document.querySelectorAll('#stampPanel .stamp-item').forEach(item=>{
+        const spot = item.dataset.spot;
+        if (!spot) return;
+        if (isGotLocal(spot)) item.classList.add('is-got');
+        item.addEventListener('click', ()=>{
+          try{ location.href = `explanation.html?spotId=${encodeURIComponent(spot)}&returnTo=map_noar.html`; }catch(e){}
+          const p = document.getElementById('stampPanel'); if (p) p.classList.remove('is-open');
+        });
       });
     });
   </script>
@@ -390,7 +457,7 @@
           'map.checkComplete': '📝 アンケートに答える',
           'map.checkCompleteRecommended': '📝 アンケート（コンプリート後推奨）',
           'map.special': '🌟 スペシャルコンテンツ',
-          'map.entry': 'ARあり/なし選択画面へ',
+          'map.entry': 'ARあり/なし選択',
           'map.openAR': '解説を読む'
         },
         en: {
