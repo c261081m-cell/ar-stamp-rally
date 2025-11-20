@@ -190,13 +190,9 @@ function showSpotDetail(spot, imgSrc, name){
   const overlay = document.getElementById('spotDetailOverlay');
   const dialog  = document.getElementById('spotDetail');
   if (!overlay || !dialog) return;
-  const title = dialog.querySelector('.spotDetailTitle');
   const img   = dialog.querySelector('#spotDetailImage');
   const arBtn = dialog.querySelector('#spotDetailARBtn');
-  const text  = dialog.querySelector('.spotDetailHint');
-  if (title) title.textContent = 'この場所を探してください！';
   if (img){ img.src = imgSrc || photoSrc(spot); img.alt = name || spot; }
-  if (text) text.textContent = '';
   if (arBtn){ arBtn.dataset.spot = spot; }
   overlay.classList.add('is-open');
   dialog.classList.add('is-open');

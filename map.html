@@ -22,25 +22,12 @@
   .wrap{max-width:var(--container);margin:0 auto;padding:clamp(10px,3vw,14px)}
   a.link{color:var(--accent);text-decoration:none;font-weight:800}
 
-  /* ======= 上部：スマホ優先のレイアウト ======= */
-  .top-grid{
-    display:grid;
-    grid-template-columns: 1fr auto;   /* スマホ：リンク / 右アイコン */
-    grid-template-areas:
-      "links  icon"
-      "book   book";
-    gap:8px;
-    align-items:center;
-    margin-bottom:clamp(10px,3vw,14px);
-  }
-  /* ensure top icon row sits above the map and has breathing room */
-  .icon-row{ margin-bottom:12px; position:relative; z-index:1300 }
-  .top-cell.left{grid-area:links; display:flex; justify-content:flex-start; gap:10px; flex-wrap:wrap}
-  .top-cell.right{grid-area:icon; display:flex; justify-content:flex-end}
-  .top-cell:nth-child(2){grid-area:book; display:block}
+  /* ======= 上部：トップヘッダーと主要アイコングリッド ======= */
+  .top-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px }
+  .primary-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; align-items:start; margin-bottom:12px }
 
   /* 左のリンク：小さめ文字で1行収まるように */
-  .top-cell.left .link{
+  .top-header .link{
     font-size: clamp(12px, 3.5vw, 13px);
     line-height:1.2;
     white-space:nowrap;
@@ -70,25 +57,27 @@
     flex-direction:column;
     align-items:center;
     justify-content:flex-start; /* icon at top */
-    height:72px;
+    height:116px; /* fixed height to align icons/labels */
     gap:6px;
     text-align:center;
   }
+  /* center each grid cell's content and keep layout consistent */
+  .primary-grid > .icon-with-label{ justify-self:center }
   /* reset absolute positioning to use normal flow inside flex container */
   .icon-with-label .icon-btn,
   .icon-with-label .stamp-icon-btn{ position:static; transform:none }
-  .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:48px;height:48px;cursor:pointer}
-  .icon-btn img{width:28px;height:28px;display:block}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:56px;height:56px;cursor:pointer}
+  .icon-btn img{width:28px !important;height:28px !important;object-fit:contain;object-position:center;display:block}
   .icon-label{
     font-size:12px;
     color:var(--accent);
-    width:48px;
     text-align:center;
     white-space:normal; /* allow wrapping */
     word-break:break-word; /* break long words if needed (helpful for English) */
     line-height:1.15;
     font-weight:800;
     display:block;
+    margin-top:6px; /* consistent gap under icon */
   }
   /* labels that should stay single-line and not constrained to the icon width */
   .icon-label.label-single{ width:auto; white-space:nowrap }
@@ -338,40 +327,41 @@
 <body>
   <div id="pageRoot">
     <div class="wrap">
-      <!-- 上部：プライバシーを最上部に置く -->
-      <div class="top-privacy" style="text-align:center;margin-bottom:8px;">
-        <a id="termsLink" class="link" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
-      </div>
-
-      <!-- 上部：アイコン行（5列） -->
-      <div class="icon-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center;">
-        <div class="icon-with-label" style="justify-self:center">
-          <a id="entryIconBtn" class="icon-btn" href="entry.html"><img src="assets/images/ui/entry_icon.png?v=20251120" alt="ARあり/なし選択"></a>
-          <div class="icon-label">ARあり/なし選択</div>
+      <!-- Top bar: left = terms, right = language button (icon only) -->
+      <div class="top-header">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <a id="termsLink" class="link" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
         </div>
-        <div class="icon-with-label" style="justify-self:center">
-          <a id="tutorialIconBtn" class="icon-btn" href="tutorial.html"><img src="assets/images/ui/tutorial_icon.png?v=20251120" alt="使い方"></a>
-          <div class="icon-label">使い方</div>
-        </div>
-        <div class="icon-with-label" style="justify-self:center">
-          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
-            <img src="assets/images/ui/stamp_icon.png?v=20251120" alt="スタンプ帳">
-          </button>
-          <div class="icon-label label-single">スタンプ帳</div>
-        </div>
-        <div class="icon-with-label" style="justify-self:center">
-          <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map.html"><img src="assets/images/ui/survey_icon.png?v=20251120" alt="アンケート"></a>
-          <div class="icon-label label-single">アンケート</div>
-        </div>
-        <div class="icon-with-label" style="justify-self:center">
-          <button id="langBtn" class="stamp-icon-btn lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <button id="langBtn" class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
             <img class="lang-icon" src="assets/images/ui/lang.png?v=20251120" alt="言語 / Language">
           </button>
-          <div class="icon-label">言語</div>
           <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
             <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
             <button class="lang-item" data-lang="en" role="menuitem">English</button>
           </div>
+        </div>
+      </div>
+
+      <!-- Primary icon grid: 4 columns (entry, tutorial, stampbook, survey) -->
+      <div class="primary-grid">
+        <div class="icon-with-label">
+          <a id="entryIconBtn" class="icon-btn" href="entry.html"><img src="assets/images/ui/entry_icon.png?v=20251120" alt="ARあり/なし選択"></a>
+          <div class="icon-label" data-i18n="map.entry">ARあり/なし選択</div>
+        </div>
+        <div class="icon-with-label">
+          <a id="tutorialIconBtn" class="icon-btn" href="tutorial.html"><img src="assets/images/ui/tutorial_icon.png?v=20251120" alt="使い方"></a>
+          <div class="icon-label" data-i18n="map.tutorial">使い方</div>
+        </div>
+        <div class="icon-with-label">
+          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
+            <img src="assets/images/ui/stamp_icon.png?v=20251120" alt="スタンプ帳">
+          </button>
+          <div class="icon-label label-single" data-i18n="map.stampbook">スタンプ帳</div>
+        </div>
+        <div class="icon-with-label">
+          <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map.html"><img src="assets/images/ui/survey_icon.png?v=20251120" alt="アンケート"></a>
+          <div class="icon-label label-single" data-i18n="map.checkComplete">アンケート</div>
         </div>
       </div>
 
@@ -444,12 +434,12 @@
   <!-- スポット詳細モーダル（画像・AR起動） -->
   <div id="spotDetailOverlay" class="spot-detail-overlay" aria-hidden="true"></div>
   <div id="spotDetail" class="spot-detail" role="dialog" aria-modal="true" aria-labelledby="spotDetailTitle">
-    <div class="spotDetailTitle" id="spotDetailTitle">この場所を探してください！</div>
+    <div class="spotDetailTitle" id="spotDetailTitle" data-i18n="spotDetail.title">この場所を探してください！</div>
     <img id="spotDetailImage" class="spotDetailImage" src="" alt="スポットの写真">
-    <div class="spotDetailHint">写真の場所まで行ってみましょう。下のボタンでARを起動します。</div>
+    <div class="spotDetailHint" data-i18n="spotDetail.hint">写真の場所まで行ってみましょう。下のボタンでARを起動します。</div>
     <div class="spotDetailActions">
-      <button id="spotDetailARBtn" class="btn" type="button">ARを起動</button>
-      <button id="spotDetailClose" class="btn btn-secondary" type="button">閉じる</button>
+      <button id="spotDetailARBtn" class="btn" type="button" data-i18n="spotDetail.openAR">ARを起動</button>
+      <button id="spotDetailClose" class="btn btn-secondary" type="button" data-i18n="spotDetail.close">閉じる</button>
     </div>
   </div>
 
@@ -525,14 +515,14 @@
       const DICT = {
         ja: {
           'map.terms': 'プライバシーポリシー・ご利用上の注意',
-          'map.tutorial': 'チュートリアル',
+          'map.tutorial': '使い方',
           'map.stampbook': 'スタンプ帳',
           'map.notgot': '未取得',
           'map.got': '取得済み',
-          'map.checkComplete': '📝 アンケートに答える',
+          'map.checkComplete': 'アンケート',
           'map.checkCompleteRecommended': '📝 アンケート（コンプリート後推奨）',
           'map.special': '🌟 スペシャルコンテンツ',
-          'map.entry': 'ARあり/なし選択画面へ',
+          'map.entry': 'ARあり/なし選択',
           'map.pinHint': '地図上のピンをタップすると、そこまでのルートが表示されます！（別アプリが開かれます）\nピンが建っているところに行くと、地形に反応してARが見えるようになります',
           'map.openAR': 'スポット周辺に来ました',
           'map.openExternalTitle': '別アプリが開きます',
@@ -760,6 +750,15 @@
           const text = (NAMES[lang] && NAMES[lang][spot]) ? NAMES[lang][spot] : null;
           if (label && text) label.textContent = text;
         });
+        // also update stamp panel titles to match chosen language
+        try{
+          document.querySelectorAll('#stampPanel .stamp-item').forEach(item=>{
+            const spot = item.getAttribute('data-spot') || item.dataset.spot;
+            const titleEl = item.querySelector('.title');
+            const text = (NAMES[lang] && NAMES[lang][spot]) ? NAMES[lang][spot] : null;
+            if (titleEl && text) titleEl.textContent = text;
+          });
+        }catch(e){}
       }
 
       // モーダルリストの生成・更新を監視
@@ -784,12 +783,20 @@
         ja: {
           'chooser.title': 'スポットを選んでください',
           'chooser.desc':  '写真をタップするとARが起動します。',
-          'chooser.close': '閉じる'
+          'chooser.close': '閉じる',
+          'spotDetail.title': 'この場所を探してください！',
+          'spotDetail.hint': '写真の場所まで行ってみましょう。下のボタンでARを起動します。',
+          'spotDetail.openAR': 'ARを起動',
+          'spotDetail.close': '閉じる'
         },
         en: {
           'chooser.title': 'Choose a spot',
           'chooser.desc':  'Tap a photo to launch AR.',
-          'chooser.close': 'Close'
+          'chooser.close': 'Close',
+          'spotDetail.title': 'Find this place!',
+          'spotDetail.hint': 'Go to the place shown in the photo. Then use the button below to open AR.',
+          'spotDetail.openAR': 'Open AR',
+          'spotDetail.close': 'Close'
         }
       };
       function getLang(){ try { return localStorage.getItem('app_lang') || 'ja'; } catch { return 'ja'; } }
