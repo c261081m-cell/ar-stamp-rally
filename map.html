@@ -53,13 +53,14 @@
     box-shadow:0 6px 24px rgba(0,0,0,.05);overflow:visible; /* パネルを重ねるため visible */
   }
   /* stamp icon button (left edge) */
-  .stamp-icon-btn{appearance:none;border:0;padding:6px;background:#fff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;box-shadow:var(--menuShadow);cursor:pointer}
-  .stamp-icon-btn img{width:100%;height:100%;object-fit:contain}
+  /* Top-row icons: unified rounded-square appearance for all five icons */
+  .stamp-icon-btn{appearance:none;border:1px solid #e3eaf6;padding:6px;background:#fff;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
+  .stamp-icon-btn img{width:24px;height:24px;object-fit:contain}
   .stamp-label{font-size:12px;color:#111;margin-bottom:6px;text-align:center;font-weight:800}
   .icon-with-label{display:flex;flex-direction:column;align-items:center;gap:6px}
-  .icon-btn img{width:40px;height:40px;display:block}
-  .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:4px;background:transparent;border:0}
-  .icon-label{font-size:12px;color:var(--accent);width:44px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}
+  .icon-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:6px;background:#fff;border:1px solid #e3eaf6;width:48px;height:48px;box-shadow:var(--menuShadow);cursor:pointer}
+  .icon-btn img{width:28px;height:28px;display:block}
+  .icon-label{font-size:12px;color:var(--accent);width:48px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:800}
   /* stamp panel when expanded */
   .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden;padding:8px}
   .stamp-panel.is-open{display:block}
@@ -71,7 +72,8 @@
   .stamp-panel .stamp-item .thumb img{opacity:.28;filter:grayscale(.2);transition:opacity .18s, filter .18s}
   .stamp-panel .stamp-item.is-got{background:#f3fbf5;border-color:#b7e4c7}
   .stamp-panel .stamp-item.is-got .thumb img{opacity:1;filter:none}
-  .stamp-panel .stamp-item .where{font-size:13px;color:#333;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:100%}
+  .stamp-panel .stamp-item .where{display:none}
+  .stamp-panel .stamp-item .title{font-size:13px;font-weight:800;text-align:center}
   /* ヘッダー：高さを抑え、1行で完結 */
   .stampbook-header{
     width:100%; text-align:center; background:#fff; color:#111;
@@ -162,7 +164,8 @@
 
   /* ======= 地図 ======= */
   .map-wrap{
-    position:relative;width:100%;max-width:920px;margin:0 auto 14px;background:#fff;
+    position:relative; /* full-bleed map: stretch to viewport width while staying centered */
+    width:100vw; max-width:none; margin:0 calc(50% - 50vw) 14px; background:#fff;
     border-radius:var(--radius);box-shadow:0 10px 30px rgba(0,0,0,.05);overflow:hidden;
   }
   .map-img{display:block;width:100%;height:auto;object-fit:contain;background:#fff}
@@ -274,48 +277,34 @@
         <a id="termsLink" class="link" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
       </div>
 
-      <!-- 上部 1/6 エリア -->
-      <div class="top-grid" aria-label="上部メニュー">
-        <div class="top-cell left" style="display:flex;align-items:center;gap:8px">
-          <!-- 左端：スタンプ帳アイコン + ラベル -->
-          <div class="icon-with-label">
-            <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
-              <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
-            </button>
-            <div class="icon-label">スタンプ帳</div>
-          </div>
-
-          <!-- 中央アイコン群（アンケート、使い方、AR選択） -->
-          <div class="top-icons" style="display:flex;gap:10px;align-items:center;margin-left:6px">
-            <div class="icon-with-label">
-              <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map.html"><img src="assets/images/ui/survey_icon.png" alt="アンケート"></a>
-              <div class="icon-label">アンケート</div>
-            </div>
-            <div class="icon-with-label">
-              <a id="tutorialIconBtn" class="icon-btn" href="tutorial.html"><img src="assets/images/ui/tutorial_icon.png" alt="使い方"></a>
-              <div class="icon-label">使い方</div>
-            </div>
-            <div class="icon-with-label">
-              <a id="entryIconBtn" class="icon-btn" href="entry.html"><img src="assets/images/ui/entry_icon.png" alt="ARあり/なし選択"></a>
-              <div class="icon-label">ARあり/なし選択</div>
-            </div>
-          </div>
-
-        <div class="top-cell">
-          <!-- placeholder: stamp panel is rendered as floating element -->
+      <!-- 上部：アイコン行（5列） -->
+      <div class="icon-row" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;align-items:center;">
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="entryIconBtn" class="icon-btn" href="entry.html"><img src="assets/images/ui/entry_icon.png" alt="ARあり/なし選択"></a>
+          <div class="icon-label">ARあり/なし選択</div>
         </div>
-
-        <div class="top-cell right">
-          <!-- 言語アイコンを右上に（四角28px） -->
-          <div class="icon-with-label">
-            <button id="langBtn" class="stamp-icon-btn lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
-              <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語 / Language">
-            </button>
-            <div class="icon-label">言語</div>
-            <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
-              <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
-              <button class="lang-item" data-lang="en" role="menuitem">English</button>
-            </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="tutorialIconBtn" class="icon-btn" href="tutorial.html"><img src="assets/images/ui/tutorial_icon.png" alt="使い方"></a>
+          <div class="icon-label">使い方</div>
+        </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
+            <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
+          </button>
+          <div class="icon-label">スタンプ帳</div>
+        </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <a id="surveyIconBtn" class="icon-btn" href="post-survey.html?returnTo=map.html"><img src="assets/images/ui/survey_icon.png" alt="アンケート"></a>
+          <div class="icon-label">アンケート</div>
+        </div>
+        <div class="icon-with-label" style="justify-self:center">
+          <button id="langBtn" class="stamp-icon-btn lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu">
+            <img class="lang-icon" src="assets/images/ui/lang.png" alt="言語 / Language">
+          </button>
+          <div class="icon-label">言語</div>
+          <div id="langMenu" class="lang-menu" role="menu" aria-label="Language">
+            <button class="lang-item" data-lang="ja" role="menuitem">日本語</button>
+            <button class="lang-item" data-lang="en" role="menuitem">English</button>
           </div>
         </div>
       </div>
@@ -344,15 +333,15 @@
         <div class="stamp-panel-inner">
           <div class="stamp-item" data-spot="spot7">
             <div class="thumb"><img src="assets/images/stamps/stamp01.png" alt="stamp01"></div>
-            <div class="meta"><div class="title">本館正面玄関</div><div class="where">取得場所: 本館正面</div></div>
+            <div class="meta"><div class="title">本館正面玄関</div></div>
           </div>
           <div class="stamp-item" data-spot="spot8">
             <div class="thumb"><img src="assets/images/stamps/stamp02.png" alt="stamp02"></div>
-            <div class="meta"><div class="title">図書館手前</div><div class="where">取得場所: 図書館手前</div></div>
+            <div class="meta"><div class="title">図書館手前</div></div>
           </div>
           <div class="stamp-item" data-spot="spot9">
             <div class="thumb"><img src="assets/images/stamps/stamp03.png" alt="stamp03"></div>
-            <div class="meta"><div class="title">D館記念碑</div><div class="where">取得場所: D館記念碑</div></div>
+            <div class="meta"><div class="title">D館記念碑</div></div>
           </div>
         </div>
       </div>
