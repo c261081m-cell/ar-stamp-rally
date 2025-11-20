@@ -55,6 +55,7 @@
   /* stamp icon button (left edge) */
   .stamp-icon-btn{appearance:none;border:0;padding:6px;background:#fff;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;box-shadow:var(--menuShadow);cursor:pointer}
   .stamp-icon-btn img{width:100%;height:100%;object-fit:contain}
+  .stamp-label{font-size:12px;color:#111;margin-bottom:6px;text-align:center;font-weight:800}
   /* stamp panel when expanded */
   .stamp-panel{position:fixed;left:8px;top:68px;z-index:1200;display:none;background:#fff;border:1px solid #e3eaf6;border-radius:12px;box-shadow:0 18px 48px rgba(0,0,0,.28);overflow:hidden}
   .stamp-panel.is-open{display:block}
@@ -167,6 +168,14 @@
   .pin img{width:100%;height:100%;display:block}
   .pin:focus-visible{outline:3px solid rgba(0,90,187,.35);border-radius:50%}
 
+  /* map-open confirmation modal */
+  .map-open-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(2px);z-index:1100;display:none}
+  .map-open-overlay.is-open{display:block}
+  .map-open-dialog{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,420px);background:#fff;border-radius:12px;padding:14px;box-shadow:0 18px 48px rgba(0,0,0,.28);z-index:1101}
+  .map-open-dialog .title{font-weight:900;margin-bottom:8px}
+  .map-open-dialog .body{color:#333;margin-bottom:12px}
+  .map-open-dialog .actions{display:flex;gap:10px;justify-content:flex-end}
+
   /* ======= 説明テキスト ======= */
   .hint{
     max-width:920px;margin:10px auto;color:#333;background:#f6f7fb;border:1px solid #e9eef6;
@@ -199,6 +208,17 @@
   .camera-chooser .list{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
   @media (min-width:520px){ .camera-chooser .list{ grid-template-columns:repeat(3, 1fr); } }
   .camera-chooser .item{ padding:0; border:none; background:transparent }
+
+  /* スポット詳細モーダル（写真＋AR起動） */
+  .spot-detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(2px);z-index:1005;display:none}
+  .spot-detail-overlay.is-open{display:block}
+  .spot-detail{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(92vw,520px);background:#fff;border-radius:16px;padding:14px;box-shadow:0 18px 48px rgba(0,0,0,.28);z-index:1006;display:none}
+  .spot-detail.is-open{display:block}
+  .spot-detail .spotDetailTitle{font-weight:900;margin:6px 0 10px;text-align:center}
+  .spot-detail .spotDetailImage{width:100%;height:auto;border-radius:12px;display:block;object-fit:cover}
+  .spot-detail .spotDetailHint{margin:8px 0;color:#444;text-align:center}
+  .spot-detail .spotDetailActions{display:flex;gap:10px;justify-content:center;margin-top:12px}
+  .spot-detail .spotDetailActions .btn{min-width:160px}
 
   .thumbWrap{
     position:relative; aspect-ratio:1/1; border-radius:12px; overflow:hidden;
@@ -248,9 +268,12 @@
       <!-- 上部 1/6 エリア -->
       <div class="top-grid" aria-label="上部メニュー">
         <div class="top-cell left">
-          <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
-            <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
-          </button>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+            <div class="stamp-label">スタンプ帳</div>
+            <button id="stampIconBtn" class="stamp-icon-btn" aria-haspopup="true" aria-expanded="false" aria-controls="stampPanel">
+              <img src="assets/images/ui/stamp_icon.png" alt="スタンプ帳">
+            </button>
+          </div>
           <div id="stampLinks" style="display:flex;align-items:center;gap:10px;margin-left:6px">
             <a id="surveyAlwaysLink" class="link" href="post-survey.html?returnTo=map.html" data-i18n="map.checkCompleteRecommended">📝 アンケート（コンプリート後推奨）</a>
             <a id="specialLinkTop" class="link" href="special.html?returnTo=map.html" data-i18n="map.special" style="display:none">🌟 スペシャルコンテンツ</a>
@@ -315,9 +338,21 @@
         </div>
       </div>
 
+      <!-- Map open confirmation (shown when tapping a pin) -->
+      <div id="mapOpenOverlay" class="map-open-overlay" aria-hidden="true">
+        <div class="map-open-dialog" role="dialog" aria-modal="true" aria-labelledby="mapOpenTitle">
+          <div class="title" id="mapOpenTitle" data-i18n="map.openExternalTitle">別アプリが開きます</div>
+          <div class="body" id="mapOpenBody" data-i18n="map.openExternalBody">この操作では別の地図アプリが開きます。よろしいですか？</div>
+          <div class="actions">
+            <button id="mapOpenCancel" class="btn btn-secondary" type="button" data-i18n="map.openExternalCancel">キャンセル</button>
+            <button id="mapOpenConfirm" class="btn" type="button" data-i18n="map.openExternalConfirm">了解しました</button>
+          </div>
+        </div>
+      </div>
+
       <!-- 画面最下部：カメラ起動 -->
       <div class="footer-cta">
-        <button id="cameraBtn" class="btn" data-i18n="map.openAR">カメラ起動</button>
+        <button id="cameraBtn" class="btn" data-i18n="map.openAR">スポット周辺に来ました</button>
       </div>
     </div>
   </div>
@@ -329,6 +364,18 @@
     <div id="cameraChooserList" class="list"></div>
     <div style="margin-top:10px;text-align:right">
       <button id="cameraChooserClose" class="btn btn-secondary" type="button" data-i18n="chooser.close">閉じる</button>
+    </div>
+  </div>
+
+  <!-- スポット詳細モーダル（画像・AR起動） -->
+  <div id="spotDetailOverlay" class="spot-detail-overlay" aria-hidden="true"></div>
+  <div id="spotDetail" class="spot-detail" role="dialog" aria-modal="true" aria-labelledby="spotDetailTitle">
+    <div class="spotDetailTitle" id="spotDetailTitle">この場所を探してください！</div>
+    <img id="spotDetailImage" class="spotDetailImage" src="" alt="スポットの写真">
+    <div class="spotDetailHint">写真の場所まで行ってみましょう。下のボタンでARを起動します。</div>
+    <div class="spotDetailActions">
+      <button id="spotDetailARBtn" class="btn" type="button">ARを起動</button>
+      <button id="spotDetailClose" class="btn btn-secondary" type="button">閉じる</button>
     </div>
   </div>
 
@@ -413,7 +460,11 @@
           'map.special': '🌟 スペシャルコンテンツ',
           'map.entry': 'ARあり/なし選択画面へ',
           'map.pinHint': '地図上のピンをタップすると、そこまでのルートが表示されます！（別アプリが開かれます）\nピンが建っているところに行くと、地形に反応してARが見えるようになります',
-          'map.openAR': 'カメラ起動',
+          'map.openAR': 'スポット周辺に来ました',
+          'map.openExternalTitle': '別アプリが開きます',
+          'map.openExternalBody': 'この操作では別の地図アプリが開きます。よろしいですか？',
+          'map.openExternalConfirm': '了解しました',
+          'map.openExternalCancel': 'キャンセル',
           'chooser.title': 'スポットを選んでください',
           'chooser.desc':  '写真をタップするとARが起動します。',
           'chooser.close': '閉じる',
@@ -434,6 +485,10 @@
           'map.entry': 'Go to AR / No-AR selection',
           'map.pinHint': 'Tap a pin on the map to show a route to that location! (This will open another app)\nWhen you reach the pin location, AR content will appear in response to the surrounding terrain',
           'map.openAR': 'Open AR',
+          'map.openExternalTitle': 'Opening external app',
+          'map.openExternalBody': 'This will open another maps app. Continue?',
+          'map.openExternalConfirm': 'OK, open it',
+          'map.openExternalCancel': 'Cancel',
           'chooser.title': 'Choose a spot',
           'chooser.desc':  'Tap a photo to launch AR.',
           'chooser.close': 'Close',
@@ -536,6 +591,7 @@
       }
 
       document.addEventListener('DOMContentLoaded', ()=>{
+        // intercept pin clicks and show confirmation modal before opening external map
         document.querySelectorAll('.map-wrap .pin').forEach(pin=>{
           pin.addEventListener('click', (e)=>{
             e.preventDefault();
@@ -543,8 +599,50 @@
             const lng = pin.dataset.lng;
             const label = pin.getAttribute('aria-label') || '';
             if (!lat || !lng) return;
-            openNativeMap(lat, lng, label);
+            showMapOpenPrompt(lat, lng, label);
           });
+        });
+
+        // wire confirm/cancel
+        const overlay = document.getElementById('mapOpenOverlay');
+        const btnConfirm = document.getElementById('mapOpenConfirm');
+        const btnCancel = document.getElementById('mapOpenCancel');
+        let _pending = null; // {lat,lng,label}
+
+        function showMapOpenPrompt(lat, lng, label){
+          _pending = {lat: String(lat), lng: String(lng), label: String(label)};
+          // stash on confirm button so handler can work even if _pending is cleared
+          try{
+            if (btnConfirm){
+              btnConfirm.dataset.lat = String(lat);
+              btnConfirm.dataset.lng = String(lng);
+              btnConfirm.dataset.label = String(label || '');
+            }
+          }catch(e){}
+          if (overlay) overlay.classList.add('is-open');
+          if (overlay) overlay.setAttribute('aria-hidden', 'false');
+        }
+
+        function hideMapOpenPrompt(){
+          _pending = null;
+          try{
+            if (btnConfirm){ delete btnConfirm.dataset.lat; delete btnConfirm.dataset.lng; delete btnConfirm.dataset.label; }
+          }catch(e){}
+          if (overlay) overlay.classList.remove('is-open');
+          if (overlay) overlay.setAttribute('aria-hidden','true');
+        }
+
+        if (btnCancel) btnCancel.addEventListener('click', (ev)=>{ ev.preventDefault(); hideMapOpenPrompt(); });
+        if (overlay) overlay.addEventListener('click', (ev)=>{ if (ev.target === overlay) hideMapOpenPrompt(); });
+        if (btnConfirm) btnConfirm.addEventListener('click', (ev)=>{
+          ev.preventDefault();
+          // prefer live pending data, fallback to dataset on the button
+          let lat = _pending && _pending.lat ? _pending.lat : (btnConfirm.dataset.lat || null);
+          let lng = _pending && _pending.lng ? _pending.lng : (btnConfirm.dataset.lng || null);
+          let label = _pending && _pending.label ? _pending.label : (btnConfirm.dataset.label || '');
+          if (!lat || !lng) { hideMapOpenPrompt(); return; }
+          hideMapOpenPrompt();
+          openNativeMap(lat, lng, label);
         });
       });
     })();

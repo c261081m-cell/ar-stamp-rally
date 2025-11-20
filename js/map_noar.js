@@ -98,7 +98,17 @@ function renderStampUI(stamps){
   const inline = $('#completeInline');
   if (inline) inline.style.display = (cnt >= COMPLETE_TARGET) ? 'block' : 'none';
   const special = $('#specialInline');
-  if (special) special.style.display = (cnt >= COMPLETE_TARGET) ? 'block' : 'none';
+  // Do not show by default here; we'll reflect actual survey-completion state separately.
+  if (special) special.style.display = 'none';
+}
+
+// Update special inline visibility when survey has been submitted
+function updateSpecialInlineVisibility(){
+  try{
+    const surveyDone = localStorage.getItem('survey_completed_v3') === 'true';
+    const special = document.getElementById('specialInline');
+    if (special) special.style.display = surveyDone ? 'block' : 'none';
+  }catch(e){}
 }
 
 function openCompleteModal(){
@@ -180,18 +190,21 @@ async function boot(){
   const stamps = await fetchStamps(uid);
   renderStampUI(stamps);
   await handleCompletionFlow(uid, stamps);
+  updateSpecialInlineVisibility();
 
   document.addEventListener('visibilitychange', async ()=>{
     if (document.visibilityState === 'visible') {
       const s = await fetchStamps(uid);
       renderStampUI(s);
       await handleCompletionFlow(uid, s);
+      updateSpecialInlineVisibility();
     }
   });
   window.addEventListener('pageshow', async ()=>{
     const s = await fetchStamps(uid);
     renderStampUI(s);
     await handleCompletionFlow(uid, s);
+    updateSpecialInlineVisibility();
   });
 
   // data-ar-spot で直接ボタンがある場合は解説ページへ

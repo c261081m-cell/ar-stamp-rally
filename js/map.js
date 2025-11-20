@@ -113,7 +113,18 @@ function renderStampUI(stamps){
 
   // ★追加：コンプリート達成時だけスペシャルリンクも表示
   const special = $('#specialInline');
-  if (special) special.style.display = (cnt >= COMPLETE_TARGET) ? 'block' : 'none';
+  // Special content should not be exposed directly from the map.
+  // The survey submission now redirects to `special.html`, so keep the inline special link hidden.
+  if (special) special.style.display = 'none';
+}
+
+// Update the top-area special link visibility based on whether the survey was submitted
+function updateSpecialTopVisibility(){
+  try{
+    const surveyDone = localStorage.getItem('survey_completed_v3') === 'true';
+    const specialTop = document.getElementById('specialLinkTop');
+    if (specialTop) specialTop.style.display = surveyDone ? 'inline-block' : 'none';
+  }catch(e){}
 }
 
 /* ====== 完走モーダル ====== */
@@ -162,20 +173,39 @@ function buildCameraChooserItems(){
     list.appendChild(item);
   });
 
-  // 画像クリックで AR 起動
+  // 画像クリックはまず「スポット詳細」画面を表示（そこで AR を起動）
   list.querySelectorAll('a.photoLink[data-spot]').forEach(a=>{
-    a.addEventListener('click', async (ev)=>{
+    a.addEventListener('click', (ev)=>{
       ev.preventDefault();
       const spot = a.getAttribute('data-spot');
-      const base = EIGHTHWALL_URLS[spot];
-      if (!base) { alert('このスポットのAR URLが未設定です'); return; }
-      const uid  = await ensureAnonSafe();
-      const url  = new URL(base);
-      url.searchParams.set('spotId', spot);
-      if (uid) url.searchParams.set('uid', uid);
-      location.href = url.toString();
+      const src  = a.querySelector('img') ? a.querySelector('img').src : photoSrc(spot);
+      const name = SPOT_LABELS[spot] || spot;
+      try { showSpotDetail(spot, src, name); } catch(e){ console.warn('showSpotDetail failed', e); }
     });
   });
+}
+
+// スポット詳細ダイアログ（選択 → AR起動）
+function showSpotDetail(spot, imgSrc, name){
+  const overlay = document.getElementById('spotDetailOverlay');
+  const dialog  = document.getElementById('spotDetail');
+  if (!overlay || !dialog) return;
+  const title = dialog.querySelector('.spotDetailTitle');
+  const img   = dialog.querySelector('#spotDetailImage');
+  const arBtn = dialog.querySelector('#spotDetailARBtn');
+  const text  = dialog.querySelector('.spotDetailHint');
+  if (title) title.textContent = 'この場所を探してください！';
+  if (img){ img.src = imgSrc || photoSrc(spot); img.alt = name || spot; }
+  if (text) text.textContent = '';
+  if (arBtn){ arBtn.dataset.spot = spot; }
+  overlay.classList.add('is-open');
+  dialog.classList.add('is-open');
+}
+function hideSpotDetail(){
+  const overlay = document.getElementById('spotDetailOverlay');
+  const dialog  = document.getElementById('spotDetail');
+  if (overlay) overlay.classList.remove('is-open');
+  if (dialog) dialog.classList.remove('is-open');
 }
 
 function showCameraChooser(){
@@ -188,6 +218,27 @@ function hideCameraChooser(){
   $('#cameraChooser')?.classList.remove('is-open');
 }
 
+// bind AR 起動ボタンとクローズ
+function bindSpotDetailButtons(){
+  const overlay = document.getElementById('spotDetailOverlay');
+  const closeBtn = document.getElementById('spotDetailClose');
+  const arBtn = document.getElementById('spotDetailARBtn');
+  if (overlay) overlay.addEventListener('click', hideSpotDetail);
+  if (closeBtn) closeBtn.addEventListener('click', hideSpotDetail);
+  if (arBtn) arBtn.addEventListener('click', async (ev)=>{
+    ev.preventDefault();
+    const spot = arBtn.dataset.spot;
+    const base = EIGHTHWALL_URLS[spot];
+    if (!base) { alert('このスポットのAR URLが未設定です'); return; }
+    const uid = await ensureAnonSafe();
+    const url = new URL(base);
+    url.searchParams.set('spotId', spot);
+    if (uid) url.searchParams.set('uid', uid);
+    // navigate to 8thwall
+    location.href = url.toString();
+  });
+}
+
 /* ====== 起動 ====== */
 async function boot(){
   bindCompleteModalButtons();
@@ -196,12 +247,16 @@ async function boot(){
   $('#cameraBtn')?.addEventListener('click', showCameraChooser);
   $('#cameraChooserClose')?.addEventListener('click', hideCameraChooser);
   $('#cameraChooserOverlay')?.addEventListener('click', hideCameraChooser);
+  // spotDetail bindings
+  bindSpotDetailButtons();
 
   // サインイン & スタンプ反映
   const uid = await ensureAnonSafe();
   const stamps = await fetchStamps(uid);
   renderStampUI(stamps);
   await handleCompletionFlow(uid, stamps);
+  // reflect survey->special state in the top link
+  updateSpecialTopVisibility();
 
   // 復帰時に再反映
   document.addEventListener('visibilitychange', async ()=>{
@@ -209,12 +264,14 @@ async function boot(){
       const s = await fetchStamps(uid);
       renderStampUI(s);
       await handleCompletionFlow(uid, s);
+      updateSpecialTopVisibility();
     }
   });
   window.addEventListener('pageshow', async ()=>{
     const s = await fetchStamps(uid);
     renderStampUI(s);
     await handleCompletionFlow(uid, s);
+    updateSpecialTopVisibility();
   });
 
   // data-ar-spot / #openAR-spotN（直接ボタンがある場合のフォールバック）

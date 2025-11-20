@@ -69,14 +69,19 @@
   /* スタンプ取得ポップアップ（中央表示） */
   .stamp-popup{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1250}
   .stamp-popup.show{display:flex}
-  .stamp-popup .panel{width:min(86vw,360px);background:transparent;border-radius:18px;padding:0;text-align:center;display:flex;flex-direction:column;align-items:center}
-  .stamp-popup .panelInner{position:relative;background:#fff;border-radius:18px;padding:16px 14px;box-shadow:0 16px 48px rgba(0,0,0,.28);width:100%;display:flex;flex-direction:column;align-items:center}
+  .stamp-popup .panel{width:min(92vw,520px);background:transparent;border-radius:18px;padding:0;text-align:center;display:flex;flex-direction:column;align-items:center;overflow:visible}
+  .stamp-popup .panelInner{position:relative;background:#fff;border-radius:18px;padding:18px 16px 22px;box-shadow:0 18px 54px rgba(0,0,0,.32);width:100%;display:flex;flex-direction:column;align-items:center;overflow:visible}
   .stamp-popup h2{margin:0 0 10px;font-size:18px;font-weight:900;color:#111}
   /* 正方形にして丸角 */
-  .stamp-popup .popup-stamp{position:relative;z-index:2;width:64vw;max-width:260px;height:64vw;max-height:260px;border-radius:18px;border:1px solid #e9eef6;background:#f7f9ff;object-fit:cover}
-  .stamp-popup .popup-fuji{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:86%;max-width:300px;z-index:1;pointer-events:none;opacity:0.98}
-  .stamp-popup.show .popup-fuji{animation: popfu .36s cubic-bezier(.2,.9,.2,1)}
-  @keyframes popfu{0%{transform:translateX(-50%) scale(.6);opacity:0}60%{transform:translateX(-50%) scale(1.05);opacity:1}100%{transform:translateX(-50%) scale(1)}}
+  .stamp-popup .popup-stamp{position:relative;z-index:3;width:60vw;max-width:260px;height:60vw;max-height:260px;border-radius:18px;border:1px solid #e9eef6;background:#f7f9ff;object-fit:cover;transform-origin:center center}
+  .stamp-popup.show .popup-stamp{animation: popStamp .48s cubic-bezier(.2,.8,.2,1) forwards}
+  @keyframes popStamp{
+    0%{transform:scale(.48) rotate(-10deg);opacity:0}
+    60%{transform:scale(1.08) rotate(6deg);opacity:1}
+    85%{transform:scale(.96) rotate(-2deg)}
+    100%{transform:scale(1) rotate(0deg)}
+  }
+  /* popup-fuji removed per request: decorative fukidashi omitted */
   .stamp-popup .closeBtn{margin-top:12px;display:inline-block;padding:12px 14px;border-radius:12px;background:#005ABB;color:#fff;font-weight:900;border:0;cursor:pointer}
   /* （動画を使わないため関連スタイルは不要） */
   </style>
@@ -128,7 +133,6 @@
     <div class="panel" id="stampPopupPanel">
       <div class="panelInner">
         <h2 id="stampPopupTitle">スタンプを取得しました</h2>
-        <img class="popup-fuji" src="assets/images/ui/fujidashi.png" alt="" aria-hidden="true">
         <img id="stampPopupImage" class="popup-stamp" src="" alt="取得スタンプ">
         <button id="stampPopupClose" class="closeBtn" type="button">閉じる</button>
       </div>

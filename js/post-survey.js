@@ -174,25 +174,16 @@
   function toast(msg){ try{ alert(msg); }catch{} }
   function goMap(){ location.href = 'map.html'; }
 
-  // 安全なリダイレクト: クエリの returnTo を確認し、許可されたページへ戻す
+  // 送信後はスペシャルコンテンツへ遷移する仕様に変更
+  // 既存の returnTo ロジックは廃止し、常に `special.html` へ飛ばす
   function goBackToReturnTo() {
     try {
-      const params = new URLSearchParams(location.search);
-      let rt = params.get('returnTo');
-      if (rt && typeof rt === 'string') {
-        // 正規化: パス部分やクエリを取り除き、basename を取り出す
-        rt = rt.split('?')[0].split('#')[0];
-        rt = rt.split('/').pop();
-      }
-      const ALLOWED = ['map.html', 'map_noar.html'];
-      if (rt && ALLOWED.includes(rt)) {
-        location.href = rt;
-        return;
-      }
+      location.href = 'special.html';
+      return;
     } catch (e) {
-      console.warn('[post-survey] returnTo parse error', e);
+      console.warn('[post-survey] redirect to special failed', e);
     }
-    // フォールバック
+    // フォールバック：マップへ
     location.href = 'map.html';
   }
 
@@ -228,8 +219,10 @@
     try {
       await writeSurvey(uid, payload);
       setBusy(false);
+      // mark locally that survey was successfully submitted so map pages can reveal the special link
+      try { localStorage.setItem('survey_completed_v3','true'); } catch (e) {}
       toast('ご協力ありがとうございます。回答を送信しました！');
-  goBackToReturnTo();
+      goBackToReturnTo();
     } catch (e) {
       console.warn('[post-survey] write failed:', e?.message || e);
       savePendingLocally(payload);
