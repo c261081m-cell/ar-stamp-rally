@@ -144,10 +144,15 @@
         },
         explainHTML: `
         <p><b>☆自転車や歩行者に注意してね！☆</b></p>
-        <p>この場所からだと図書館の変遷がよくわかるね。昔の図書館の中はこんな感じだったらしいよ。</p>
+        <p>この場所からだと図書館の変遷がよくわかるね。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="図書館の過去の写真">
-          <figcaption>（写真: 図書館の過去の様子）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="図書館の全景（過去）">
+          <figcaption>（写真: 図書館の過去の全景）</figcaption>
+        </figure>
+        <p>昔の図書館の中はこんな感じだったらしいよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="図書館内部">
+          <figcaption>（写真: 図書館内部）</figcaption>
         </figure>
         <p>1960年に寄付金をもとに左側が建てられて、1972年に右側が増築、2000年に後ろ側にグループラーニングエリアやカフェが入っているオスマー図書館（正式にはミルドレッドトップオスマー図書館）が増えたんだ。また、ICUの図書館には地下階があるけど、その地下を掘った土が盛られてできたのがバカ山とアホ山なんだよ。</p>
         <figure>
@@ -159,7 +164,7 @@
           <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="図書館の移転に関する写真">
           <figcaption>（写真）</figcaption>
         </figure>
-        <p>図書館の手前、図書館から出てきた時に右側の茂みの内側には、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。</p>
+        <p>今は図書館の玄関前にいると思うから、そこから図書館を出た時に右側に見える坂を下りてみて。茂みの内側に、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="図書館手前にある記念碑の写真">
           <figcaption>（写真）</figcaption>
@@ -211,6 +216,24 @@
           answer: 'A'
         },
         explainHTML: `
+        <p>D館とはICU創立に多大なる貢献をしてくださった、ディッフェンドルファー博士を記念して1958年に建てられた建築だよ。D館はディッフェンドルファー博士を悼むものでもあるんだ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_9.jpg" alt="ディッフェンドルファー博士">
+          <figcaption>（写真）</figcaption>
+        </figure>
+        <p>今目の前にあるのはその記念碑だよ。昔から変わらないね。かつては噴水だったんだよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_2.jpg" alt="D館記念碑">
+          <figcaption>（写真）</figcaption>
+        </figure>
+
+        <p>この場所から右側にまわって、D館の正面、自動ドアがあるほうまで壁沿いに歩いてみよう！左に曲がると、こんな場所が見えるかな？</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="D館の入口付近写真">
+          <figcaption>（写真）</figcaption>
+        </figure>
+        <p>このD館東館の入口側、礼拝堂の裏がICUの中心だよ。写真の、わざとかくっとなっている部分が中心をあらわしているんだ。ぜひ体感してみてね！D館は東棟（記念碑がある）と西棟（ファミリーマートがある）に分かれていて、東棟の方が古いんだ。</p>
+
         <p>D館には昔、学生や教職員が暮らすための施設が入っていたんだ。コーヒーを出してくれるカウンターや、理髪店や郵便局、靴磨き店もあったんだよ！</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="地下一階にある理髪店跡の写真">
@@ -222,24 +245,13 @@
           <figcaption>（写真）</figcaption>
         </figure>
 
-        <p>D館は東側（今正面にある、記念碑があるほう）と西側（ファミリーマートが入っている方）に分かれていて、東側の方が古いよ。このD館東館の入口側・礼拝堂の裏がICUの中心だよ。この写真の、わざとかくっとなっている部分が中心をあらわしているんだ。</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="D館の入口付近写真">
-          <figcaption>（写真）</figcaption>
-        </figure>
-
-        <p>D館とはICU創立に多大なる貢献をしてくださった、ディッフェンドルファー博士を記念して1958年に建てられた建築だよ。D館はディッフェンドルファー博士を悼むものでもあるんだ。</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_8.jpg" alt="D館外観の写真">
-          <figcaption>（写真）</figcaption>
-        </figure>
-
         <p>登録有形文化財になっていて、3.4階にはほぼ日本最古のアルミサッシや、古くて景色が歪んで見えるガラスが使われている窓があるなど、とっても貴重な建物なんだ！</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="D館の古いガラスの写真">
           <figcaption>（写真では分からないけどガラスが歪んでいるよ）</figcaption>
         </figure>
 
+        <p>今はクラブやサークルの部室が入っていたり、1階は自習スペースになっていたりと進化を見せているよ。</p>
         <p>D館には歴史を解説するパネルがあるんだ。ここに載っていること以外の事もたくさん書いてあるから、ぜひ見てみてね！</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_4.jpg" alt="D館に設置されている歴史解説パネルの写真">
