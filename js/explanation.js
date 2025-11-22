@@ -146,8 +146,8 @@
         <p><b>☆自転車や歩行者に注意してね！☆</b></p>
         <p>この場所からだと図書館の変遷がよくわかるね。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="図書館の全景（過去）">
-          <figcaption>（写真: 図書館の過去の全景）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="図書館の過去の全景">
+          <figcaption>（写真: 図書館の過去の全景、assets/images/Photos_thesis/spot8_main.jpg）</figcaption>
         </figure>
         <p>昔の図書館の中はこんな感じだったらしいよ。</p>
         <figure>
@@ -181,10 +181,15 @@
         },
         explainHTML: `
         <p><b>☆Please watch for bicycles and pedestrians!☆</b></p>
-        <p>From this spot you can clearly see how the library has changed over time. The interior of the old library looked something like this.</p>
+        <p>From this spot you can clearly see how the library has changed over time.</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="Historic photo of the library">
-          <figcaption>(Photo: historic view of the library)</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="Historic view of the library">
+          <figcaption>(Photo: Historic view of the library, assets/images/Photos_thesis/spot8_main.jpg)</figcaption>
+        </figure>
+        <p>The interior of the old library looked something like this.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="Historic library interior">
+          <figcaption>(Photo: historic library interior)</figcaption>
         </figure>
         <p>The left wing was built in 1960 thanks to donations, the right wing was added in 1972, and in 2000 the Osmar Library (officially the Mildred Topp Osmar Library) was expanded at the rear to include group learning areas and a café. The library has a basement, and the soil dug out when creating it was piled up to form the two mounds known as Baka-yama and Aho-yama.</p>
         <figure>
@@ -196,7 +201,7 @@
           <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="Photo related to the library relocation">
           <figcaption>(Photo)</figcaption>
         </figure>
-        <p>On the right side of the path in front of the library, tucked inside the bushes, there is a monument erected in 1952 to commemorate the San Francisco Peace Treaty. This reflects donations made in 1952 in the hope of peace between Japan and the U.S. after World War II.</p>
+        <p>From the library entrance, walk down the slope on your right. Inside the bushes, you will find a monument built in 1952 to commemorate the San Francisco Peace Treaty.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="Monument near the library">
           <figcaption>(Photo)</figcaption>
@@ -266,36 +271,43 @@
           answer: 'A'
         },
         explainHTML: `
-        <p>D-Building once housed facilities used by students and staff. There was a counter serving coffee, a barbershop, a post office, and even a shoeshine stand!</p>
+        <p>D-Building was constructed in 1958 to honor Dr. Diffendorfer, who made significant contributions to the founding of ICU. The building stands as a memorial to him.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_9.jpg" alt="Dr. Diffendorfer">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+        <p>The monument you see now has remained largely unchanged. It used to be a fountain in the past.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_2.jpg" alt="D-Building monument">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+
+        <p>Walk around to the right from this spot and follow the wall toward the main entrance with the automatic doors. If you turn left there, you’ll see the area pictured here.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="Entrance area of D-Building">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+        <p>The entrance side of the east wing, just behind the chapel, marks the historic center of the ICU campus — the small kink in the building in the photo indicates that center. D-Building is divided into an east wing (where the monument stands) and a west wing (the side with the FamilyMart); the east wing is older.</p>
+
+        <p>In the past, D-Building housed facilities for students and staff, including a counter serving coffee, a barbershop, a post office, and even a shoeshine stand.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_6.jpg" alt="Remains of a barbershop in the basement">
-          <figcaption>(Caption: Remains of a barbershop in the basement)</figcaption>
+          <figcaption>(Photo: remains of a barbershop in the basement)</figcaption>
         </figure>
-        <p>Even today you can see tiles on the first-floor floor where the counter once stood — the tiles are a different color there.</p>
+        <p>Even today you can spot tiles on the first-floor where the counter once stood — the tiles are a different color there.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_3.jpg" alt="Tiles on the D-Building first floor">
           <figcaption>(Photo)</figcaption>
         </figure>
 
-        <p>D-Building is split into an east side (where the monument now stands) and a west side (the side with the FamilyMart). The east side is older. The entrance side of the east wing, just behind the chapel, marks the historic center of ICU — the small kink in the building in the photo indicates that center.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="Entrance area of D-Building">
-          <figcaption>(Photo)</figcaption>
-        </figure>
-
-        <p>D-Building was constructed in 1958 to honor Dr. Diffendorfer, who made significant contributions to the founding of ICU. The building serves as a memorial to him.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot9_detail_8.jpg" alt="Exterior of D-Building">
-          <figcaption>(Photo)</figcaption>
-        </figure>
-
-        <p>The building is registered as a tangible cultural property. On the third and fourth floors you can find very early aluminum window frames and old glass that slightly distorts the view — features that make the building especially valuable.</p>
+        <p>D-Building is registered as a tangible cultural property. On the third and fourth floors you can find very early aluminum window frames and old glass that slightly distorts the view — features that make the building especially valuable.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_5.jpg" alt="Old glass at D-Building">
-          <figcaption>(Caption: The glass is slightly warped though you may not notice in photos)</figcaption>
+          <figcaption>(Photo: warped old glass)</figcaption>
         </figure>
 
-        <p>There is also an information panel explaining D-Building’s history. It contains many details beyond what’s shown here, so please take a look when you visit.</p>
+        <p>Today the building has evolved — rooms are used for clubs and circles, and the first floor includes study spaces.</p>
+        <p>There is an information panel explaining D-Building’s history. It includes many details beyond what’s shown here, so please take a look when you visit.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_4.jpg" alt="History panel at D-Building">
           <figcaption>(Photo)</figcaption>
