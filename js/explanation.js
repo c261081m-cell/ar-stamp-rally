@@ -91,6 +91,16 @@
           <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="昔の小田急バスの写真">
           <figcaption>（写真: 小田急バス、assets/images/Photos_thesis/spot1_detail_3.jpg）</figcaption>
         </figure>
+        <p>これは昔の畑に向かうトラクターの写真！これも、本館東側の写真だよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_5.jpg">
+          <figcaption>（写真: トラクター）</figcaption>
+        </figure>
+        <p>ここが今の本館東入口。上の二つはここ周辺の写真なんだよ。</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_6.jpg">
+          <figcaption>（写真: 本館東）</figcaption>
+        </figure>
 
         <p>これは授業風景の写真……ではなく、1950-60年頃のクラブ活動の写真。本館で行われていたみたいだね。かつての人たちの生き生きとした表情がうかがえるよ。</p>
         <figure>
@@ -122,6 +132,16 @@
         <figure>
           <img src="assets/images/Photos_thesis/spot1_detail_3.jpg" alt="Old Odakyu bus photo">
           <figcaption>(Photo: Odakyu bus, assets/images/Photos_thesis/spot1_detail_3.jpg)</figcaption>
+        </figure>
+        <p>This is a shot of a tractor heading toward the old fields! This one's also a photo of the east side of the main building.</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_5.jpg">
+          <figcaption>(Photo)</figcaption>
+        </figure>
+        <p>This is the current east entrance to the main building. The two photos above are of the area around here</p>
+        <figure>
+          <img src="assets/images/Photos_thesis/spot1_detail_6.jpg">
+          <figcaption>(Photo)</figcaption>
         </figure>
 
         <p>Finally, this is not a classroom photo but a club activity scene from the 1950s–60s, apparently held in the Main Building. You can sense how lively people were back then.</p>
