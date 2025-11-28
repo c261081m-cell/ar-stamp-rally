@@ -193,10 +193,11 @@
           'common.next': '次へ',
           'common.skip': 'skip',
           // チュートリアル 5 ページ分（HTML を含む）
-          'tut.slide1': `
-            <h3>はじめに</h3>
-            <p>このアプリでは、AR技術を使って<br>「今のICU」と「昔のICU」の違いを体験できます。<br>実際にキャンパスを歩きながら、その場で昔の写真やエピソードを見てみましょう。<br>3つのスポットを巡ると「コンプリート」になります。<br>アンケートに答えると、特別コンテンツが見られます！</p>
-            <div class="hint">💡 周囲に気をつけながら安全に歩きましょう。</div>
+          'tut.slide4': `
+            <h3>地図について</h3>
+            <p>マップを使って、次のスポットを探しましょう。<br>
+            ピンをタップすると、スマホの地図アプリが開き、経路が表示されます。<br>
+            現地に着いたら「スポット周辺に来ました」から体験を始めましょう。</p>
           `,
 
           'tut.slide2': `
@@ -210,6 +211,7 @@
             <p>AR（エーアール）は、現実の風景に仮想のものを重ねて見る技術です。<br>スマホのカメラを通して、昔のICUの写真を今の景色に重ねて表示します。<br>このアプリでは「VPS（位置認識技術）」を使っています。<br>カメラを周囲に向けてゆっくり動かすと、VPSが場所を認識し、「Save」ボタンが表示されます。<br>Saveを押すとスタンプが登録され、解説が読めるようになります。</p>
             <div class="hint">💡 カメラを地面と平行にゆっくり左右に動かすと認識されやすいです。</div>
             <div class="smallnote">📸 初回は「カメラ」「位置情報」の許可を求められます。Safari推奨。プライベートブラウズではARが動作しない場合があります。</div>
+          <p>カメラと位置情報をONにしてください。</p>
           `,
 
           'tut.slide4': `
@@ -240,8 +242,13 @@
           // Minimal English placeholders (can be refined later)
           'tut.slide1': `<h3>Welcome</h3><p>This app uses AR to compare present-day ICU with past ICU. Walk the campus and view historic photos and stories on-site. Collect 3 stamps to complete. Answer the survey to unlock special content.</p><div class="hint">💡 Walk safely and watch your surroundings.</div>`,
           'tut.slide2': `<h3>About the Stamp Rally</h3><p>Select a spot on the map and tap “Open AR”. When you reach the spot the camera will start. Point the camera around; VPS will recognize the location and show a “Save” button. Tap Save to get a stamp and read the explanation. Collect 3 to complete.</p><div class="hint">💡 If connection is unstable, go back and retry.</div>`,
-          'tut.slide3': `<h3>About AR</h3><p>AR overlays virtual content on the real world. This app uses VPS (visual positioning). Move the camera slowly and parallel to the ground to help recognition. Tap Save to register a stamp and read the explanation.</p><div class="hint">💡 Move the camera slowly left-right, parallel to the ground.</div><div class="smallnote">📸 Camera and location permissions are requested on first use. Safari recommended.</div>`,
-          'tut.slide4': `<h3>About the Map</h3><p>Use the map to find the next spot. Tap a pin for info; tap again to open your map app for directions. Start the AR experience when you arrive.</p><div class="hint">💡 Use pinch to zoom; confirm your location before leaving.</div>`,
+          'tut.slide3': `<h3>About AR</h3><p>AR overlays virtual content on the real world. This app uses VPS (visual positioning). Move the camera slowly and parallel to the ground to help recognition. Tap Save to register a stamp and read the explanation.</p><div class="hint">💡 Move the camera slowly left-right, parallel to the ground.</div><div class="smallnote">📸 Camera and location permissions are requested on first use. Safari recommended.</div><p>Please enable camera and location.</p>`,
+          'tut.slide4': `
+            <h3>About the Map</h3>
+            <p>Use the map to find the next spot.<br>
+            When you tap a pin, your map app will open and show the route.<br>
+            Once you arrive at the spot, start the experience from “I have arrived near a spot”.</p>
+          `,
           'tut.slide5': `<h3>Finish</h3><p>The tutorial is complete. Walk the campus and feel the history. After collecting 3 stamps, please answer the survey to see special content.</p><div class="hint">💡 Contact us via “Contact” at the bottom of the page.</div>`
         }
       };
@@ -278,11 +285,11 @@
 
       // スライド定義（画像・テキスト） — 指定の 5 ページ
       const slides = [
-        { img: 'assets/images/tutorial_photos/tutorial_image01.png', htmlKey: 'tut.slide1' },
-        { img: 'assets/images/tutorial_photos/tutorial_image02.png', htmlKey: 'tut.slide2' },
-        { img: 'assets/images/tutorial_photos/tutorial_image03.png', htmlKey: 'tut.slide3' },
-        { img: 'assets/images/tutorial_photos/tutorial_image04.png', htmlKey: 'tut.slide4' },
-        { img: 'assets/images/tutorial_photos/tutorial_image05.png', htmlKey: 'tut.slide5' }
+        { img: 'assets/images/tutorial_photos/tutorial_image05.png', htmlKey: 'tut.slide1' },
+        { img: 'assets/images/tutorial_photos/tutorial_image09.png', htmlKey: 'tut.slide2' },
+        { img: 'assets/images/tutorial_photos/tutorial_image02.png', htmlKey: 'tut.slide3' },
+        { img: 'assets/images/tutorial_photos/tutorial_image10.jpg',  htmlKey: 'tut.slide4' },
+        { img: 'assets/images/tutorial_photos/tutorial_image07.png',  htmlKey: 'tut.slide5' }
       ];
 
   const imgEl   = document.getElementById('slideImg');
@@ -333,7 +340,8 @@
       }
 
       function goNext(){
-        // request camera/location on the permissions slide (shifted after removal)
+        // Request camera/location permissions when moving from slide 3 into slide 4
+        // (i.e. just before transitioning to the page that displays slide 4)
         if (idx === 2){ requestPermissions(); }
         if (idx < slides.length - 1){
           idx++;
