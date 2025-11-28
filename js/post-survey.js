@@ -84,8 +84,20 @@
     const hist_change          = getRadioValue('hist_change');          setError('histChangeErr', !hist_change);
     const preservation_change  = getRadioValue('preservation_change');  setError('presChangeErr', !preservation_change);
 
+    const hist_after           = getRadioValue('hist_after');           setError('histAfterErr', !hist_after);
+    const preservation_after   = getRadioValue('preservation_after');   setError('presAfterErr', !preservation_after);
+    const hist_closeness       = getRadioValue('hist_closeness');       setError('histCloseErr', !hist_closeness);
+    const future_research      = getRadioValue('future_research');      setError('futureResearchErr', !future_research);
+
     const fun                  = getRadioValue('fun');                   setError('funErr', !fun);
+    const fun_stamp            = getRadioValue('fun_stamp');             setError('funStampErr', !fun_stamp);
+    const fun_ar               = getRadioValue('fun_ar');                setError('funARErr', !fun_ar);
+    const fun_quiz             = getRadioValue('fun_quiz');              setError('funQuizErr', !fun_quiz);
+
     const usability            = getRadioValue('usability');             setError('usabilityErr', !usability);
+    const usability_stamp      = getRadioValue('usability_stamp');       setError('usabilityStampErr', !usability_stamp);
+    const usability_ar         = getRadioValue('usability_ar');          setError('usabilityARErr', !usability_ar);
+    const usability_quiz       = getRadioValue('usability_quiz');        setError('usabilityQuizErr', !usability_quiz);
 
     // 任意
     const panel_awareness   = getRadioValue('panel_awareness');
@@ -101,12 +113,27 @@
       (!preservation_interest && 'f-presInterest') ||
       (!self_research && 'f-selfResearch') ||
       (!hist_change && 'f-histChange') ||
+      (!hist_after && 'f-histAfter') ||
       (!preservation_change && 'f-presChange') ||
+      (!preservation_after && 'f-presAfter') ||
+      (!hist_closeness && 'f-histClose') ||
+      (!future_research && 'f-futureResearch') ||
       (!fun && 'f-fun') ||
-      (!usability && 'f-usability') || null;
+      (!fun_stamp && 'f-funStamp') ||
+      (!fun_ar && 'f-funAR') ||
+      (!fun_quiz && 'f-funQuiz') ||
+      (!usability && 'f-usability') ||
+      (!usability_stamp && 'f-usabilityStamp') ||
+      (!usability_ar && 'f-usabilityAR') ||
+      (!usability_quiz && 'f-usabilityQuiz') || null;
 
-    const ok = ageOk && hist_interest && preservation_interest && self_research &&
-               hist_change && preservation_change && fun && usability;
+    const ok = ageOk &&
+           hist_interest && preservation_interest && self_research &&
+           hist_change && hist_after &&
+           preservation_change && preservation_after &&
+           hist_closeness && future_research &&
+           fun && fun_stamp && fun_ar && fun_quiz &&
+           usability && usability_stamp && usability_ar && usability_quiz;
 
     const payload = {
       version: 3,
@@ -119,15 +146,30 @@
         self_research,
         hist_change,
         preservation_change,
+
+        // ★ 新しく追加した歴史関連
+        hist_after,
+        preservation_after,
+        hist_closeness,
+        future_research,
+
         // ICU 在学生・教職員向け（任意）
         panel_awareness,
         panel_interest,
         archives_awareness,
-        archives_visited,     // 'yes' | 'no' | null
+        archives_visited,     // 'yes' | 'no' | 'neutral' | null
         archives_interest,
+
         // アプリ
         fun,
+        fun_stamp,
+        fun_ar,
+        fun_quiz,
         usability,
+        usability_stamp,
+        usability_ar,
+        usability_quiz,
+
         // 自由記述
         free_text: qs('#free_text')?.value || '',
       },

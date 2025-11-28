@@ -143,33 +143,55 @@
           answer: 'B'
         },
         explainHTML: `
-        <p><b>☆自転車や歩行者に注意してね！☆</b></p>
-        <p>この場所からだと図書館の変遷がよくわかるね。</p>
+        <p>この場所からだと図書館の変遷が良くわかるね。</p>
+
+        <p>1960年に寄付金をもとに左側が建てられて、1972年に右側が増築、2000年に後ろ側にグループラーニングエリアやカフェが入っているオスマー図書館（正式にはミルドレッドトップオスマー図書館）が増えたんだ。</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="図書館の過去の全景">
-          <figcaption>（写真: 図書館の過去の全景、assets/images/Photos_thesis/spot8_main.jpg）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_6.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_7.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
         <p>昔の図書館の中はこんな感じだったらしいよ。</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="図書館内部">
-          <figcaption>（写真: 図書館内部）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
-        <p>1960年に寄付金をもとに左側が建てられて、1972年に右側が増築、2000年に後ろ側にグループラーニングエリアやカフェが入っているオスマー図書館（正式にはミルドレッドトップオスマー図書館）が増えたんだ。また、ICUの図書館には地下階があるけど、その地下を掘った土が盛られてできたのがバカ山とアホ山なんだよ。</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="1950年代の本館前の写真">
-          <figcaption>（写真: 1950年代の本館前。バカ山・アホ山はまだない）</figcaption>
-        </figure>
+
         <p>この図書館が出来る前は、本館に図書館があったんだ！本を引越ししたんだよ。</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="図書館の移転に関する写真">
-          <figcaption>（写真）</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
-        <p>今は図書館の玄関前にいると思うから、そこから図書館を出た時に右側に見える坂を下りてみて。茂みの内側に、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。</p>
+
+        <p>ICUの図書館には地下階があるけど、その地下を掘った土が盛られてできたのがバカ山とアホ山なんだよ。これは本館の1950年代の写真。まだバカ山とアホ山が無いのが良くわかるね！</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="図書館手前にある記念碑の写真">
-          <figcaption>（写真）</figcaption>
+          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
-        <p>これはICUが1952年に、第二次世界大戦後の日米において、和平を願って集められた寄付金によって献学されたからなんだ。</p>
+
+        <p>☆移動してみよう！☆</p>
+
+        <p>今は図書館の玄関前にいると思うから、そこから図書館を出た時に右側に見える坂を下りてみて。茂みの内側に、1952年のサンフランシスコ平和条約を記念して建てられた碑があるよ。これはICUが1952年に、第二次世界大戦後の日米において、和平を願って集められた寄付金によって献学されたからなんだ。</p>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
         <p>ICU図書館の歴史については、ICU図書館のホームページから歴史・沿革を選ぶことで見られるよ！</p>
       `
       },
@@ -180,32 +202,55 @@
           answer: 'B'
         },
         explainHTML: `
-        <p><b>☆Please watch for bicycles and pedestrians!☆</b></p>
         <p>From this spot you can clearly see how the library has changed over time.</p>
+
+        <p>The left wing was built in 1960 thanks to donations, the right wing was added in 1972, and in 2000 the Osmar Library (officially the Mildred Topp Osmar Library) was expanded at the rear to include group learning areas and a café.</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="Historic view of the library">
-          <figcaption>(Photo: Historic view of the library, assets/images/Photos_thesis/spot8_main.jpg)</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_6.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_7.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_main.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
         <p>The interior of the old library looked something like this.</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="Historic library interior">
-          <figcaption>(Photo: historic library interior)</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_3.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
-        <p>The left wing was built in 1960 thanks to donations, the right wing was added in 1972, and in 2000 the Osmar Library (officially the Mildred Topp Osmar Library) was expanded at the rear to include group learning areas and a café. The library has a basement, and the soil dug out when creating it was piled up to form the two mounds known as Baka-yama and Aho-yama.</p>
-        <figure>
-          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="Main Building, 1950s">
-          <figcaption>(Photo: Main Building in the 1950s — note the mounds are not yet present)</figcaption>
-        </figure>
+
         <p>Before this library was built, the library collection was housed in the Main Building, and the books were moved when the new library opened.</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="Photo related to the library relocation">
-          <figcaption>(Photo)</figcaption>
+          <img src="assets/images/Photos_thesis/spot8_detail_4.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
-        <p>From the library entrance, walk down the slope on your right. Inside the bushes, you will find a monument built in 1952 to commemorate the San Francisco Peace Treaty.</p>
+
+        <p>The library has a basement, and the soil dug out when creating it was piled up to form the two mounds known as Baka-yama and Aho-yama. The photo below of the Main Building from the 1950s shows the site before those mounds existed.</p>
+
         <figure>
-          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="Monument near the library">
-          <figcaption>(Photo)</figcaption>
+          <img src="assets/images/Photos_thesis/spot1_main.jpg" alt="">
+          <figcaption></figcaption>
         </figure>
+
+        <p>☆Let's move around!☆</p>
+
+        <p>From the library entrance, walk down the slope on your right. Inside the bushes you will find a monument built in 1952 to commemorate the San Francisco Peace Treaty. This monument was donated to ICU in 1952 as a symbol of hope for peace after World War II.</p>
+
+        <figure>
+          <img src="assets/images/Photos_thesis/spot8_detail_5.jpg" alt="">
+          <figcaption></figcaption>
+        </figure>
+
         <p>For more on the history of the ICU Library, please see the library’s official website and its history pages.</p>
       `
       }
@@ -232,6 +277,7 @@
           <figcaption>（写真）</figcaption>
         </figure>
 
+        <p>☆移動してみよう☆</p>
         <p>この場所から右側にまわって、D館の正面、自動ドアがあるほうまで壁沿いに歩いてみよう！左に曲がると、こんな場所が見えるかな？</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="D館の入口付近写真">
@@ -282,6 +328,7 @@
           <figcaption>(Photo)</figcaption>
         </figure>
 
+        <p>☆Let's move around!☆</p>
         <p>Walk around to the right from this spot and follow the wall toward the main entrance with the automatic doors. If you turn left there, you’ll see the area pictured here.</p>
         <figure>
           <img src="assets/images/Photos_thesis/spot9_detail_7.jpg" alt="Entrance area of D-Building">

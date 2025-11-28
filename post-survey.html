@@ -120,6 +120,10 @@
     .likert[data-name="self_research"],
     .likert[data-name="hist_change"],
     .likert[data-name="preservation_change"],
+    .likert[data-name="hist_after"],
+    .likert[data-name="preservation_after"],
+    .likert[data-name="hist_closeness"],
+    .likert[data-name="future_research"],
     .likert[data-name="panel_interest"],
     .likert[data-name="archives_interest"],
     .likert[data-name="fun"],
@@ -132,6 +136,10 @@
     .likert[data-name="self_research"] .radio-pill,
     .likert[data-name="hist_change"] .radio-pill,
     .likert[data-name="preservation_change"] .radio-pill,
+    .likert[data-name="hist_after"] .radio-pill,
+    .likert[data-name="preservation_after"] .radio-pill,
+    .likert[data-name="hist_closeness"] .radio-pill,
+    .likert[data-name="future_research"] .radio-pill,
     .likert[data-name="panel_interest"] .radio-pill,
     .likert[data-name="archives_interest"] .radio-pill,
     .likert[data-name="fun"] .radio-pill,
@@ -269,6 +277,26 @@
           <div class="err" id="histChangeErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
         </div>
 
+        <!-- 本アプリ使用後の歴史への興味（必須） -->
+        <div class="field" id="f-histAfter">
+          <div class="label-row">
+            <label data-i18n="survey.histAfter.label">本アプリ使用後の歴史への興味</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="hist_after" role="radiogroup" aria-describedby="histAfterScale histAfterErr">
+            <label class="radio-pill"><input type="radio" name="hist_after" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_after" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_after" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_after" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_after" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="histAfterScale">
+            <span data-i18n="common.disagree">そう思わない</span>
+            <span data-i18n="common.agree">そう思う</span>
+          </div>
+          <div class="err" id="histAfterErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
         <!-- アプリで保存への関心の変化（必須） -->
         <div class="field" id="f-presChange">
           <div class="label-row"><label data-i18n="survey.presChange.label">本アプリを通して、歴史資料の保存の関心に変化はあったか</label><span class="req" data-i18n="common.required">*必須</span></div>
@@ -281,6 +309,66 @@
           </div>
           <div class="likert-scale" id="presChangeScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
           <div class="err" id="presChangeErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- 本アプリ使用後の歴史資料の保存の関心（必須） -->
+        <div class="field" id="f-presAfter">
+          <div class="label-row">
+            <label data-i18n="survey.presAfter.label">本アプリ使用後の歴史資料の保存の関心</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="preservation_after" role="radiogroup" aria-describedby="presAfterScale presAfterErr">
+            <label class="radio-pill"><input type="radio" name="preservation_after" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="preservation_after" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="preservation_after" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="preservation_after" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="preservation_after" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="presAfterScale">
+            <span data-i18n="common.disagree">そう思わない</span>
+            <span data-i18n="common.agree">そう思う</span>
+          </div>
+          <div class="err" id="presAfterErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- 歴史を身近に感じたか（必須） -->
+        <div class="field" id="f-histClose">
+          <div class="label-row">
+            <label data-i18n="survey.histClose.label">歴史を身近に感じたか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="hist_closeness" role="radiogroup" aria-describedby="histCloseScale histCloseErr">
+            <label class="radio-pill"><input type="radio" name="hist_closeness" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_closeness" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_closeness" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_closeness" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="hist_closeness" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="histCloseScale">
+            <span data-i18n="common.disagree">そう思わない</span>
+            <span data-i18n="common.agree">そう思う</span>
+          </div>
+          <div class="err" id="histCloseErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- 今後、歴史資料や事柄について調べようと思うか（必須） -->
+        <div class="field" id="f-futureResearch">
+          <div class="label-row">
+            <label data-i18n="survey.futureResearch.label">今後、歴史資料や事柄について調べようと思うか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="future_research" role="radiogroup" aria-describedby="futureResearchScale futureResearchErr">
+            <label class="radio-pill"><input type="radio" name="future_research" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="future_research" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="future_research" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="future_research" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="future_research" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="futureResearchScale">
+            <span data-i18n="common.disagree">そう思わない</span>
+            <span data-i18n="common.agree">そう思う</span>
+          </div>
+          <div class="err" id="futureResearchErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
         </div>
       </section>
 
@@ -332,8 +420,18 @@
         <div class="field">
           <div class="label-row"><label data-i18n="survey.archivesVisited.label">ICUアーカイブズを訪問したことがあるか</label></div>
           <div class="yn" data-name="archives_visited">
-            <label class="radio-pill"><input type="radio" name="archives_visited" value="no"><span data-i18n="common.no">いいえ</span></label>
-            <label class="radio-pill"><input type="radio" name="archives_visited" value="yes"><span data-i18n="common.yes">はい</span></label>
+            <label class="radio-pill">
+              <input type="radio" name="archives_visited" value="no">
+              <span data-i18n="common.no">いいえ</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="archives_visited" value="neutral">
+              <span data-i18n="common.neutral">どちらともいえない</span>
+            </label>
+            <label class="radio-pill">
+              <input type="radio" name="archives_visited" value="yes">
+              <span data-i18n="common.yes">はい</span>
+            </label>
           </div>
         </div>
 
@@ -367,6 +465,57 @@
           <div class="err" id="funErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
         </div>
 
+        <!-- スタンプラリーは面白かったか（必須） -->
+        <div class="field" id="f-funStamp">
+          <div class="label-row">
+            <label data-i18n="survey.funStamp.label">スタンプラリーは面白かったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="fun_stamp" role="radiogroup" aria-describedby="funStampScale funStampErr">
+            <label class="radio-pill"><input type="radio" name="fun_stamp" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_stamp" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_stamp" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_stamp" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_stamp" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="funStampScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="funStampErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- ARは面白かったか（必須） -->
+        <div class="field" id="f-funAR">
+          <div class="label-row">
+            <label data-i18n="survey.funAR.label">ARは面白かったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="fun_ar" role="radiogroup" aria-describedby="funARScale funARErr">
+            <label class="radio-pill"><input type="radio" name="fun_ar" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_ar" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_ar" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_ar" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_ar" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="funARScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="funARErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- クイズと解説は面白かったか（必須） -->
+        <div class="field" id="f-funQuiz">
+          <div class="label-row">
+            <label data-i18n="survey.funQuiz.label">クイズと解説は面白かったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="fun_quiz" role="radiogroup" aria-describedby="funQuizScale funQuizErr">
+            <label class="radio-pill"><input type="radio" name="fun_quiz" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_quiz" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_quiz" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_quiz" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="fun_quiz" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="funQuizScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="funQuizErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
         <div class="field" id="f-usability">
           <div class="label-row"><label data-i18n="survey.usability.label">使いやすかったか</label><span class="req" data-i18n="common.required">*必須</span></div>
           <div class="likert" data-name="usability" role="radiogroup" aria-describedby="usabilityScale usabilityErr">
@@ -378,6 +527,57 @@
           </div>
           <div class="likert-scale" id="usabilityScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
           <div class="err" id="usabilityErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- スタンプラリー機能は使いやすかったか（必須） -->
+        <div class="field" id="f-usabilityStamp">
+          <div class="label-row">
+            <label data-i18n="survey.usabilityStamp.label">スタンプラリー機能は使いやすかったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="usability_stamp" role="radiogroup" aria-describedby="usabilityStampScale usabilityStampErr">
+            <label class="radio-pill"><input type="radio" name="usability_stamp" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_stamp" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_stamp" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_stamp" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_stamp" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="usabilityStampScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="usabilityStampErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- AR機能は使いやすかったか（必須） -->
+        <div class="field" id="f-usabilityAR">
+          <div class="label-row">
+            <label data-i18n="survey.usabilityAR.label">AR機能は使いやすかったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="usability_ar" role="radiogroup" aria-describedby="usabilityARScale usabilityARErr">
+            <label class="radio-pill"><input type="radio" name="usability_ar" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_ar" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_ar" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_ar" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_ar" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="usabilityARScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="usabilityARErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
+        </div>
+
+        <!-- クイズと解説機能は使いやすかったか（必須） -->
+        <div class="field" id="f-usabilityQuiz">
+          <div class="label-row">
+            <label data-i18n="survey.usabilityQuiz.label">クイズと解説機能は使いやすかったか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="likert" data-name="usability_quiz" role="radiogroup" aria-describedby="usabilityQuizScale usabilityQuizErr">
+            <label class="radio-pill"><input type="radio" name="usability_quiz" value="1"><span>1</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_quiz" value="2"><span>2</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_quiz" value="3"><span>3</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_quiz" value="4"><span>4</span></label>
+            <label class="radio-pill"><input type="radio" name="usability_quiz" value="5"><span>5</span></label>
+          </div>
+          <div class="likert-scale" id="usabilityQuizScale"><span data-i18n="common.disagree">そう思わない</span><span data-i18n="common.agree">そう思う</span></div>
+          <div class="err" id="usabilityQuizErr" data-i18n="common.likertErr">1〜5のいずれかを選択してください。</div>
         </div>
       </section>
 
@@ -436,8 +636,26 @@
           'common.yes':'はい',
           'survey.archivesInterest.label':'本アプリにより、ICUアーカイブズへの関心が高まったか',
           'survey.aboutApp':'アプリについて',
-          'survey.fun.label':'面白かったか',
-          'survey.usability.label':'使いやすかったか',
+          'survey.fun.label':'全体的に面白かったか',
+          'survey.usability.label':'全体的に使いやすかったか',
+          // 歴史関連の新設問
+          'survey.histAfter.label':'本アプリ使用後の歴史への興味',
+          'survey.presAfter.label':'本アプリ使用後の歴史資料の保存の関心',
+          'survey.histClose.label':'歴史を身近に感じたか',
+          'survey.futureResearch.label':'今後、歴史資料や事柄について調べようと思うか',
+
+          // 面白さ（部分別）
+          'survey.funStamp.label':'スタンプラリーは面白かったか',
+          'survey.funAR.label':'ARは面白かったか',
+          'survey.funQuiz.label':'クイズと解説は面白かったか',
+
+          // 使いやすさ（部分別）
+          'survey.usabilityStamp.label':'スタンプラリー機能は使いやすかったか',
+          'survey.usabilityAR.label':'AR機能は使いやすかったか',
+          'survey.usabilityQuiz.label':'クイズと解説機能は使いやすかったか',
+
+          // アーカイブズ訪問 選択肢の「どちらともいえない」
+          'common.neutral':'どちらともいえない',
           'survey.free.title':'自由記述欄（任意）',
           'survey.free.label':'ご意見・ご感想など',
           'survey.free.ph':'ご自由にお書きください（任意）',
@@ -479,8 +697,26 @@
           'common.yes':'Yes',
           'survey.archivesInterest.label':'Did this app increase your interest in ICU Archives?',
           'survey.aboutApp':'About the app',
-          'survey.fun.label':'Was it fun?',
-          'survey.usability.label':'Was it easy to use?',
+          'survey.fun.label':'Was it fun overall?',
+          'survey.usability.label':'Was it easy to use overall?',
+          // History related
+          'survey.histAfter.label':'How interested are you in history after using this app?',
+          'survey.presAfter.label':'How interested are you in preserving historical materials after using this app?',
+          'survey.histClose.label':'Did you feel history became more familiar/closer to you?',
+          'survey.futureResearch.label':'Do you think you will look into historical materials or topics in the future?',
+
+          // Fun (by feature)
+          'survey.funStamp.label':'Was the stamp rally fun?',
+          'survey.funAR.label':'Was the AR feature fun?',
+          'survey.funQuiz.label':'Were the quizzes and explanations fun?',
+
+          // Usability (by feature)
+          'survey.usabilityStamp.label':'Was the stamp rally feature easy to use?',
+          'survey.usabilityAR.label':'Was the AR feature easy to use?',
+          'survey.usabilityQuiz.label':'Were the quiz & explanation features easy to use?',
+
+          // Archives visited neutral option
+          'common.neutral':'Not sure',
           'survey.free.title':'Free-text (optional)',
           'survey.free.label':'Comments/Feedback',
           'survey.free.ph':'Feel free to write anything (optional)',

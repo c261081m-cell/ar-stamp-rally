@@ -278,7 +278,7 @@
   .spot-detail.is-open{display:block}
   .spot-detail .spotDetailTitle{font-weight:900;margin:6px 0 10px;text-align:center}
   .spot-detail .spotDetailImage{width:100%;height:auto;border-radius:12px;display:block;object-fit:cover}
-  .spot-detail .spotDetailHint{margin:8px 0;color:#444;text-align:center}
+  .spot-detail .spotDetailHint, .spot-detail .spotDetailNotice{margin:8px 0;color:#444;text-align:center;font-size:14px}
   .spot-detail .spotDetailActions{display:flex;gap:10px;justify-content:center;margin-top:12px}
   .spot-detail .spotDetailActions .btn{min-width:160px}
 
@@ -376,7 +376,7 @@
         <a class="pin" id="pin2" href="#" role="link" aria-label="図書館手前" data-lat="35.687333" data-lng="139.529611" style="left:33.3333%; top:calc(25% + 28px);">
           <img src="assets/images/ui/mapPin.png" alt="pin">
         </a>
-        <a class="pin" id="pin3" href="#" role="link" aria-label="D館記念碑" data-lat="35.687278" data-lng="139.530472" style="left:50%; top:calc(25% + 28px);">
+        <a class="pin" id="pin3" href="#" role="link" aria-label="D館記念碑" data-lat="35.6871388889" data-lng="139.5308888889" style="left:calc(50% + 114px); top:calc(25% + 28px);">
           <img src="assets/images/ui/mapPin.png" alt="pin">
         </a>
       </div>
@@ -437,6 +437,7 @@
     <div class="spotDetailTitle" id="spotDetailTitle" data-i18n="spotDetail.title">この場所を探してください！</div>
     <img id="spotDetailImage" class="spotDetailImage" src="" alt="スポットの写真">
     <div class="spotDetailHint" data-i18n="spotDetail.hint">写真の場所まで行ってみましょう。下のボタンでARを起動します。</div>
+    <div class="spotDetailNotice" data-i18n="spotDetail.notice">カメラと位置情報の許可をオンにしてください。</div>
     <div class="spotDetailActions">
       <button id="spotDetailARBtn" class="btn" type="button" data-i18n="spotDetail.openAR">ARを起動</button>
       <button id="spotDetailClose" class="btn btn-secondary" type="button" data-i18n="spotDetail.close">閉じる</button>
@@ -786,6 +787,7 @@
           'chooser.close': '閉じる',
           'spotDetail.title': 'この場所を探してください！',
           'spotDetail.hint': '写真の場所まで行ってみましょう。下のボタンでARを起動します。',
+          'spotDetail.notice': 'カメラと位置情報の許可をオンにしてください。',
           'spotDetail.openAR': 'ARを起動',
           'spotDetail.close': '閉じる'
         },
@@ -795,6 +797,7 @@
           'chooser.close': 'Close',
           'spotDetail.title': 'Find this place!',
           'spotDetail.hint': 'Go to the place shown in the photo. Then use the button below to open AR.',
+          'spotDetail.notice': 'Please enable camera and location permissions.',
           'spotDetail.openAR': 'Open AR',
           'spotDetail.close': 'Close'
         }
