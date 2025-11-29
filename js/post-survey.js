@@ -77,6 +77,10 @@
     const ageOk = /^[0-9]+$/.test(ageRaw) && ageRaw.length > 0;
     setError('ageErr', !ageOk);
 
+    // AR利用の有無（必須）
+    const used_ar = getRadioValue('used_ar');
+    setError('usedArErr', !used_ar);
+
     // 必須 5段階
     const hist_interest        = getRadioValue('hist_interest');        setError('histInterestErr', !hist_interest);
     const preservation_interest= getRadioValue('preservation_interest');setError('presInterestErr', !preservation_interest);
@@ -109,6 +113,7 @@
     // 必須のどれか未入力ならスクロール先を決定
     const firstErrorId =
       (!ageOk && 'f-age') ||
+      (!used_ar && 'f-usedAr') ||
       (!hist_interest && 'f-histInterest') ||
       (!preservation_interest && 'f-presInterest') ||
       (!self_research && 'f-selfResearch') ||
@@ -128,6 +133,7 @@
       (!usability_quiz && 'f-usabilityQuiz') || null;
 
     const ok = ageOk &&
+          !!used_ar &&
            hist_interest && preservation_interest && self_research &&
            hist_change && hist_after &&
            preservation_change && preservation_after &&
@@ -159,6 +165,9 @@
         archives_awareness,
         archives_visited,     // 'yes' | 'no' | 'neutral' | null
         archives_interest,
+
+        // AR 利用の有無
+        used_ar,
 
         // アプリ
         fun,

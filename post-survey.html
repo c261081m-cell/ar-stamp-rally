@@ -221,6 +221,19 @@
           <div class="err" id="ageErr" data-i18n="survey.age.err">年代（年齢）を半角数字で入力してください。</div>
         </div>
 
+        <!-- AR利用の有無（必須：あり/なし） -->
+        <div class="field" id="f-usedAr">
+          <div class="label-row">
+            <label data-i18n="survey.usedAr.label">ARありとARなしのどちらを利用しましたか</label>
+            <span class="req" data-i18n="common.required">*必須</span>
+          </div>
+          <div class="yn" data-name="used_ar">
+            <label class="radio-pill"><input type="radio" name="used_ar" value="ar"><span data-i18n="survey.usedAr.ar">あり</span></label>
+            <label class="radio-pill"><input type="radio" name="used_ar" value="noar"><span data-i18n="survey.usedAr.no">なし</span></label>
+          </div>
+          <div class="err" id="usedArErr" data-i18n="survey.usedAr.err">ARの利用有無を選択してください。</div>
+        </div>
+
         <!-- 歴史に興味（必須） -->
         <div class="field" id="f-histInterest">
           <div class="label-row"><label data-i18n="survey.histInterest.label">歴史に興味があるか</label><span class="req" data-i18n="common.required">*必須</span></div>
@@ -660,6 +673,12 @@
           'survey.free.label':'ご意見・ご感想など',
           'survey.free.ph':'ご自由にお書きください（任意）',
           'survey.submit':'アンケート送信'
+          ,
+          // AR利用の有無
+          'survey.usedAr.label':'ARありとARなしのどちらを利用しましたか',
+          'survey.usedAr.ar':'あり',
+          'survey.usedAr.no':'なし',
+          'survey.usedAr.err':'ARの利用有無を選択してください。'
         },
         en: {
           'survey.title':'Survey',
@@ -721,6 +740,12 @@
           'survey.free.label':'Comments/Feedback',
           'survey.free.ph':'Feel free to write anything (optional)',
           'survey.submit':'Submit Survey'
+          ,
+          // AR used
+          'survey.usedAr.label':'Did you use AR during this session?',
+          'survey.usedAr.ar':'Used AR',
+          'survey.usedAr.no':'Did not use AR',
+          'survey.usedAr.err':'Please select whether you used AR.'
         }
       };
 
