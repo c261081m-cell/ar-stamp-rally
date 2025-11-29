@@ -98,7 +98,7 @@
         </figure>
         <p>ここが今の本館東入口。上の二つはここ周辺の写真なんだよ。</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_6.jpg">
+          <img src="assets/images/Photos_thesis/spot1_detail_6.JPG">
           <figcaption>（写真: 本館東）</figcaption>
         </figure>
 
@@ -140,7 +140,7 @@
         </figure>
         <p>This is the current east entrance to the main building. The two photos above are of the area around here</p>
         <figure>
-          <img src="assets/images/Photos_thesis/spot1_detail_6.jpg">
+          <img src="assets/images/Photos_thesis/spot1_detail_6.JPG">
           <figcaption>(Photo)</figcaption>
         </figure>
 
