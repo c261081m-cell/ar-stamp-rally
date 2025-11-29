@@ -330,7 +330,7 @@
       <!-- Top bar: left = terms, right = language button (icon only) -->
       <div class="top-header">
         <div style="display:flex;align-items:center;gap:10px;">
-          <a id="termsLink" class="link" href="terms.html" data-i18n="map.terms">プライバシーポリシー・ご利用上の注意</a>
+          <a id="termsLink" class="link" href="terms.html" data-i18n="map.terms">Privacy & Terms</a>
           <a id="specialLinkTop" class="link" href="special.html" data-i18n="map.special" style="display:none;margin-left:8px;">🌟 スペシャルコンテンツ</a>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
@@ -511,12 +511,32 @@
     });
   </script>
 
+  <!-- Show special-content top link when survey completed -->
+  <script>
+    (function(){
+      function updateSpecialTop(){
+        try{
+          const el = document.getElementById('specialLinkTop');
+          if (!el) return;
+          const done = localStorage.getItem('survey_completed_v3') === 'true';
+          el.style.display = done ? 'inline-block' : 'none';
+        }catch(e){}
+      }
+      // initial
+      document.addEventListener('DOMContentLoaded', updateSpecialTop);
+      // react to changes from other tabs
+      window.addEventListener('storage', (ev)=>{ if (ev.key === 'survey_completed_v3') updateSpecialTop(); });
+      // also update when language changes (text is handled by existing i18n)
+      window.addEventListener('app_lang_changed', updateSpecialTop);
+    })();
+  </script>
+
   <!-- 言語メニュー & 簡易i18n（このページ内だけ適用） -->
   <script>
     (function(){
       const DICT = {
         ja: {
-          'map.terms': 'プライバシーポリシー・ご利用上の注意',
+          'map.terms': 'Privacy & Terms',
           'map.tutorial': '使い方',
           'map.stampbook': 'スタンプ帳',
           'map.notgot': '未取得',
